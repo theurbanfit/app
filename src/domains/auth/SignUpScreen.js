@@ -1,19 +1,18 @@
 import React, {useState, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Title} from 'react-native-paper';
-import {FormInput} from '../components/FormInput';
-import {FormButton} from '../components/FormButton';
-import {AuthContext} from '../navigation/AuthProvider';
+import {Title, IconButton} from 'react-native-paper';
+import {FormInput} from '../../components/FormInput';
+import {FormButton} from '../../components/FormButton';
+import {AuthContext} from './AuthProvider';
 
-export default function LoginScreen({navigation}) {
+export default function SignupScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const {login} = useContext(AuthContext);
+  const {register} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
-      <Title style={styles.titleText}>Welcome to Chat app</Title>
+      <Title style={styles.titleText}>Register to chat</Title>
       <FormInput
         labelName="Email"
         value={email}
@@ -27,17 +26,17 @@ export default function LoginScreen({navigation}) {
         onChangeText={userPassword => setPassword(userPassword)}
       />
       <FormButton
-        title="Login"
+        title="Signup"
         modeValue="contained"
+        onPress={() => register(email, password)}
         labelStyle={styles.loginButtonLabel}
-        onPress={() => login(email, password)}
       />
-      <FormButton
-        title="New user? Join here"
-        modeValue="text"
-        uppercase={false}
-        labelStyle={styles.navButtonText}
-        onPress={() => navigation.navigate('Signup')}
+      <IconButton
+        icon="keyboard-backspace"
+        size={30}
+        style={styles.navButton}
+        color="#6646ee"
+        onPress={() => navigation.navigate('Login')}
       />
     </View>
   );
@@ -58,6 +57,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   navButtonText: {
-    fontSize: 16,
+    fontSize: 18,
+  },
+  navButton: {
+    marginTop: 10,
   },
 });

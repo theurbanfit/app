@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {IconButton} from 'react-native-paper';
-import HomeScreen from '../screens/HomeScreen';
-import {AuthContext} from './AuthProvider';
+import HomeScreen from './HomeScreen';
+import {AuthContext} from '../auth/AuthProvider';
 
 const ChatAppStack = createStackNavigator();
 const ModalStack = createStackNavigator();
