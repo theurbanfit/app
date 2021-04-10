@@ -6,6 +6,7 @@ import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import { background } from "../../components/colors";
 
 export default function ForgotPasswordScreen({navigation}) {
   const [snackbarVisible, setSnackbarVisibility] = useState(false);
@@ -88,7 +89,7 @@ export default function ForgotPasswordScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: background,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

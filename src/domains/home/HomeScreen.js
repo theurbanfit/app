@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {Title} from 'react-native-paper';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from '../auth/AuthProvider';
+import {background} from '../../components/colors';
 
 export default function HomeScreen() {
   const {logout} = useContext(AuthContext);
@@ -22,7 +23,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: background,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

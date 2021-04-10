@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   },
   buttonContainerMedium: {
     width: width / 2,
-    height: height / 15,
+    height: height / 20,
   },
 });
