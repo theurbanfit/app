@@ -4,11 +4,13 @@ import {Title, IconButton} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
-import { background } from "../../components/colors";
+import {background} from '../../components/colors';
 
 export default function SignupScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const {register} = useContext(AuthContext);
 
   return (
@@ -26,10 +28,21 @@ export default function SignupScreen({navigation}) {
         secureTextEntry={true}
         onChangeText={userPassword => setPassword(userPassword)}
       />
+      <FormInput
+        labelName="First name"
+        value={firstName}
+        onChangeText={userFirstName => setFirstName(userFirstName)}
+      />
+      <FormInput
+        labelName="Last name"
+        value={lastName}
+        onChangeText={userLastName => setLastName(userLastName)}
+      />
+
       <FormButton
         title="Signup"
         modeValue="contained"
-        onPress={() => register(email, password)}
+        onPress={() => register({email, password, firstName, lastName})}
         labelStyle={styles.loginButtonLabel}
       />
       <IconButton

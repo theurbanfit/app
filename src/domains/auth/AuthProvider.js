@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
   const [error, setError] = useState(null);
 
   const handleAuthErrors = ({code, message}) => {
+    console.log(message);
     switch (code) {
       case 'auth/email-already-exists':
       case 'auth/account-exists-with-different-credential':
@@ -44,33 +45,24 @@ export const AuthProvider = ({children}) => {
             handleAuthErrors(e);
           }
         },
-        register: async (email, password) => {
+        register: async ({email, password, firstName, lastName}) => {
           try {
-            const currentUser = await auth().createUserWithEmailAndPassword(
-              email,
-              password,
-            );
+            const {
+              user: currentUser,
+            } = await auth().createUserWithEmailAndPassword(email, password);
 
-            console.log(currentUser);
-            // const document = firebase$
-            // .firestore()
-            // .collection('users')
-            // .doc(uid)
-            const document = firestore().collection('users');
-            // .doc(currentUser.uid);
-
-            console.log(currentUser);
-            debugger;
-            document.add({
+            firestore().collection('users').doc(currentUser.uid).set({
               email: currentUser.email,
               uid: currentUser.uid,
+              firstName,
+              lastName,
             });
-
-            console.log(currentUser);
+            currentUser.updateProfile({
+              displayName: `${firstName} ${lastName}`,
+            });
+            currentUser.sendEmailVerification();
             setError(null);
           } catch (e) {
-            console.log(e);
-            debugger;
             handleAuthErrors(e);
           }
         },
