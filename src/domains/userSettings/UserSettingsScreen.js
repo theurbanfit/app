@@ -1,14 +1,19 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Title} from 'react-native-paper';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {Avatar, Button} from 'react-native-paper';
 import {background} from '../../components/colors';
-
 export default function UserSettingsScreen() {
   return (
-    <View style={styles.container}>
-      <Title>User settings</Title>
-      <Title>All user settings will be here</Title>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Avatar.Image size={200} source={require('../../assets/begin.jpeg')} />
+      <Button
+        style={styles.uploadPhotoButton}
+        icon="camera"
+        mode="text"
+        onPress={() => console.log('Pressed')}>
+        Upload photo
+      </Button>
+    </SafeAreaView>
   );
 }
 
@@ -16,7 +21,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: background,
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+  },
+  uploadPhotoButton: {
+    marginTop: 12,
   },
 });

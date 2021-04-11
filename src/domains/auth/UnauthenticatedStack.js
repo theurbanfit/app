@@ -6,7 +6,7 @@ import ForgotPasswordScreen from './ForgotPasswordScreen';
 
 const Stack = createStackNavigator();
 
-export default function AuthStack() {
+export default function UnauthenticatedStack() {
   return (
     <Stack.Navigator initialRouteName="Login" headerMode="none">
       <Stack.Screen name="Login" component={LoginScreen} />
