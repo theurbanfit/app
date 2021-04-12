@@ -18,10 +18,6 @@ const uploadImage = async (uri, name, firebasePath = '') => {
   return url;
 };
 
-const updateUserAvatar = async (uid, photoURL) => {
-  await firestore().collection('users').doc(uid).update({photoURL: photoURL});
-};
-
 export default function UserProfileScreen() {
   const {user, userData} = useFetchUser();
   const [imageIsUploading, setLoading] = useState(false);
@@ -35,6 +31,13 @@ export default function UserProfileScreen() {
     launchImageLibrary(
       imagePickerOptions,
       async ({didCancel, error, fileName, uri}) => {
+        const updateUserAvatar = async (uid, photoURL) => {
+          await firestore()
+            .collection('users')
+            .doc(uid)
+            .update({photoURL: photoURL});
+        };
+
         if (didCancel) {
           setLoading(false);
         } else if (error) {
