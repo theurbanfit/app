@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Title} from 'react-native-paper';
-import {FormButton} from '../../components/FormButton';
+import {Button, Title} from 'react-native-paper';
 import {AuthContext} from '../auth/AuthProvider';
 
 export default function HomeScreen() {
@@ -9,13 +8,14 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Title>Home Screen</Title>
-      <Title>All chat rooms will be listed here</Title>
-      <FormButton
+      <Title>Urbanfit{'\u00A9'}</Title>
+      <Button
         modeValue="contained"
-        title="Logout"
-        onPress={() => logout()}
-      />
+        onPress={() => {
+          logout();
+        }}>
+        Logout
+      </Button>
     </View>
   );
 }
