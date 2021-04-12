@@ -2,17 +2,17 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Title} from 'react-native-paper';
 
-export default function UserInfo({displayName}) {
+export default function UserInfo({displayName, styles = {}}) {
   return (
-    <View style={styles.container}>
+    <View style={[ownStyles.container, styles]}>
       <Title>{displayName}</Title>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  uploadPhotoButton: {
-    marginTop: 12,
+const ownStyles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    marginLeft: 12,
   },
 });

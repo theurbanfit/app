@@ -68,7 +68,7 @@ export default function UserProfileScreen() {
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <View style={styles.flexRow}>
         <UserAvatar
           onUploadAvatar={handleAvatarUpload}
           source={userData?.photoURL}
@@ -84,27 +84,5 @@ const styles = StyleSheet.create({
   flexRow: {
     margin: 12,
     flexDirection: 'row',
-    flex: 1,
-  },
-  box1: {
-    width: 75,
-    height: 75,
-    // Uncomment the following style to see flex effects
-    //flex: 1,
-    backgroundColor: 'steelblue',
-  },
-  box2: {
-    width: 75,
-    height: 75,
-    // Uncomment the following style to see flex effects
-    //flex: 2,
-    backgroundColor: 'pink',
-  },
-  box3: {
-    width: 75,
-    height: 75,
-    // Uncomment the following style to see flex effects
-    //flex: 3,
-    backgroundColor: 'orange',
   },
 });
