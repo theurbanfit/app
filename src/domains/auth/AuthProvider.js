@@ -48,21 +48,22 @@ export const AuthProvider = ({children}) => {
         },
         register: async ({email, password, firstName, lastName}) => {
           try {
-            const {
-              user: currentUser,
-            } = await auth().createUserWithEmailAndPassword(email, password);
+            const firebase = await auth().createUserWithEmailAndPassword(
+              email,
+              password,
+            );
 
-            firestore().collection('users').doc(currentUser.uid).set({
-              email: currentUser.email,
-              uid: currentUser.uid,
-              firstName,
-              lastName,
-            });
-            await currentUser.updateProfile({
-              displayName: `${firstName} ${lastName}`,
-            });
-            await currentUser.sendEmailVerification();
-            await currentUser.reload();
+            firestore()
+              .collection('users')
+              .doc(firebase.user.uid)
+              .set({
+                uid: firebase.user.uid,
+                email,
+                firstName,
+                lastName,
+                displayName: `${firstName} ${lastName}`,
+              });
+            await firebase.user.sendEmailVerification();
             setError(null);
           } catch (e) {
             handleAuthErrors(e);

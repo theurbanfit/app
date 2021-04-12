@@ -22,9 +22,7 @@ export default function UserAvatar({onUploadAvatar, source, loading}) {
         <Avatar.Image
           style={styles.margins}
           size={100}
-          source={
-            source ? {uri: source} : require('../../../assets/begin.jpeg')
-          }
+          source={source ? {uri: source} : undefined}
         />
       </TouchableOpacity>
     </View>

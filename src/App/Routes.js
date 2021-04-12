@@ -4,7 +4,8 @@ import auth from '@react-native-firebase/auth';
 import UnauthenticatedStack from './UnauthenticatedStack';
 import AuthenticatedStack from './AuthenticatedStack';
 import {AuthContext} from '../domains/auth/AuthProvider';
-import Loading from '../components/Loading';
+import {ActivityIndicator} from 'react-native-paper';
+import {SafeAreaView, StyleSheet} from 'react-native';
 
 export default function Routes() {
   const {user, setUser} = useContext(AuthContext);
@@ -12,10 +13,8 @@ export default function Routes() {
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
-    // Handle user state changes
     function onAuthStateChanged(authenticatedUser) {
       setUser(authenticatedUser);
-      // debugger
       if (initializing) {
         setInitializing(false);
       }
@@ -25,7 +24,11 @@ export default function Routes() {
   }, [setUser, initializing]);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <SafeAreaView style={styles.container}>
+        <ActivityIndicator size="large" animating={true} />
+      </SafeAreaView>
+    );
   }
 
   return (
@@ -34,3 +37,7 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {flex: 1, justifyContent: 'center'},
+});

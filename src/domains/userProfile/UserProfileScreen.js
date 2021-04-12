@@ -1,10 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View, Alert} from 'react-native';
 import UserAvatar from './components/UserAvatar';
 import UserInfo from './components/UserInfo';
-import {AuthContext} from '../auth/AuthProvider';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
+import {useFetchUser} from './hooks';
 
 const uploadImage = async (uri, name, firebasePath = '') => {
   const imageRef = storage().ref(`${firebasePath}/${name}`);
@@ -17,42 +18,49 @@ const uploadImage = async (uri, name, firebasePath = '') => {
   return url;
 };
 
-const updateUserAvatar = async (currentUser, photoURL) => {
-  await currentUser.updateProfile({
-    photoURL:
-      'https://images.unsplash.com/photo-1618111415321-b406d66958de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80',
-  });
-  await currentUser.reload();
+const updateUserAvatar = async (uid, photoURL) => {
+  await firestore().collection('users').doc(uid).update({photoURL: photoURL});
 };
 
 export default function UserProfileScreen() {
-  const {user} = useContext(AuthContext);
+  const {user, userData} = useFetchUser();
   const [imageIsUploading, setLoading] = useState(false);
+
   const handleAvatarUpload = () => {
     const imagePickerOptions = {
       noData: true,
+      quality: 0.3,
     };
 
-    launchImageLibrary(imagePickerOptions, async imagePickerResponse => {
-      const {didCancel, error, fileName, uri} = imagePickerResponse;
-      setLoading(true);
-      if (didCancel) {
-      } else if (error) {
-        setLoading(false);
-        alert('An error occurred while uploading your profile photo');
-      } else {
-        try {
-          const imageUrl = await uploadImage(uri, fileName, 'profilePhotos');
-          await updateUserAvatar(user, imageUrl);
-          Alert.alert('Success', 'Upload successful');
+    launchImageLibrary(
+      imagePickerOptions,
+      async ({didCancel, error, fileName, uri}) => {
+        if (didCancel) {
           setLoading(false);
-        } catch (e) {
-          console.log(e);
-          alert('An error occurred while uploading your profile photo');
+        } else if (error) {
           setLoading(false);
+          Alert.alert(
+            'Error',
+            'An error occurred while uploading your profile photo',
+          );
+        } else {
+          try {
+            setLoading(true);
+            const imageUrl = await uploadImage(uri, fileName, 'profilePhotos');
+            await updateUserAvatar(user?.uid, imageUrl);
+            setLoading(false);
+            Alert.alert('Success', 'Upload successful');
+          } catch (e) {
+            console.log(e);
+            Alert.alert(
+              'Error',
+              'An error occurred while uploading your profile photo',
+            );
+            setLoading(false);
+          }
         }
-      }
-    });
+      },
+    );
   };
 
   return (
@@ -60,10 +68,10 @@ export default function UserProfileScreen() {
       <View style={styles.container}>
         <UserAvatar
           onUploadAvatar={handleAvatarUpload}
-          source={user.photoURL}
+          source={userData?.photoURL}
           loading={imageIsUploading}
         />
-        <UserInfo displayName={user.displayName} />
+        <UserInfo displayName={userData?.displayName} />
       </View>
     </SafeAreaView>
   );
