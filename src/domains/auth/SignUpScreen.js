@@ -4,9 +4,9 @@ import {Title, IconButton} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
-import {background} from '../../components/colors';
 
 export default function SignupScreen({navigation}) {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -42,7 +42,13 @@ export default function SignupScreen({navigation}) {
       <FormButton
         title="Signup"
         modeValue="contained"
-        onPress={() => register({email, password, firstName, lastName})}
+        onPress={async () => {
+          setLoading(true);
+          await register({email, password, firstName, lastName});
+          setLoading(false);
+        }}
+        loading={loading}
+        disabled={loading}
         labelStyle={styles.loginButtonLabel}
       />
       <IconButton
@@ -58,7 +64,6 @@ export default function SignupScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: background,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

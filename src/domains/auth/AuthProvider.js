@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {Alert} from 'react-native';
 
 export const AuthContext = createContext({});
 
@@ -57,10 +58,11 @@ export const AuthProvider = ({children}) => {
               firstName,
               lastName,
             });
-            currentUser.updateProfile({
+            await currentUser.updateProfile({
               displayName: `${firstName} ${lastName}`,
             });
-            currentUser.sendEmailVerification();
+            await currentUser.sendEmailVerification();
+            await currentUser.reload();
             setError(null);
           } catch (e) {
             handleAuthErrors(e);
@@ -74,8 +76,9 @@ export const AuthProvider = ({children}) => {
             handleAuthErrors(e);
           }
         },
-        passwordReset: email => {
-          return auth().sendPasswordResetEmail(email);
+        passwordReset: async email => {
+          await auth().sendPasswordResetEmail(email);
+          Alert.alert('Success', 'Email has been sent, check your mailbox');
         },
       }}>
       {children}
