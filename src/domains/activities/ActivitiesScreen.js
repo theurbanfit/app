@@ -1,21 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Button, Title} from 'react-native-paper';
-import {AuthContext} from '../auth/AuthProvider';
+import {Title} from 'react-native-paper';
 
 export default function ActivitiesScreen() {
-  const {logout} = useContext(AuthContext);
-
   return (
     <View style={styles.container}>
       <Title>Urbanfit{'\u00A9'}</Title>
-      <Button
-        modeValue="contained"
-        onPress={() => {
-          logout();
-        }}>
-        Logout
-      </Button>
     </View>
   );
 }

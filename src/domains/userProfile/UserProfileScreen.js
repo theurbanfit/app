@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, View, Alert} from 'react-native';
+import {Divider, Button} from 'react-native-paper';
 import UserAvatar from './components/UserAvatar';
 import UserInfo from './components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {useFetchUser} from './hooks';
+import {AuthContext} from '../auth/AuthProvider';
 
 const uploadImage = async (uri, name, firebasePath = '') => {
   const imageRef = storage().ref(`${firebasePath}/${name}`);
@@ -20,6 +22,8 @@ const uploadImage = async (uri, name, firebasePath = '') => {
 
 export default function UserProfileScreen() {
   const {user, userData} = useFetchUser();
+  const {logout} = useContext(AuthContext);
+
   const [imageIsUploading, setLoading] = useState(false);
 
   const handleAvatarUpload = () => {
@@ -76,6 +80,14 @@ export default function UserProfileScreen() {
         />
         <UserInfo displayName={userData?.displayName} />
       </View>
+      <Divider />
+      <Button
+        modeValue="contained"
+        onPress={() => {
+          logout();
+        }}>
+        Logout
+      </Button>
     </SafeAreaView>
   );
 }
