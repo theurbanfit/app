@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Dimensions} from 'react-native';
 import {Button} from 'react-native-paper';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 export function FormButton({title, modeValue, sm, ...rest}) {
   return (
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
   },
   buttonContainerSmall: {
     width: width / 2,
-    height: height / 10,
+    height: 'auto',
   },
   buttonContainerMedium: {
     width: width / 2,
-    height: height / 20,
+    height: 'auto',
   },
 });

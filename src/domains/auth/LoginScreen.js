@@ -7,20 +7,33 @@ import {AuthContext} from './AuthProvider';
 import {background, textSecondary} from '../../components/colors';
 
 export default function LoginScreen({navigation}) {
+  const [loading, setLoading] = useState(false);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {login, error} = useContext(AuthContext);
+  const {login, setError, error} = useContext(AuthContext);
+
+  const handleLogin = async () => {
+    if (email.length && password.length) {
+      setLoading(true);
+      await login(email, password);
+    } else {
+      setError('All values are required');
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Title style={styles.titleText}>Welcome to Urbanfit</Title>
       <FormInput
+        editable={!loading}
         labelName="Email"
         value={email}
         autoCapitalize="none"
         onChangeText={userEmail => setEmail(userEmail)}
       />
       <FormInput
+        editable={!loading}
         labelName="Password"
         value={password}
         secureTextEntry={true}
@@ -33,10 +46,12 @@ export default function LoginScreen({navigation}) {
       ) : null}
       <View style={styles.buttonMargin}>
         <FormButton
+          loading={loading}
+          disabled={loading}
           title="Login"
           modeValue="contained"
           labelStyle={styles.loginButtonLabel}
-          onPress={() => login(email, password)}
+          onPress={handleLogin}
         />
       </View>
       <FormButton
@@ -72,6 +87,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   loginButtonLabel: {
+    margin: 12,
     fontSize: 22,
   },
   registrationButtonText: {
