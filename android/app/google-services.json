@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "179379279680",
+    "project_id": "urbanfit-dev",
+    "storage_bucket": "urbanfit-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179379279680:android:9fcb61952165e497700ca5",
+        "android_client_info": {
+          "package_name": "com.urbanfitsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179379279680-d948n3n647shdtsst9gbn06mon5fnl81.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.urbanfitsample",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "179379279680-abhir49ph43s3ojjq0t29ksr0rgoqqms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH2sTCOMPE4CEJh50Dq33IM3vDbu8z2Eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179379279680-abhir49ph43s3ojjq0t29ksr0rgoqqms.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "179379279680-1l8mepmuap0dkibq5dgmae9eratse65k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.urbanfit.app-dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
