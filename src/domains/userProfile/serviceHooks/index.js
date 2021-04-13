@@ -4,7 +4,6 @@ import firestore from '@react-native-firebase/firestore';
 
 export const useFetchUser = () => {
   const {user} = useContext(AuthContext);
-
   const [data, setData] = useState([]);
 
   useEffect(() => {

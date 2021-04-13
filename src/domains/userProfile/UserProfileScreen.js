@@ -6,7 +6,7 @@ import UserInfo from './components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import {useFetchUser} from './hooks';
+import {useFetchUser} from './serviceHooks';
 import {AuthContext} from '../auth/AuthProvider';
 
 const uploadImage = async (uri, name, firebasePath = '') => {
