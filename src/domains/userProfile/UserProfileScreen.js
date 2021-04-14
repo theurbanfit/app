@@ -1,8 +1,8 @@
 import React, {useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, View, Alert} from 'react-native';
 import {Divider, Button} from 'react-native-paper';
-import UserAvatar from './components/UserAvatar';
-import UserInfo from './components/UserInfo';
+import UserAvatar from '../../components/UserAvatar';
+import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';

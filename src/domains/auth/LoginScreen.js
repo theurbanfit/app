@@ -4,7 +4,7 @@ import {Title, HelperText} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
-import {background, textSecondary} from '../../components/colors';
+import {background, textLightDark} from '../../components/colors';
 
 export default function LoginScreen({navigation}) {
   const [loading, setLoading] = useState(false);
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   forgotPasswordButtonText: {
-    color: textSecondary,
+    color: textLightDark,
     fontSize: 14,
   },
 });

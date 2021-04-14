@@ -1,13 +1,13 @@
-export const background = '#FBF7FE';
-export const backgroundSecondary = '#f5f5f5';
-export const textSecondary = '#727272';
+export const background = '#f8f8f8';
+export const backgroundSecondary = '#f3f3f3';
 export const textPrimary = '#031323';
+export const textSecondary = '#2E2E2E';
+export const textLightDark = '#727272';
 export const primary = '#0071f3';
 export const secondary = '#ACB1B6';
 export const active = '#0366d6';
 export const activeLight = '#5da2f0';
 export const divider = '#D9DCDE';
-export const blackPearl = '#59636e';
 export const primaryDim = '#FBF7FE';
 export const destructive = '#E63644';
 export const affirmative = '#189F59';
