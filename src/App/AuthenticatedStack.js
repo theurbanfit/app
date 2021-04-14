@@ -1,19 +1,37 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ActivitiesScreen from '../domains/activities/ActivitiesScreen';
+import {createStackNavigator} from '@react-navigation/stack';
+import ActivityFeedScreen from '../domains/activities/ActivityFeedScreen';
 import UserProfileScreen from '../domains/userProfile/UserProfileScreen';
 import FontCommunityIcons from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
 import CheckInScreen from '../domains/checkIn/CheckInScreen';
+import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 
 const Tab = createBottomTabNavigator();
+const ActivityStack = createStackNavigator();
+
+const MainStackNavigator = () => {
+  return (
+    <ActivityStack.Navigator initialRouteName="Activities" headerMode="none">
+      <ActivityStack.Screen
+        name="ActivityFeed"
+        component={ActivityFeedScreen}
+      />
+      <ActivityStack.Screen
+        name="ActivityDetails"
+        component={ActivityDetailsScreen}
+      />
+    </ActivityStack.Navigator>
+  );
+};
 
 export default function BottomTabNavigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={ActivitiesScreen}
+        name="Activity feed"
+        component={MainStackNavigator}
         options={{
           tabBarLabel: 'Activities',
           tabBarIcon: ({color, size}) => (

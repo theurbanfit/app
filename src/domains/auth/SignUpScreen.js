@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Title, IconButton, HelperText} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';

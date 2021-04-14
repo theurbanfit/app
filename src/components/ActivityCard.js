@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Title, Text, Divider} from 'react-native-paper';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {textSecondary} from './colors';
 
 export const ActivityCard = ({
@@ -10,8 +10,9 @@ export const ActivityCard = ({
   endTime,
   fullAddress,
   tags = [],
+  onPress = () => {},
 }) => (
-  <>
+  <TouchableOpacity onPress={onPress}>
     <View style={styles.container}>
       <View>
         <Title>{title}</Title>
@@ -35,7 +36,7 @@ export const ActivityCard = ({
       />
     </View>
     <Divider />
-  </>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
