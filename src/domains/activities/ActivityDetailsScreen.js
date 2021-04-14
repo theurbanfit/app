@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   text: {
-    marginBottom: 4,
+    marginBottom: 6,
   },
   inline: {
     flexDirection: 'row',
