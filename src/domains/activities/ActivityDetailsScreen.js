@@ -102,11 +102,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: 240,
-    marginBottom: 16,
+    marginBottom: 20,
   },
   headlineSize: {
     fontWeight: '600',
-    fontSize: 30,
+    fontSize: 36,
   },
   headlineMargin: {
     marginBottom: 16,
