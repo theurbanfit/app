@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-paper';
 import {ActivityIndicator, Portal, Modal, Text} from 'react-native-paper';
+import {mintGreen} from './colors';
 
 export default function UserAvatar({onUploadAvatar, source, loading}) {
   return (
@@ -19,15 +20,11 @@ export default function UserAvatar({onUploadAvatar, source, loading}) {
             />
           </Modal>
         </Portal>
-        {source ? (
-          <Avatar.Image
-            style={styles.margins}
-            size={100}
-            source={{uri: source}}
-          />
-        ) : (
-          <Avatar.Text style={styles.margins} size={100} label="UF" />
-        )}
+        <Avatar.Image
+          style={styles.margins}
+          size={100}
+          source={source ? {uri: source} : undefined}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -42,6 +39,7 @@ const styles = StyleSheet.create({
   },
   loadingIndicator: {marginTop: 20},
   margins: {
+    backgroundColor: mintGreen,
     margin: 12,
   },
 });

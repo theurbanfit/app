@@ -2,13 +2,7 @@ import React from 'react';
 import Calendar from 'react-native-calendar-strip';
 import moment from 'moment';
 import {StyleSheet} from 'react-native';
-import {
-  backgroundSecondary,
-  divider,
-  primary,
-  textPrimary,
-  white,
-} from './colors';
+import {divider, primary, textPrimary, white} from './colors';
 
 export const CalendarStrip = ({
   selectedDay,
@@ -24,7 +18,7 @@ export const CalendarStrip = ({
       style={styles.calendar}
       iconStyle={styles.icon}
       calendarHeaderStyle={styles.header}
-      calendarColor={backgroundSecondary}
+      calendarColor={white}
       dateNumberStyle={styles.dateNumber}
       dateNameStyle={styles.dateName}
       highlightDateNameStyle={styles.highlight}

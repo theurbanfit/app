@@ -47,7 +47,6 @@ const deriveEventsForTheDayFromSnapshot = (numberOfTheDay, snapshot) =>
     );
 
 const useEventsForDay = numberOfTheDay => {
-  debugger;
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
