@@ -92,14 +92,15 @@ export default memo(function ActivitiesScreen({navigation}) {
               <ActivityCard
                 onPress={() =>
                   navigation.navigate('ActivityDetails', {
+                    imageSrc: bannerUrl,
+                    title: name,
                     fullAddress,
-                    bannerUrl,
-                    name,
                     startTime,
                     endTime,
-                    scheduledClassId,
                     tags,
+                    scheduledClassId,
                     description,
+                    date: selectedDay,
                   })
                 }
                 key={scheduledClassId}
