@@ -19,11 +19,15 @@ export default function UserAvatar({onUploadAvatar, source, loading}) {
             />
           </Modal>
         </Portal>
-        <Avatar.Image
-          style={styles.margins}
-          size={100}
-          source={source ? {uri: source} : undefined}
-        />
+        {source ? (
+          <Avatar.Image
+            style={styles.margins}
+            size={100}
+            source={{uri: source}}
+          />
+        ) : (
+          <Avatar.Text style={styles.margins} size={100} label="UF" />
+        )}
       </TouchableOpacity>
     </View>
   );
