@@ -5,6 +5,7 @@ import moment from 'moment';
 import firestore from '@react-native-firebase/firestore';
 import {ActivityCard} from '../../components/ActivityCard';
 import {ContainerView} from '../../components/ContainerView';
+import {deriveTimeRange} from '../../components/utils/time';
 
 const mapNumberToWeekDays = {
   1: 'mon',
@@ -22,21 +23,29 @@ const deriveEventsForTheDayFromSnapshot = (
 ) =>
   snapshot.docs
     .map(doc => doc.data())
-    .flatMap(({classes, facilityId, fullAddress}) =>
+    .flatMap(({classes, facilityId, facilityDescription, fullAddress}) =>
       Object.values(classes).flatMap(
-        ({bannerUrl, name, schedule, tags, description}) => {
+        ({
+          bannerUrl,
+          name,
+          schedule,
+          tags,
+          durationInMinutes,
+          classImportantInfo,
+          classDescription,
+          howToPrepare,
+          howToArrive,
+        }) => {
           const day = mapNumberToWeekDays[numberOfTheDay];
           const scheduleOfTheDay = schedule[day] ?? {};
           return Object.values(scheduleOfTheDay).map(
             ({
               startTime,
-              endTime,
               scheduledClassId,
               remainingSeats,
               prearrangedSeats,
             }) => ({
-              startTime,
-              endTime,
+              timeRange: deriveTimeRange(startTime, durationInMinutes),
               scheduledClassId,
               remainingSeats,
               prearrangedSeats,
@@ -45,7 +54,11 @@ const deriveEventsForTheDayFromSnapshot = (
               fullAddress,
               facilityId,
               tags,
-              description,
+              classImportantInfo,
+              classDescription,
+              howToPrepare,
+              howToArrive,
+              facilityDescription,
             }),
           );
         },
@@ -83,11 +96,14 @@ export default memo(function ActivitiesScreen({navigation}) {
               fullAddress,
               bannerUrl,
               name,
-              startTime,
-              endTime,
+              timeRange,
               scheduledClassId,
               tags,
-              description,
+              classImportantInfo,
+              classDescription,
+              howToPrepare,
+              howToArrive,
+              facilityDescription,
             }) => (
               <ActivityCard
                 onPress={() =>
@@ -95,11 +111,14 @@ export default memo(function ActivitiesScreen({navigation}) {
                     imageSrc: bannerUrl,
                     title: name,
                     fullAddress,
-                    startTime,
-                    endTime,
+                    timeRange,
                     tags,
                     scheduledClassId,
-                    description,
+                    classImportantInfo,
+                    classDescription,
+                    howToPrepare,
+                    howToArrive,
+                    facilityDescription,
                     date: selectedDay,
                   })
                 }
@@ -107,8 +126,7 @@ export default memo(function ActivitiesScreen({navigation}) {
                 fullAddress={fullAddress}
                 imageSrc={bannerUrl}
                 title={name}
-                startTime={startTime}
-                endTime={endTime}
+                timeRange={timeRange}
                 tags={tags}
               />
             ),

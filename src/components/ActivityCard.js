@@ -6,8 +6,7 @@ import {textSecondary} from './colors';
 export const ActivityCard = ({
   imageSrc,
   title,
-  startTime,
-  endTime,
+  timeRange,
   fullAddress,
   tags = [],
   onPress = () => {},
@@ -16,9 +15,7 @@ export const ActivityCard = ({
     <View style={styles.container}>
       <View>
         <Title>{title}</Title>
-        <Text style={[styles.marginBottom, styles.color]}>
-          {startTime} - {endTime}
-        </Text>
+        <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
         <Text style={[styles.small, styles.marginBottom, styles.color]}>
           {fullAddress}
         </Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, SafeAreaView, Image, ScrollView} from 'react-native';
 import {ContainerView} from '../../components/ContainerView';
 import {IconButton, Headline, Text, Divider} from 'react-native-paper';
-import {white} from '../../components/colors';
+import {background, white} from '../../components/colors';
 import {ReadMoreText} from '../../components/ReadMoreText';
 
 export default function ActivityDetailsScreen({
@@ -13,14 +13,17 @@ export default function ActivityDetailsScreen({
       title,
       fullAddress,
       date,
-      startTime,
-      endTime,
-      description,
+      timeRange,
+      classImportantInfo,
+      classDescription,
+      howToPrepare,
+      howToArrive,
+      facilityDescription,
     },
   },
 }) {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <IconButton
           color={white}
@@ -49,18 +52,37 @@ export default function ActivityDetailsScreen({
               })}
               , {date.format('MMM Do')}
             </Text>
-            <Text style={styles.text}>
-              {startTime} - {endTime}
-            </Text>
+            <Text style={styles.text}>{timeRange}</Text>
           </View>
 
-          <Divider style={styles.divider} />
-
           <View>
+            <Divider style={styles.divider} />
             <Headline style={styles.headlineMarginSm}>
               About this course
             </Headline>
-            <ReadMoreText>{description}</ReadMoreText>
+            <ReadMoreText>{classDescription}</ReadMoreText>
+          </View>
+          <View>
+            <Divider style={styles.divider} />
+            <Headline style={styles.headlineMarginSm}>
+              Important information
+            </Headline>
+            <ReadMoreText>{classImportantInfo}</ReadMoreText>
+          </View>
+          <View>
+            <Divider style={styles.divider} />
+            <Headline style={styles.headlineMarginSm}>How to prepare</Headline>
+            <ReadMoreText>{howToPrepare}</ReadMoreText>
+          </View>
+          <View>
+            <Divider style={styles.divider} />
+            <Headline style={styles.headlineMarginSm}>How to arrive</Headline>
+            <ReadMoreText>{howToArrive}</ReadMoreText>
+          </View>
+          <View>
+            <Divider style={styles.divider} />
+            <Headline style={styles.headlineMarginSm}>About</Headline>
+            <ReadMoreText>{facilityDescription}</ReadMoreText>
           </View>
         </ContainerView>
       </ScrollView>
@@ -69,6 +91,7 @@ export default function ActivityDetailsScreen({
 }
 
 const styles = StyleSheet.create({
+  container: {backgroundColor: background},
   navButton: {
     color: white,
     position: 'absolute',
@@ -99,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   divider: {
-    marginTop: 12,
-    marginBottom: 12,
+    marginTop: 30,
+    marginBottom: 30,
   },
 });
