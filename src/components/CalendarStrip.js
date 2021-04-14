@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import Calendar from 'react-native-calendar-strip';
 import moment from 'moment';
 import {StyleSheet} from 'react-native';
@@ -9,14 +9,15 @@ export const CalendarStrip = ({
   setSelectedDay,
   today = moment(),
 }) => {
+  const {current} = useRef(today);
   return (
     <Calendar
       scrollable
-      minDate={today}
+      style={styles.calendar}
+      minDate={current}
+      maxDate={moment().add(15, 'days')}
       calendarAnimation={{type: 'sequence', duration: 30}}
       daySelectionAnimation={{type: 'background', duration: 300}}
-      style={styles.calendar}
-      iconStyle={styles.icon}
       calendarHeaderStyle={styles.header}
       calendarColor={white}
       dateNumberStyle={styles.dateNumber}
@@ -27,6 +28,8 @@ export const CalendarStrip = ({
       selectedDate={selectedDay}
       onDateSelected={setSelectedDay}
       useIsoWeekday={false}
+      leftSelector={[]}
+      rightSelector={[]}
     />
   );
 };
