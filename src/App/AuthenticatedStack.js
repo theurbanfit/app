@@ -9,29 +9,14 @@ import CheckInScreen from '../domains/checkIn/CheckInScreen';
 import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 
 const Tab = createBottomTabNavigator();
-const ActivityStack = createStackNavigator();
+const Stack = createStackNavigator();
 
-const MainStackNavigator = () => {
-  return (
-    <ActivityStack.Navigator initialRouteName="Activities" headerMode="none">
-      <ActivityStack.Screen
-        name="ActivityFeed"
-        component={ActivityFeedScreen}
-      />
-      <ActivityStack.Screen
-        name="ActivityDetails"
-        component={ActivityDetailsScreen}
-      />
-    </ActivityStack.Navigator>
-  );
-};
-
-export default function BottomTabNavigation() {
+function BottomTabNavigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="Activity feed"
-        component={MainStackNavigator}
+        component={ActivityFeedScreen}
         options={{
           tabBarLabel: 'Activities',
           tabBarIcon: ({color, size}) => (
@@ -68,5 +53,14 @@ export default function BottomTabNavigation() {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+export default function AuthenticatedStack() {
+  return (
+    <Stack.Navigator initialRouteName="Authenticated" headerMode="none">
+      <Stack.Screen name="ActivityFeed" component={BottomTabNavigation} />
+      <Stack.Screen name="ActivityDetails" component={ActivityDetailsScreen} />
+    </Stack.Navigator>
   );
 }

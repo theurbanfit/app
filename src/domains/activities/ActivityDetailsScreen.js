@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   navButton: {
     color: white,
     position: 'absolute',
-    top: 40,
     zIndex: 2,
   },
   image: {
