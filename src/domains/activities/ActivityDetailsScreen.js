@@ -3,11 +3,20 @@ import {View, StyleSheet, SafeAreaView, Image} from 'react-native';
 import {ContainerView} from '../../components/ContainerView';
 import {IconButton, Headline, Text, Divider} from 'react-native-paper';
 import {white} from '../../components/colors';
+import {ReadMoreText} from '../../components/ReadMoreText';
 
 export default function ActivityDetailsScreen({
   navigation,
   route: {
-    params: {imageSrc, title, fullAddress, date, startTime, endTime},
+    params: {
+      imageSrc,
+      title,
+      fullAddress,
+      date,
+      startTime,
+      endTime,
+      description,
+    },
   },
 }) {
   return (
@@ -26,7 +35,9 @@ export default function ActivityDetailsScreen({
         }}
       />
       <ContainerView>
-        <Headline style={styles.headline}>{title}</Headline>
+        <Headline style={[styles.headlineSize, styles.headlineMargin]}>
+          {title}
+        </Headline>
         <Text style={styles.text}>{fullAddress}</Text>
         <View style={styles.inline}>
           <Text style={styles.text}>
@@ -41,9 +52,14 @@ export default function ActivityDetailsScreen({
             {startTime} - {endTime}
           </Text>
         </View>
-      </ContainerView>
 
-      <Divider style={styles.divider} />
+        <Divider style={styles.divider} />
+
+        <View>
+          <Headline style={styles.headlineMarginSm}>About this course</Headline>
+          <ReadMoreText>{description}</ReadMoreText>
+        </View>
+      </ContainerView>
     </SafeAreaView>
   );
 }
@@ -60,11 +76,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: 240,
-  },
-  headline: {
-    marginTop: 16,
     marginBottom: 16,
+  },
+  headlineSize: {
+    fontWeight: '600',
     fontSize: 30,
+  },
+  headlineMargin: {
+    marginBottom: 16,
+  },
+  headlineMarginSm: {
+    marginBottom: 8,
   },
   text: {
     marginBottom: 6,
@@ -74,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   divider: {
-    marginTop: 16,
-    marginBottom: 16,
+    marginTop: 12,
+    marginBottom: 12,
   },
 });
