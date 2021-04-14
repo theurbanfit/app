@@ -26,5 +26,8 @@ const ownStyles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 12,
   },
-  text: {color: primary, fontSize: 14},
+  text: {
+    color: primary,
+    fontSize: 14,
+  },
 });
