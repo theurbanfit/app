@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, Image} from 'react-native';
+import {View, StyleSheet, SafeAreaView, Image, ScrollView} from 'react-native';
 import {ContainerView} from '../../components/ContainerView';
 import {IconButton, Headline, Text, Divider} from 'react-native-paper';
 import {white} from '../../components/colors';
@@ -21,45 +21,49 @@ export default function ActivityDetailsScreen({
 }) {
   return (
     <SafeAreaView>
-      <IconButton
-        color={white}
-        icon="keyboard-backspace"
-        size={30}
-        style={styles.navButton}
-        onPress={() => navigation.navigate('ActivityFeed')}
-      />
-      <Image
-        style={styles.image}
-        source={{
-          uri: imageSrc,
-        }}
-      />
-      <ContainerView>
-        <Headline style={[styles.headlineSize, styles.headlineMargin]}>
-          {title}
-        </Headline>
-        <Text style={styles.text}>{fullAddress}</Text>
-        <View style={styles.inline}>
-          <Text style={styles.text}>
-            {date.calendar(null, {
-              sameDay: '[Today]',
-              nextDay: '[Tomorrow]',
-              nextWeek: 'ddd',
-            })}
-            , {date.format('MMM Do')}
-          </Text>
-          <Text style={styles.text}>
-            {startTime} - {endTime}
-          </Text>
-        </View>
+      <ScrollView>
+        <IconButton
+          color={white}
+          icon="keyboard-backspace"
+          size={30}
+          style={styles.navButton}
+          onPress={() => navigation.navigate('ActivityFeed')}
+        />
+        <Image
+          style={styles.image}
+          source={{
+            uri: imageSrc,
+          }}
+        />
+        <ContainerView>
+          <Headline style={[styles.headlineSize, styles.headlineMargin]}>
+            {title}
+          </Headline>
+          <Text style={styles.text}>{fullAddress}</Text>
+          <View style={styles.inline}>
+            <Text style={styles.text}>
+              {date.calendar(null, {
+                sameDay: '[Today]',
+                nextDay: '[Tomorrow]',
+                nextWeek: 'ddd',
+              })}
+              , {date.format('MMM Do')}
+            </Text>
+            <Text style={styles.text}>
+              {startTime} - {endTime}
+            </Text>
+          </View>
 
-        <Divider style={styles.divider} />
+          <Divider style={styles.divider} />
 
-        <View>
-          <Headline style={styles.headlineMarginSm}>About this course</Headline>
-          <ReadMoreText>{description}</ReadMoreText>
-        </View>
-      </ContainerView>
+          <View>
+            <Headline style={styles.headlineMarginSm}>
+              About this course
+            </Headline>
+            <ReadMoreText>{description}</ReadMoreText>
+          </View>
+        </ContainerView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
