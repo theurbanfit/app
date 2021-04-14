@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import Calendar from 'react-native-calendar-strip';
 import moment from 'moment';
 import {StyleSheet} from 'react-native';
@@ -9,12 +9,11 @@ export const CalendarStrip = ({
   setSelectedDay,
   today = moment(),
 }) => {
-  const {current} = useRef(today);
   return (
     <Calendar
       scrollable
       style={styles.calendar}
-      minDate={current}
+      minDate={today}
       maxDate={moment().add(15, 'days')}
       calendarAnimation={{type: 'sequence', duration: 30}}
       daySelectionAnimation={{type: 'background', duration: 300}}
