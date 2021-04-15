@@ -65,7 +65,8 @@ platform :android do
         build_android_app(
            task: "assemble",
            flavor: "GotNoClue",
-           build_type: "Release"
+           build_type: "Release",
+           gradle_path: "./android/gradlew"
         )
 
         firebase_app_distribution(
