@@ -23,4 +23,7 @@ jobs:
       - name: Install Fastlane
         run: gem install fastlane
       - name: Bundle and distribute to firebase
+        env:
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         run: fastlane android distribute
