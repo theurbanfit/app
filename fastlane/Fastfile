@@ -66,7 +66,7 @@ platform :android do
            task: "assemble",
            flavor: "urbanfitsample",
            build_type: "Release",
-           gradle_path: "./android/gradlew"
+           gradle_path: "./android/gradle"
         )
 
         firebase_app_distribution(
