@@ -68,7 +68,6 @@ platform :android do
           build_type: 'Release',
           gradle_path: './gradlew',
           project_dir: './android',
-          apk_path: './android/app/build/outputs/bundle/release/app-release.aab',
         )
 
         firebase_app_distribution(
