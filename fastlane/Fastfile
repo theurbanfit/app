@@ -62,6 +62,7 @@ platform :android do
 
     desc "Android distribution to firebase"
     lane :distribute do
+        gradle(task: 'clean', project_dir: './android/')
         build_android_app(
           task: 'bundle',
           build_type: 'Release',
