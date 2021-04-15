@@ -64,7 +64,7 @@ platform :android do
     lane :distribute do
         build_android_app(
            task: "assemble",
-           flavor: "GotNoClue",
+           flavor: "urbanfitsample",
            build_type: "Release",
            gradle_path: "./android/gradlew"
         )
