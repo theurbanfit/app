@@ -59,9 +59,25 @@ platform :android do
         gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
         supply(track: 'beta', aab: './android/app/build/outputs/bundle/release/app-release.aab')
     end
+
+    desc "Android distribution to firebase"
+    lane :distribute do
+        build_android_app(
+           task: "assemble",
+           flavor: "GotNoClue",
+           build_type: "Release"
+        )
+
+        firebase_app_distribution(
+            app: "1:179379279680:android:9fcb61952165e497700ca5",
+            testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
+            release_notes: "A new release is being out, check it ;)"
+        )
+    end
+
     lane :release do
-        increment_version_code(app_project_dir: './android/app')
-        increment_version_name(app_project_dir: './android/app', bump_type: 'patch')
+        increment_version_code(app_folder_name: './android/app')
+        increment_version_name(app_folder_name: './android/app', bump_type: 'patch')
         gradle(task: 'clean', project_dir: './android/')
         gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
         supply(track: 'production', aab: './android/app/build/outputs/bundle/release/app-release.aab', release_status: 'draft')

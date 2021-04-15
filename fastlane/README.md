@@ -35,6 +35,11 @@ fastlane ios release
 fastlane android beta
 ```
 Android build and release to beta
+### android distribute
+```
+fastlane android distribute
+```
+Android distribution to firebase
 ### android release
 ```
 fastlane android release
