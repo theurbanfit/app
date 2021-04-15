@@ -64,7 +64,7 @@ platform :android do
     lane :distribute do
         gradle(task: 'clean', project_dir: './android/')
         build_android_app(
-          task: 'bundle',
+          task: 'assemble',
           build_type: 'Release',
           gradle_path: './gradlew',
           project_dir: './android',
