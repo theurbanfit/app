@@ -1,5 +1,4 @@
 before_all do
-    ensure_git_branch( branch: 'main' )
     ensure_git_status_clean
     git_pull
 end
@@ -68,15 +67,7 @@ platform :ios do
 end
 
 platform :android do
-    desc "Android build and release to beta"
-    lane :beta do
-        increment_version_code(app_folder_name: './android/app')
-        gradle(task: 'clean', project_dir: './android/')
-        gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
-        supply(track: 'beta', aab: './android/app/build/outputs/bundle/release/app-release.aab')
-    end
-
-    desc "Android distribution to firebase"
+    desc "Android build and distribution to firebase"
     lane :distribute do
         gradle(task: 'clean', project_dir: './android/')
         build_android_app(
@@ -92,6 +83,16 @@ platform :android do
             release_notes: "A new release is being out, check it ;)"
         )
     end
+
+
+    desc "Android build and release to beta"
+    lane :beta do
+        increment_version_code(app_folder_name: './android/app')
+        gradle(task: 'clean', project_dir: './android/')
+        gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
+        supply(track: 'beta', aab: './android/app/build/outputs/bundle/release/app-release.aab')
+    end
+
 
     lane :release do
         increment_version_code(app_folder_name: './android/app')

@@ -22,5 +22,5 @@ jobs:
           yarn react-native link
       - name: Install Fastlane
         run: gem install fastlane
-      - name: Bundle and upload to firebase
+      - name: Bundle and distribute to firebase
         run: fastlane android distribute
