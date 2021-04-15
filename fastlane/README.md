@@ -21,6 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane ios beta
 ```
 
+### ios distribute
+```
+fastlane ios distribute
+```
+Ios distribution to firebase
 ### ios release
 ```
 fastlane ios release

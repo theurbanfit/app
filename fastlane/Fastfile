@@ -42,6 +42,22 @@ platform :ios do
         push_to_git_remote
     end
 
+    desc "Ios distribution to firebase"
+        lane :distribute do
+            build_ios_app(
+              scheme: "urbanfitsample",
+              workspace: './ios/urbanfitsample.xcworkspace',
+                output_name: 'urbanfit.ipa',
+            )
+
+            firebase_app_distribution(
+                app: "1:179379279680:ios:74cf176da6c4469a700ca5",
+                testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
+                release_notes: "A new release is being out, check it ;)",
+                ipa_path: './urbanfit.ipa',
+            )
+        end
+
     lane :release do
         release_build
         screenshots
