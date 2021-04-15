@@ -1,7 +1,7 @@
 export const background = '#FDFDFD';
 export const backgroundSecondary = '#f3f3f3';
 export const textPrimary = '#031323';
-export const textSecondary = '#2E2E2E';
+export const textSecondary = '#24292e';
 export const textLightDark = '#727272';
 export const primary = '#0071f3';
 export const mintGreen = '#98FB98';
@@ -10,7 +10,7 @@ export const active = '#0366d6';
 export const activeLight = '#5da2f0';
 export const divider = '#D9DCDE';
 export const primaryDim = '#FBF7FE';
-export const destructive = '#E63644';
+export const yello = '#fff872';
 export const warning = '#D97508';
 export const white = '#FFFFFF';
 export const destructiveDim = '#FFE1E1';
