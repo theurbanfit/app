@@ -77,7 +77,8 @@ platform :android do
         )
 
         firebase_app_distribution(
-            app: "1:179379279680:android:9fcb61952165e497700ca5",
+            app: ENV['FIREBASE_APP_ID_ANDROID'],
+            firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
             testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
             release_notes: "A new release is being out, check it ;)"
         )
