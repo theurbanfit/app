@@ -5,7 +5,10 @@ import moment from 'moment';
 import firestore from '@react-native-firebase/firestore';
 import {ActivityCard} from '../../components/ActivityCard';
 import {ContainerView} from '../../components/ContainerView';
-import {deriveTimeRange} from '../../components/utils/time';
+import {
+  convertTimeStringToMoment,
+  deriveTimeRange,
+} from '../../components/utils/time';
 
 const mapNumberToWeekDays = {
   1: 'mon',
@@ -38,33 +41,38 @@ const deriveEventsForTheDayFromSnapshot = (
         }) => {
           const day = mapNumberToWeekDays[numberOfTheDay];
           const scheduleOfTheDay = schedule[day] ?? {};
-          return Object.values(scheduleOfTheDay).map(
-            ({
-              startTime,
-              scheduledClassId,
-              remainingSeats,
-              prearrangedSeats,
-            }) => ({
-              timeRange: deriveTimeRange(startTime, durationInMinutes),
-              scheduledClassId,
-              remainingSeats,
-              prearrangedSeats,
-              name,
-              bannerUrl,
-              fullAddress,
-              facilityId,
-              tags,
-              classImportantInfo,
-              classDescription,
-              howToPrepare,
-              howToArrive,
-              facilityDescription,
-            }),
-          );
+          return Object.values(scheduleOfTheDay)
+            .sort(({startTime: a}, {startTime: b}) =>
+              moment(convertTimeStringToMoment(a)).diff(
+                convertTimeStringToMoment(b),
+              ),
+            )
+            .map(
+              ({
+                startTime,
+                scheduledClassId,
+                remainingSeats,
+                prearrangedSeats,
+              }) => ({
+                timeRange: deriveTimeRange(startTime, durationInMinutes),
+                scheduledClassId,
+                remainingSeats,
+                prearrangedSeats,
+                name,
+                bannerUrl,
+                fullAddress,
+                facilityId,
+                tags,
+                classImportantInfo,
+                classDescription,
+                howToPrepare,
+                howToArrive,
+                facilityDescription,
+              }),
+            );
         },
       ),
     );
-
 const useEventsForDay = numberOfTheDay => {
   const [snap, setSnap] = useState(undefined);
   useEffect(() => {

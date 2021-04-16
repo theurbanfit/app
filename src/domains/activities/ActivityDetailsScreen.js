@@ -1,9 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, SafeAreaView, Image, ScrollView} from 'react-native';
 import {ContainerView} from '../../components/ContainerView';
-import {IconButton, Headline, Text, Divider} from 'react-native-paper';
-import {background, white} from '../../components/colors';
+import {
+  IconButton,
+  Headline,
+  Text,
+  Divider,
+  Button,
+  Portal,
+  Dialog,
+  Paragraph,
+} from 'react-native-paper';
+import {background, divider, white} from '../../components/colors';
 import {ReadMoreText} from '../../components/ReadMoreText';
+
+const ConfirmationDialog = ({onConfirm, onDismiss, visible}) => {
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={onDismiss}>
+        <Dialog.Title>Alert</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph>This is simple dialog</Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button uppercase={false} onPress={onDismiss}>
+            Close
+          </Button>
+          <Button
+            uppercase={false}
+            style={{marginLeft: 12}}
+            mode="contained"
+            onPress={onConfirm}>
+            Add to schedule
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+    </Portal>
+  );
+};
 
 export default function ActivityDetailsScreen({
   navigation,
@@ -22,9 +56,15 @@ export default function ActivityDetailsScreen({
     },
   },
 }) {
+  const [dialogOpen, toggleDialogView] = useState(false);
+
+  const handleConfirmation = () => {
+    toggleDialogView(false);
+    alert('Booked');
+  };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <IconButton
           color={white}
           icon="keyboard-backspace"
@@ -86,12 +126,40 @@ export default function ActivityDetailsScreen({
           </View>
         </ContainerView>
       </ScrollView>
+      <View style={styles.surface}>
+        <Button
+          style={styles.bookMeButton}
+          mode="contained"
+          uppercase={false}
+          onPress={() => toggleDialogView(true)}>
+          Add to schedule
+        </Button>
+      </View>
+
+      <ConfirmationDialog
+        visible={dialogOpen}
+        onConfirm={handleConfirmation}
+        onDismiss={() => toggleDialogView(false)}
+      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: background},
+  container: {
+    backgroundColor: background,
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1.9,
+  },
+  surface: {
+    flex: 0.1,
+    borderTopColor: divider,
+    borderTopWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   navButton: {
     color: white,
     position: 'absolute',
@@ -124,5 +192,11 @@ const styles = StyleSheet.create({
   divider: {
     marginTop: 30,
     marginBottom: 30,
+  },
+  bookMeButton: {
+    alignSelf: 'stretch',
+    marginTop: 12,
+    marginLeft: 12,
+    marginRight: 12,
   },
 });

@@ -8,6 +8,8 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {useFetchUser} from './serviceHooks';
 import {AuthContext} from '../auth/AuthProvider';
+import {ContainerView} from '../../components/ContainerView';
+import {UserSchedule} from '../../components/UserSchedule';
 
 const uploadImage = async (uri, name, firebasePath = '') => {
   const imageRef = storage().ref(`${firebasePath}/${name}`);
@@ -72,22 +74,18 @@ export default function UserProfileScreen() {
 
   return (
     <SafeAreaView>
-      <View style={styles.flexRow}>
+      <ContainerView style={styles.flexRow}>
         <UserAvatar
           onUploadAvatar={handleAvatarUpload}
           source={userData?.photoURL}
           loading={imageIsUploading}
         />
         <UserInfo displayName={userData?.displayName} />
-      </View>
+      </ContainerView>
       <Divider />
-      <Button
-        modeValue="contained"
-        onPress={() => {
-          logout();
-        }}>
-        Logout
-      </Button>
+      <ContainerView>
+        <UserSchedule />
+      </ContainerView>
     </SafeAreaView>
   );
 }

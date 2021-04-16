@@ -1,32 +1,27 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-paper';
 import {ActivityIndicator, Portal, Modal, Text} from 'react-native-paper';
 import {mintGreen} from './colors';
 
 export default function UserAvatar({onUploadAvatar, source, loading}) {
   return (
-    <View>
-      <TouchableOpacity onPress={onUploadAvatar}>
-        <Portal>
-          <Modal
-            visible={loading}
-            dismissable={false}
-            contentContainerStyle={styles.container}>
-            <Text>This might take a minute, please wait.</Text>
-            <ActivityIndicator
-              animating={true}
-              style={styles.loadingIndicator}
-            />
-          </Modal>
-        </Portal>
-        <Avatar.Image
-          style={styles.margins}
-          size={100}
-          source={source ? {uri: source} : undefined}
-        />
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={onUploadAvatar}>
+      <Portal>
+        <Modal
+          visible={loading}
+          dismissable={false}
+          contentContainerStyle={styles.container}>
+          <Text>This might take a minute, please wait.</Text>
+          <ActivityIndicator animating={true} style={styles.loadingIndicator} />
+        </Modal>
+      </Portal>
+      <Avatar.Image
+        style={styles.margins}
+        size={100}
+        source={source ? {uri: source} : undefined}
+      />
+    </TouchableOpacity>
   );
 }
 

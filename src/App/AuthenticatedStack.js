@@ -2,15 +2,39 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import ActivityFeedScreen from '../domains/activities/ActivityFeedScreen';
-import UserProfileScreen from '../domains/userProfile/UserProfileScreen';
+import UserProfileScreen from '../domains/profile/UserProfileScreen';
 import FontCommunityIcons from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
 import CheckInScreen from '../domains/checkIn/CheckInScreen';
 import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
+import UserSettingsScreen from '../domains/profile/UserSettings';
+import {IconButton} from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const Profile = createStackNavigator();
 
+function ProfileStackScreen({navigation}) {
+  return (
+    <Profile.Navigator>
+      <Profile.Screen
+        options={{
+          headerTitle: null,
+          headerRight: () => (
+            <IconButton
+              icon="cog-outline"
+              size={28}
+              onPress={() => navigation.navigate('User Settings')}
+            />
+          ),
+        }}
+        name="Profile"
+        component={UserProfileScreen}
+      />
+      <Profile.Screen name="User Settings" component={UserSettingsScreen} />
+    </Profile.Navigator>
+  );
+}
 function BottomTabNavigation() {
   return (
     <Tab.Navigator>
@@ -44,7 +68,7 @@ function BottomTabNavigation() {
       />
       <Tab.Screen
         name="Profile"
-        component={UserProfileScreen}
+        component={ProfileStackScreen}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (

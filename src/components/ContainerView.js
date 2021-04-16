@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
 
-export const ContainerView = ({children}) => (
-  <View style={styles.container}>{children}</View>
+export const ContainerView = ({children, style}) => (
+  <View style={[style, styles.container]}>{children}</View>
 );
 
 const {width} = Dimensions.get('window');

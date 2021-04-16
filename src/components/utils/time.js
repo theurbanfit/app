@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const convertTimeFromString = startTime => {
+export const convertTimeStringToMoment = startTime => {
   const day = moment().zone('EST');
   const splitTime = startTime.split(/:/);
   return day
@@ -11,8 +11,12 @@ const convertTimeFromString = startTime => {
 };
 
 export const deriveTimeRange = (startTime, durationInMinutes) => {
-  const startMoment = convertTimeFromString(startTime);
+  const startMoment = convertTimeStringToMoment(startTime);
   const endMoment = moment(startMoment).add({minutes: durationInMinutes});
 
   return `${startMoment.format('H:mm')} - ${endMoment.format('H:mm')}`;
+};
+
+export const sortArrayByHour = ({startTime: a}, {startTime: b}) => {
+  return moment(a).diff(b);
 };
