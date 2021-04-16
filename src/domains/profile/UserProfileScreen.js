@@ -6,7 +6,7 @@ import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import {useFetchUser} from './serviceHooks';
+import {useFetchUser} from './asyncHooks';
 import {ContainerView} from '../../components/ContainerView';
 import {UserSchedule} from '../../components/UserSchedule';
 

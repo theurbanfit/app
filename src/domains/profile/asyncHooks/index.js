@@ -1,6 +1,6 @@
 import {useContext, useState, useEffect} from 'react';
 import {AuthContext} from '../../auth/AuthProvider';
-import firestore from '@react-native-firebase/firestore';
+import {retrieveActiveUser} from '../../../sharedServices';
 
 export const useFetchUser = () => {
   const {user} = useContext(AuthContext);
@@ -8,13 +8,9 @@ export const useFetchUser = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await firestore()
-        .collection('users')
-        .doc(user.uid)
-        .get();
+      const response = await retrieveActiveUser(user.uid);
 
-      const data = response.data();
-      setData(data);
+      setData(response.data());
     };
 
     fetchData();

@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, StyleSheet, SafeAreaView, Image, ScrollView} from 'react-native';
 import {ContainerView} from '../../components/ContainerView';
 import {
@@ -14,24 +14,11 @@ import {
 import {background, divider, white} from '../../components/colors';
 import {ReadMoreText} from '../../components/ReadMoreText';
 import {AuthContext} from '../auth/AuthProvider';
-import firestore from '@react-native-firebase/firestore';
-
-const updateUserSchedule = async (
-  user,
-  {scheduledClassId, title, dateTime, classId},
-) => {
-  await firestore()
-    .collection('users')
-    .doc(user.uid)
-    .update({
-      [`schedule.${scheduledClassId}`]: {
-        scheduledClassId,
-        title,
-        dateTime,
-        classId,
-      },
-    });
-};
+import {
+  scheduleStatuses,
+  useScheduleStatus,
+} from './asyncHooks/useScheduleStatus';
+import {updateUserSchedule} from './services';
 
 const ConfirmationDialog = ({
   onConfirm,
@@ -68,34 +55,6 @@ const ConfirmationDialog = ({
   );
 };
 
-const useScheduleStatus = scheduledClassId => {
-  const {user} = useContext(AuthContext);
-  const [snap, setSnap] = useState(undefined);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const snapshot = await firestore()
-        .collection('users')
-        .where('uid', '==', user.uid)
-        .get();
-
-      snapshot.forEach(s => {
-        const {schedule} = s.data();
-        setSnap(Object.keys(schedule).some(key => key === scheduledClassId));
-      });
-    };
-    fetchData();
-  }, [user.uid, scheduledClassId]);
-
-  if (snap === undefined) {
-    return 'idle';
-  } else if (snap === false) {
-    return 'notScheduled';
-  } else {
-    return 'scheduled';
-  }
-};
-
 export default function ActivityDetailsScreen({
   navigation,
   route: {
@@ -119,7 +78,9 @@ export default function ActivityDetailsScreen({
   const {user} = useContext(AuthContext);
   const [dialogOpen, toggleDialogView] = useState(false);
   const [confirmationInProgress, setLoading] = useState(false);
-  const scheduleStatus = useScheduleStatus(scheduledClassId);
+  const [scheduleStatus, setScheduleStatus] = useScheduleStatus(
+    scheduledClassId,
+  );
 
   const handleConfirmation = async () => {
     setLoading(true);
@@ -129,6 +90,7 @@ export default function ActivityDetailsScreen({
       title,
       dateTime: dateTime.format('dddd, MMMM Do YYYY, HH:mm:ss'),
     });
+    setScheduleStatus(scheduleStatuses.scheduled);
     toggleDialogView(false);
     setLoading(false);
   };
