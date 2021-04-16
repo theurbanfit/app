@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, StyleSheet, SafeAreaView, Image, ScrollView} from 'react-native';
 import {ContainerView} from '../../components/ContainerView';
 import {
@@ -13,20 +13,49 @@ import {
 } from 'react-native-paper';
 import {background, divider, white} from '../../components/colors';
 import {ReadMoreText} from '../../components/ReadMoreText';
+import {AuthContext} from '../auth/AuthProvider';
+import firestore from '@react-native-firebase/firestore';
 
-const ConfirmationDialog = ({onConfirm, onDismiss, visible}) => {
+const updateUserSchedule = async (
+  user,
+  {scheduledClassId, title, dateTime, classId},
+) => {
+  await firestore()
+    .collection('users')
+    .doc(user.uid)
+    .update({
+      [`schedule.${scheduledClassId}`]: {
+        scheduledClassId,
+        title,
+        dateTime,
+        classId,
+      },
+    });
+};
+
+const ConfirmationDialog = ({
+  onConfirm,
+  onDismiss,
+  visible,
+  confirmationInProgress,
+}) => {
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onDismiss}>
-        <Dialog.Title>Alert</Dialog.Title>
+        <Dialog.Title>Add to schedule?</Dialog.Title>
         <Dialog.Content>
-          <Paragraph>This is simple dialog</Paragraph>
+          <Paragraph>
+            Check partner's cancellation policy to avoid late cancelation or no
+            show-fees.
+          </Paragraph>
         </Dialog.Content>
         <Dialog.Actions>
           <Button uppercase={false} onPress={onDismiss}>
             Close
           </Button>
           <Button
+            loading={confirmationInProgress}
+            disabled={confirmationInProgress}
             uppercase={false}
             style={{marginLeft: 12}}
             mode="contained"
@@ -39,6 +68,34 @@ const ConfirmationDialog = ({onConfirm, onDismiss, visible}) => {
   );
 };
 
+const useScheduleStatus = scheduledClassId => {
+  const {user} = useContext(AuthContext);
+  const [snap, setSnap] = useState(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const snapshot = await firestore()
+        .collection('users')
+        .where('uid', '==', user.uid)
+        .get();
+
+      snapshot.forEach(s => {
+        const {schedule} = s.data();
+        setSnap(Object.keys(schedule).some(key => key === scheduledClassId));
+      });
+    };
+    fetchData();
+  }, [user.uid, scheduledClassId]);
+
+  if (snap === undefined) {
+    return 'idle';
+  } else if (snap === false) {
+    return 'notScheduled';
+  } else {
+    return 'scheduled';
+  }
+};
+
 export default function ActivityDetailsScreen({
   navigation,
   route: {
@@ -46,21 +103,34 @@ export default function ActivityDetailsScreen({
       imageSrc,
       title,
       fullAddress,
+      dateTime,
       date,
       timeRange,
+      classId,
       classImportantInfo,
       classDescription,
       howToPrepare,
       howToArrive,
       facilityDescription,
+      scheduledClassId,
     },
   },
 }) {
+  const {user} = useContext(AuthContext);
   const [dialogOpen, toggleDialogView] = useState(false);
+  const [confirmationInProgress, setLoading] = useState(false);
+  const scheduleStatus = useScheduleStatus(scheduledClassId);
 
-  const handleConfirmation = () => {
+  const handleConfirmation = async () => {
+    setLoading(true);
+    await updateUserSchedule(user, {
+      classId,
+      scheduledClassId,
+      title,
+      dateTime: dateTime.format('dddd, MMMM Do YYYY, HH:mm:ss'),
+    });
     toggleDialogView(false);
-    alert('Booked');
+    setLoading(false);
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -127,16 +197,42 @@ export default function ActivityDetailsScreen({
         </ContainerView>
       </ScrollView>
       <View style={styles.surface}>
-        <Button
-          style={styles.bookMeButton}
-          mode="contained"
-          uppercase={false}
-          onPress={() => toggleDialogView(true)}>
-          Add to schedule
-        </Button>
+        {(() => {
+          switch (scheduleStatus) {
+            case 'idle':
+              return (
+                <Button
+                  style={styles.bookMeButton}
+                  mode="contained"
+                  disabled={true}
+                  loading={true}
+                />
+              );
+            case 'scheduled':
+              return (
+                <Button
+                  style={styles.bookMeButton}
+                  uppercase={false}
+                  onPress={() => toggleDialogView(true)}>
+                  View your schedule
+                </Button>
+              );
+            case 'notScheduled':
+              return (
+                <Button
+                  style={styles.bookMeButton}
+                  mode="contained"
+                  uppercase={false}
+                  onPress={() => toggleDialogView(true)}>
+                  Add to schedule
+                </Button>
+              );
+          }
+        })()}
       </View>
 
       <ConfirmationDialog
+        confirmationInProgress={confirmationInProgress}
         visible={dialogOpen}
         onConfirm={handleConfirmation}
         onDismiss={() => toggleDialogView(false)}

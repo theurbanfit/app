@@ -7,7 +7,6 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {useFetchUser} from './serviceHooks';
-import {AuthContext} from '../auth/AuthProvider';
 import {ContainerView} from '../../components/ContainerView';
 import {UserSchedule} from '../../components/UserSchedule';
 
@@ -24,7 +23,6 @@ const uploadImage = async (uri, name, firebasePath = '') => {
 
 export default function UserProfileScreen() {
   const {user, userData} = useFetchUser();
-  const {logout} = useContext(AuthContext);
 
   const [imageIsUploading, setLoading] = useState(false);
 

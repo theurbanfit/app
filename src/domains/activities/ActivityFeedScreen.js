@@ -20,11 +20,10 @@ const mapNumberToWeekDays = {
   7: 'sun',
 };
 
-const deriveEventsForTheDayFromSnapshot = (
-  numberOfTheDay,
-  snapshot = {docs: []},
-) =>
-  snapshot.docs
+const deriveEventsForTheDateFromSnapshot = (date, snapshot = {docs: []}) => {
+  const numberOfTheDay = date.day();
+
+  return snapshot.docs
     .map(doc => doc.data())
     .flatMap(({classes, facilityId, facilityDescription, fullAddress}) =>
       Object.values(classes).flatMap(
@@ -33,6 +32,7 @@ const deriveEventsForTheDayFromSnapshot = (
           name,
           schedule,
           tags,
+          classId,
           durationInMinutes,
           classImportantInfo,
           classDescription,
@@ -54,6 +54,7 @@ const deriveEventsForTheDayFromSnapshot = (
                 remainingSeats,
                 prearrangedSeats,
               }) => ({
+                dateTime: moment(date.format('YYYY MM DD') + ' ' + startTime),
                 timeRange: deriveTimeRange(startTime, durationInMinutes),
                 scheduledClassId,
                 remainingSeats,
@@ -63,6 +64,7 @@ const deriveEventsForTheDayFromSnapshot = (
                 fullAddress,
                 facilityId,
                 tags,
+                classId,
                 classImportantInfo,
                 classDescription,
                 howToPrepare,
@@ -73,7 +75,10 @@ const deriveEventsForTheDayFromSnapshot = (
         },
       ),
     );
-const useEventsForDay = numberOfTheDay => {
+};
+
+const useEventsForDate = date => {
+  const numberOfTheDay = date.day;
   const [snap, setSnap] = useState(undefined);
   useEffect(() => {
     const fetchData = async () => {
@@ -83,13 +88,13 @@ const useEventsForDay = numberOfTheDay => {
     fetchData();
   }, [numberOfTheDay]);
 
-  return {events: deriveEventsForTheDayFromSnapshot(numberOfTheDay, snap)};
+  return {events: deriveEventsForTheDateFromSnapshot(date, snap)};
 };
 
 export default memo(function ActivitiesScreen({navigation}) {
   const today = moment();
   const [selectedDay, setSelectedDay] = useState(today);
-  const {events} = useEventsForDay(selectedDay.day());
+  const {events} = useEventsForDate(selectedDay);
 
   return (
     <SafeAreaView>
@@ -104,9 +109,11 @@ export default memo(function ActivitiesScreen({navigation}) {
               fullAddress,
               bannerUrl,
               name,
+              dateTime,
               timeRange,
               scheduledClassId,
               tags,
+              classId,
               classImportantInfo,
               classDescription,
               howToPrepare,
@@ -119,9 +126,11 @@ export default memo(function ActivitiesScreen({navigation}) {
                     imageSrc: bannerUrl,
                     title: name,
                     fullAddress,
+                    dateTime,
                     timeRange,
                     tags,
                     scheduledClassId,
+                    classId,
                     classImportantInfo,
                     classDescription,
                     howToPrepare,
