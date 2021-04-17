@@ -1,6 +1,5 @@
 import {useState, useEffect, useContext} from 'react';
-import {AuthContext} from '../../auth/AuthProvider';
-import {retrieveScheduledClasses} from '../../../sharedServices';
+import {ProfileContext} from '../../profile/ProfileProvider';
 
 export const scheduleStatuses = {
   pending: 'pending',
@@ -9,33 +8,27 @@ export const scheduleStatuses = {
 };
 
 export const useScheduleStatus = scheduledClassId => {
-  const {auth} = useContext(AuthContext);
-  const [snap, setSnap] = useState(undefined);
+  const {
+    profile: {schedule},
+  } = useContext(ProfileContext);
+
   const [scheduledClassStatus, setScheduledClassStatus] = useState(
     scheduleStatuses.pending,
   );
 
   useEffect(() => {
-    const classExistsInUserSchedule = scheduledClasses =>
-      Object.keys(scheduledClasses).some(key => key === scheduledClassId);
+    const classExistsInUserSchedule = (id, scheduledClasses) =>
+      Object.keys(scheduledClasses).some(key => key === id);
 
-    const fetchData = async () => {
-      const scheduledClasses = await retrieveScheduledClasses(auth.uid);
-
-      setSnap(classExistsInUserSchedule(scheduledClasses));
-    };
-    fetchData();
-  }, [auth.uid, scheduledClassId]);
-
-  useEffect(() => {
-    if (snap === undefined) {
+    const classExists = classExistsInUserSchedule(scheduledClassId, schedule);
+    if (classExists === undefined) {
       setScheduledClassStatus(scheduleStatuses.pending);
-    } else if (snap === false) {
+    } else if (classExists === false) {
       setScheduledClassStatus(scheduleStatuses.notScheduled);
     } else {
       setScheduledClassStatus(scheduleStatuses.scheduled);
     }
-  }, [snap]);
+  }, [schedule, scheduledClassId]);
 
-  return [scheduledClassStatus, setScheduledClassStatus];
+  return {scheduledClassStatus};
 };

@@ -4,19 +4,18 @@ import {Divider} from 'react-native-paper';
 import UserAvatar from '../../components/UserAvatar';
 import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {useUser} from './asyncHooks';
 import {ContainerView} from '../../components/ContainerView';
 import {UserSchedule} from '../../components/UserSchedule';
 import {uploadImageOnFirestorage, updateUserProfilePhoto} from './services';
 import {AuthContext} from '../auth/AuthProvider';
+import {ProfileContext} from './ProfileProvider';
 
 export default function UserProfileScreen() {
   const {auth} = useContext(AuthContext);
-  const {userData} = useUser();
+  const {profile} = useContext(ProfileContext);
 
   const [imageIsUploading, setLoading] = useState(false);
 
-  console.log(userData);
   const handleAvatarUpload = () => {
     const imagePickerOptions = {
       noData: true,
@@ -63,14 +62,14 @@ export default function UserProfileScreen() {
       <ContainerView style={styles.flexRow}>
         <UserAvatar
           onUploadAvatar={handleAvatarUpload}
-          source={userData?.photoURL}
+          source={profile?.photoURL}
           loading={imageIsUploading}
         />
-        <UserInfo displayName={userData?.displayName} />
+        <UserInfo displayName={profile?.displayName} />
       </ContainerView>
       <Divider />
       <ContainerView>
-        <UserSchedule scheduledClasses={userData?.schedule} />
+        <UserSchedule scheduledClasses={profile?.schedule} />
       </ContainerView>
     </SafeAreaView>
   );

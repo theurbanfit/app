@@ -82,9 +82,7 @@ export default function ActivityDetailsScreen({
   const [cancellationDialogOpen, setCancellationDialogView] = useState(false);
   const [confirmationInProgress, setConfirmationLoading] = useState(false);
   const [cancellationInProgress, setCancellationLoading] = useState(false);
-  const [scheduleStatus, setScheduleStatus] = useScheduleStatus(
-    scheduledClassId,
-  );
+  const {scheduledClassStatus} = useScheduleStatus(scheduledClassId);
 
   const handleConfirmation = async () => {
     setConfirmationLoading(true);
@@ -102,7 +100,6 @@ export default function ActivityDetailsScreen({
       facilityDescription,
       scheduledClassId,
     });
-    setScheduleStatus(scheduleStatuses.scheduled);
     setConfirmationDialogView(false);
     setConfirmationLoading(false);
   };
@@ -110,7 +107,6 @@ export default function ActivityDetailsScreen({
   const handleCancellation = async () => {
     setCancellationLoading(true);
     await removeClassFromUserSchedule(auth.uid, scheduledClassId);
-    setScheduleStatus(scheduleStatuses.notScheduled);
     setCancellationDialogView(false);
     setCancellationLoading(false);
   };
@@ -181,7 +177,7 @@ export default function ActivityDetailsScreen({
       </ScrollView>
       <View style={styles.surface}>
         {(() => {
-          switch (scheduleStatus) {
+          switch (scheduledClassStatus) {
             case scheduleStatuses.pending:
               return (
                 <Button

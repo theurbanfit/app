@@ -6,7 +6,7 @@ import {Alert} from 'react-native';
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
-  const [auth, setAuth] = useState(null);
+  const [auth, setAuth] = useState({});
   const [error, setError] = useState(null);
 
   const handleAuthErrors = ({code, message}) => {
