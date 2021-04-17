@@ -61,6 +61,7 @@ export const UserSchedule = ({scheduledClasses}) => {
           )
           .map(({title, dateTimeFormatted, scheduledClassId, fullAddress}) => (
             <ScheduledActivityCard
+              key={scheduledClassId}
               title={title}
               dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
               scheduledClassId={scheduledClassId}
