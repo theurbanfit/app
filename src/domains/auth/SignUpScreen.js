@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Title, IconButton, HelperText} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
@@ -12,6 +12,8 @@ export default function SignupScreen({navigation}) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const {register, setError, error} = useContext(AuthContext);
+
+  useEffect(() => setLoading(false), []);
 
   return (
     <View style={styles.container}>
