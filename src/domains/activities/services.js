@@ -14,7 +14,7 @@ export const addClassToUserSchedule = async (uid, classDetailsObject) => {
 };
 
 export const removeClassFromUserSchedule = async (
-  user,
+  uid,
   removalCandidateScheduledClassId,
 ) => {
   try {
