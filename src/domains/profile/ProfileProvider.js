@@ -11,13 +11,15 @@ export const useProfile = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = queryActiveUser(auth.uid).onSnapshot(snapshot => {
-      setData(snapshot.data());
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, [auth.uid]);
+    if (auth) {
+      const unsubscribe = queryActiveUser(auth.uid).onSnapshot(snapshot => {
+        setData(snapshot.data());
+      });
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [auth]);
 
   return {profile: data};
 };

@@ -11,11 +11,7 @@ export default function UserSettingsScreen() {
     <SafeAreaView>
       <ContainerView style={styles.flexRow}>
         <Divider />
-        <Button
-          modeValue="contained"
-          onPress={() => {
-            logout();
-          }}>
+        <Button modeValue="contained" onPress={() => logout()}>
           Logout
         </Button>
       </ContainerView>

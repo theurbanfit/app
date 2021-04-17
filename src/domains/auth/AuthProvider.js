@@ -53,7 +53,7 @@ export const AuthProvider = ({children}) => {
               password,
             );
 
-            firestore()
+            await firestore()
               .collection('users')
               .doc(firebase.user.uid)
               .set({
@@ -62,6 +62,7 @@ export const AuthProvider = ({children}) => {
                 firstName,
                 lastName,
                 displayName: `${firstName} ${lastName}`,
+                schedule: {},
               });
             await firebase.user.sendEmailVerification();
             setError(null);
