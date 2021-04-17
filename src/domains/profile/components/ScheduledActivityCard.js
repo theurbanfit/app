@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Title, Text, Divider, Menu, IconButton} from 'react-native-paper';
 import {View, StyleSheet} from 'react-native';
 import {white} from '../../../components/colors';
-import {displayActivityDate} from '../../../components/utils/datetime';
+import {displayActivityDateAndTime} from '../../../components/utils/datetime';
 
 export const ScheduledActivityCard = ({
   scheduledClassId,
@@ -13,12 +13,15 @@ export const ScheduledActivityCard = ({
 }) => {
   const [menuVisible, setMenuVisibility] = useState(false);
 
+  useEffect(() => {
+    return setMenuVisibility(false);
+  }, []);
   return (
     <>
       <View key={scheduledClassId} style={[styles.inline, styles.card]}>
         <View>
           <Title>{title}</Title>
-          <Text>{displayActivityDate(dateTime)}</Text>
+          <Text>{displayActivityDateAndTime(dateTime)}</Text>
           <Text>{fullAddress}</Text>
         </View>
         <View>
@@ -32,7 +35,13 @@ export const ScheduledActivityCard = ({
                 onPress={() => setMenuVisibility(true)}
               />
             }>
-            <Menu.Item onPress={onViewCard} title="View class details" />
+            <Menu.Item
+              onPress={() => {
+                onViewCard(scheduledClassId);
+                setMenuVisibility(false);
+              }}
+              title="View class details"
+            />
           </Menu>
         </View>
       </View>

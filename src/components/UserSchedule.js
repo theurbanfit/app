@@ -3,8 +3,8 @@ import {Headline, Text, Colors} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ScheduledActivityCard} from '../domains/profile/components/ScheduledActivityCard';
 import {useNavigation} from '@react-navigation/native';
-import moment from 'moment';
 import {formatFirestoreDateToMoment} from './utils/datetime';
+import moment from 'moment';
 
 export const UserSchedule = ({scheduledClasses}) => {
   const navigation = useNavigation();
@@ -53,17 +53,21 @@ export const UserSchedule = ({scheduledClasses}) => {
         Your Schedule
       </Headline>
       {scheduledClasses ? (
-        Object.values(
-          scheduledClasses,
-        ).map(({title, dateTimeFormatted, scheduledClassId, fullAddress}) => (
-          <ScheduledActivityCard
-            title={title}
-            dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
-            scheduledClassId={scheduledClassId}
-            fullAddress={fullAddress}
-            onViewCard={() => handleViewCardDetails(scheduledClassId)}
-          />
-        ))
+        Object.values(scheduledClasses)
+          .sort(({dateTimeFormatted: a}, {dateTimeFormatted: b}) =>
+            moment(formatFirestoreDateToMoment(a)).diff(
+              formatFirestoreDateToMoment(b),
+            ),
+          )
+          .map(({title, dateTimeFormatted, scheduledClassId, fullAddress}) => (
+            <ScheduledActivityCard
+              title={title}
+              dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
+              scheduledClassId={scheduledClassId}
+              fullAddress={fullAddress}
+              onViewCard={() => handleViewCardDetails(scheduledClassId)}
+            />
+          ))
       ) : (
         <Text>Loading..</Text>
       )}

@@ -22,7 +22,14 @@ export const displayActivityDate = dateTime =>
     sameDay: '[Today]',
     nextDay: '[Tomorrow]',
     nextWeek: 'ddd',
-  })}, ${dateTime.format('MMM Do')}`;
+  })}, ${dateTime.format('D MMM')}`;
+
+export const displayActivityDateAndTime = dateTime =>
+  `${dateTime.calendar(null, {
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    nextWeek: 'ddd',
+  })}, ${dateTime.format(' D MMM H:mm')}`;
 
 export const formatActivityDateForFirestore = dateTime =>
   dateTime.format('dddd, MMMM Do YYYY, HH:mm:ss');

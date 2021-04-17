@@ -15,9 +15,9 @@ const mapNumberToWeekDays = {
   6: 'sat',
   7: 'sun',
 };
-
 const sortBasedOnStartTime = ({startTime: a}, {startTime: b}) =>
   moment(convertTimeStringToMoment(a)).diff(convertTimeStringToMoment(b));
+
 
 const deriveEventsForTheDateFromSnapshot = (date, snapshot = {docs: []}) => {
   const numberOfTheDay = date.day();
