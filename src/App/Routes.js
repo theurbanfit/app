@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
+import firebaseAuth from '@react-native-firebase/auth';
 import UnauthenticatedStack from './UnauthenticatedStack';
 import AuthenticatedStack from './AuthenticatedStack';
 import {AuthContext} from '../domains/auth/AuthProvider';
@@ -8,20 +8,20 @@ import {ActivityIndicator} from 'react-native-paper';
 import {SafeAreaView, StyleSheet} from 'react-native';
 
 export default function Routes() {
-  const {user, setUser} = useContext(AuthContext);
+  const {auth, setAuth} = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
     function onAuthStateChanged(authenticatedUser) {
-      setUser(authenticatedUser);
+      setAuth(authenticatedUser);
       if (initializing) {
         setInitializing(false);
       }
       setLoading(false);
     }
-    return auth().onAuthStateChanged(onAuthStateChanged); // unsubscribe on unmount
-  }, [setUser, initializing]);
+    return firebaseAuth().onAuthStateChanged(onAuthStateChanged); // unsubscribe on unmount
+  }, [setAuth, initializing]);
 
   if (loading) {
     return (
@@ -33,7 +33,7 @@ export default function Routes() {
 
   return (
     <NavigationContainer>
-      {user ? <AuthenticatedStack /> : <UnauthenticatedStack />}
+      {auth ? <AuthenticatedStack /> : <UnauthenticatedStack />}
     </NavigationContainer>
   );
 }

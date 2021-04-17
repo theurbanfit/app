@@ -1,12 +1,12 @@
 import React, {createContext, useState} from 'react';
-import auth from '@react-native-firebase/auth';
+import firebaseAuth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {Alert} from 'react-native';
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
-  const [user, setUser] = useState(null);
+  const [auth, setAuth] = useState(null);
   const [error, setError] = useState(null);
 
   const handleAuthErrors = ({code, message}) => {
@@ -34,13 +34,13 @@ export const AuthProvider = ({children}) => {
   return (
     <AuthContext.Provider
       value={{
-        user,
-        setUser,
+        auth,
+        setAuth,
         error,
         setError,
         login: async (email, password) => {
           try {
-            await auth().signInWithEmailAndPassword(email, password);
+            await firebaseAuth().signInWithEmailAndPassword(email, password);
             setError(null);
           } catch (e) {
             handleAuthErrors(e);
@@ -48,7 +48,7 @@ export const AuthProvider = ({children}) => {
         },
         register: async ({email, password, firstName, lastName}) => {
           try {
-            const firebase = await auth().createUserWithEmailAndPassword(
+            const firebase = await firebaseAuth().createUserWithEmailAndPassword(
               email,
               password,
             );
@@ -71,14 +71,14 @@ export const AuthProvider = ({children}) => {
         },
         logout: async () => {
           try {
-            await auth().signOut();
+            await firebaseAuth().signOut();
             setError(null);
           } catch (e) {
             handleAuthErrors(e);
           }
         },
         passwordReset: async email => {
-          await auth().sendPasswordResetEmail(email);
+          await firebaseAuth().sendPasswordResetEmail(email);
           Alert.alert('Success', 'Email has been sent, check your mailbox');
         },
       }}>

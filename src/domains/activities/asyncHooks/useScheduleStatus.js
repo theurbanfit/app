@@ -9,7 +9,7 @@ export const scheduleStatuses = {
 };
 
 export const useScheduleStatus = scheduledClassId => {
-  const {user} = useContext(AuthContext);
+  const {auth} = useContext(AuthContext);
   const [snap, setSnap] = useState(undefined);
   const [scheduledClassStatus, setScheduledClassStatus] = useState(
     scheduleStatuses.pending,
@@ -20,12 +20,12 @@ export const useScheduleStatus = scheduledClassId => {
       Object.keys(scheduledClasses).some(key => key === scheduledClassId);
 
     const fetchData = async () => {
-      const scheduledClasses = await retrieveScheduledClasses(user.uid);
+      const scheduledClasses = await retrieveScheduledClasses(auth.uid);
 
       setSnap(classExistsInUserSchedule(scheduledClasses));
     };
     fetchData();
-  }, [user.uid, scheduledClassId]);
+  }, [auth.uid, scheduledClassId]);
 
   useEffect(() => {
     if (snap === undefined) {

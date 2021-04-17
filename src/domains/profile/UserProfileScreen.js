@@ -1,33 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, Alert} from 'react-native';
 import {Divider} from 'react-native-paper';
 import UserAvatar from '../../components/UserAvatar';
 import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
-import storage from '@react-native-firebase/storage';
-import firestore from '@react-native-firebase/firestore';
-import {useUser, useScheduledClasses} from './asyncHooks';
+import {useUser} from './asyncHooks';
 import {ContainerView} from '../../components/ContainerView';
 import {UserSchedule} from '../../components/UserSchedule';
-
-const uploadImage = async (uri, name, firebasePath = '') => {
-  const imageRef = storage().ref(`${firebasePath}/${name}`);
-  await imageRef.putFile(uri, {contentType: 'image/jpg'}).catch(error => {
-    throw error;
-  });
-  const url = await imageRef.getDownloadURL().catch(error => {
-    throw error;
-  });
-  return url;
-};
+import {uploadImageOnFirestorage, updateUserProfilePhoto} from './services';
+import {AuthContext} from '../auth/AuthProvider';
 
 export default function UserProfileScreen() {
-  const {scheduledClasses} = useScheduledClasses();
-
-  const {user, userData} = useUser();
+  const {auth} = useContext(AuthContext);
+  const {userData} = useUser();
 
   const [imageIsUploading, setLoading] = useState(false);
 
+  console.log(userData);
   const handleAvatarUpload = () => {
     const imagePickerOptions = {
       noData: true,
@@ -37,13 +26,6 @@ export default function UserProfileScreen() {
     launchImageLibrary(
       imagePickerOptions,
       async ({didCancel, error, fileName, uri}) => {
-        const updateUserAvatar = async (uid, photoURL) => {
-          await firestore()
-            .collection('users')
-            .doc(uid)
-            .update({photoURL: photoURL});
-        };
-
         if (didCancel) {
           setLoading(false);
         } else if (error) {
@@ -55,8 +37,12 @@ export default function UserProfileScreen() {
         } else {
           try {
             setLoading(true);
-            const imageUrl = await uploadImage(uri, fileName, 'profilePhotos');
-            await updateUserAvatar(user?.uid, imageUrl);
+            const imageUrl = await uploadImageOnFirestorage(
+              uri,
+              fileName,
+              'profilePhotos',
+            );
+            await updateUserProfilePhoto(auth?.uid, imageUrl);
             setLoading(false);
             Alert.alert('Success', 'Upload successful');
           } catch (e) {
@@ -84,7 +70,7 @@ export default function UserProfileScreen() {
       </ContainerView>
       <Divider />
       <ContainerView>
-        <UserSchedule scheduledClasses={scheduledClasses} />
+        <UserSchedule scheduledClasses={userData?.schedule} />
       </ContainerView>
     </SafeAreaView>
   );

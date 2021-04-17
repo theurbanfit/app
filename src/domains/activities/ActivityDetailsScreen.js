@@ -77,7 +77,7 @@ export default function ActivityDetailsScreen({
     },
   },
 }) {
-  const {user} = useContext(AuthContext);
+  const {auth} = useContext(AuthContext);
   const [confirmationDialogOpen, setConfirmationDialogView] = useState(false);
   const [cancellationDialogOpen, setCancellationDialogView] = useState(false);
   const [confirmationInProgress, setConfirmationLoading] = useState(false);
@@ -88,7 +88,7 @@ export default function ActivityDetailsScreen({
 
   const handleConfirmation = async () => {
     setConfirmationLoading(true);
-    await addClassToUserSchedule(user, {
+    await addClassToUserSchedule(auth.uid, {
       imageSrc,
       title,
       fullAddress,
@@ -109,7 +109,7 @@ export default function ActivityDetailsScreen({
 
   const handleCancellation = async () => {
     setCancellationLoading(true);
-    await removeClassFromUserSchedule(user, scheduledClassId);
+    await removeClassFromUserSchedule(auth.uid, scheduledClassId);
     setScheduleStatus(scheduleStatuses.notScheduled);
     setCancellationDialogView(false);
     setCancellationLoading(false);
