@@ -18,36 +18,38 @@ import {
   scheduleStatuses,
   useScheduleStatus,
 } from './asyncHooks/useScheduleStatus';
-import {updateUserSchedule} from './services';
+import {addClassToUserSchedule, removeClassFromUserSchedule} from './services';
 
 const ConfirmationDialog = ({
   onConfirm,
   onDismiss,
+  title,
+  content,
+  confirmationText,
   visible,
-  confirmationInProgress,
+  actionInProgress,
 }) => {
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onDismiss}>
-        <Dialog.Title>Add to schedule?</Dialog.Title>
-        <Dialog.Content>
-          <Paragraph>
-            Check partner's cancellation policy to avoid late cancelation or no
-            show-fees.
-          </Paragraph>
-        </Dialog.Content>
+        <Dialog.Title>{title}</Dialog.Title>
+        {content && (
+          <Dialog.Content>
+            <Paragraph>{content}</Paragraph>
+          </Dialog.Content>
+        )}
         <Dialog.Actions>
           <Button uppercase={false} onPress={onDismiss}>
             Close
           </Button>
           <Button
-            loading={confirmationInProgress}
-            disabled={confirmationInProgress}
+            loading={actionInProgress}
+            disabled={actionInProgress}
             uppercase={false}
             style={{marginLeft: 12}}
             mode="contained"
             onPress={onConfirm}>
-            Add to schedule
+            {confirmationText}
           </Button>
         </Dialog.Actions>
       </Dialog>
@@ -76,24 +78,43 @@ export default function ActivityDetailsScreen({
   },
 }) {
   const {user} = useContext(AuthContext);
-  const [dialogOpen, toggleDialogView] = useState(false);
-  const [confirmationInProgress, setLoading] = useState(false);
+  const [confirmationDialogOpen, setConfirmationDialogView] = useState(false);
+  const [cancellationDialogOpen, setCancellationDialogView] = useState(false);
+  const [confirmationInProgress, setConfirmationLoading] = useState(false);
+  const [cancellationInProgress, setCancellationLoading] = useState(false);
   const [scheduleStatus, setScheduleStatus] = useScheduleStatus(
     scheduledClassId,
   );
 
   const handleConfirmation = async () => {
-    setLoading(true);
-    await updateUserSchedule(user, {
-      classId,
-      scheduledClassId,
+    setConfirmationLoading(true);
+    await addClassToUserSchedule(user, {
+      imageSrc,
       title,
+      fullAddress,
       dateTime: dateTime.format('dddd, MMMM Do YYYY, HH:mm:ss'),
+      timeRange,
+      classId,
+      classImportantInfo,
+      classDescription,
+      howToPrepare,
+      howToArrive,
+      facilityDescription,
+      scheduledClassId,
     });
     setScheduleStatus(scheduleStatuses.scheduled);
-    toggleDialogView(false);
-    setLoading(false);
+    setConfirmationDialogView(false);
+    setConfirmationLoading(false);
   };
+
+  const handleCancellation = async () => {
+    setCancellationLoading(true);
+    await removeClassFromUserSchedule(user, scheduledClassId);
+    setScheduleStatus(scheduleStatuses.notScheduled);
+    setCancellationDialogView(false);
+    setCancellationLoading(false);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -161,7 +182,7 @@ export default function ActivityDetailsScreen({
       <View style={styles.surface}>
         {(() => {
           switch (scheduleStatus) {
-            case 'idle':
+            case scheduleStatuses.pending:
               return (
                 <Button
                   style={styles.bookMeButton}
@@ -170,22 +191,22 @@ export default function ActivityDetailsScreen({
                   loading={true}
                 />
               );
-            case 'scheduled':
+            case scheduleStatuses.scheduled:
               return (
                 <Button
                   style={styles.bookMeButton}
                   uppercase={false}
-                  onPress={() => toggleDialogView(true)}>
-                  View your schedule
+                  onPress={() => setCancellationDialogView(true)}>
+                  Cancel reservation
                 </Button>
               );
-            case 'notScheduled':
+            case scheduleStatuses.notScheduled:
               return (
                 <Button
                   style={styles.bookMeButton}
                   mode="contained"
                   uppercase={false}
-                  onPress={() => toggleDialogView(true)}>
+                  onPress={() => setConfirmationDialogView(true)}>
                   Add to schedule
                 </Button>
               );
@@ -194,10 +215,24 @@ export default function ActivityDetailsScreen({
       </View>
 
       <ConfirmationDialog
-        confirmationInProgress={confirmationInProgress}
-        visible={dialogOpen}
+        actionInProgress={confirmationInProgress}
+        visible={confirmationDialogOpen}
         onConfirm={handleConfirmation}
-        onDismiss={() => toggleDialogView(false)}
+        onDismiss={() => setConfirmationDialogView(false)}
+        title={'Add to schedule?'}
+        content={
+          "Check partner's cancellation policy to avoid late cancelation or no show-fees."
+        }
+        confirmationText={'Add class'}
+      />
+      <ConfirmationDialog
+        actionInProgress={cancellationInProgress}
+        visible={cancellationDialogOpen}
+        onConfirm={handleCancellation}
+        onDismiss={() => setCancellationDialogView(false)}
+        title={'Remove from schedule?'}
+        content={'The class will be removed from your schedule, are you sure?'}
+        confirmationText={'Cancel class'}
       />
     </SafeAreaView>
   );

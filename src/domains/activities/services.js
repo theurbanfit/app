@@ -1,20 +1,32 @@
 import firestore from '@react-native-firebase/firestore';
 
-export const updateUserSchedule = async (
+export const addClassToUserSchedule = async (user, classDetailsObject) => {
+  try {
+    await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .update({
+        [`schedule.${classDetailsObject.scheduledClassId}`]: classDetailsObject,
+      });
+  } catch (e) {
+    debugger;
+  }
+};
+
+export const removeClassFromUserSchedule = async (
   user,
-  {scheduledClassId, title, dateTime, classId},
+  removalCandidateScheduledClassId,
 ) => {
-  await firestore()
-    .collection('users')
-    .doc(user.uid)
-    .update({
-      [`schedule.${scheduledClassId}`]: {
-        scheduledClassId,
-        title,
-        dateTime,
-        classId,
-      },
-    });
+  try {
+    await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .update({
+        [`schedule.${removalCandidateScheduledClassId}`]: firestore.FieldValue.delete(),
+      });
+  } catch (e) {
+    debugger;
+  }
 };
 
 export const retrieveFacilities = async () =>

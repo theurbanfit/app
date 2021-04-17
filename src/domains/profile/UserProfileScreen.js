@@ -1,12 +1,12 @@
-import React, {useState, useContext} from 'react';
-import {SafeAreaView, StyleSheet, View, Alert} from 'react-native';
-import {Divider, Button} from 'react-native-paper';
+import React, {useState} from 'react';
+import {SafeAreaView, StyleSheet, Alert} from 'react-native';
+import {Divider} from 'react-native-paper';
 import UserAvatar from '../../components/UserAvatar';
 import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import {useFetchUser} from './asyncHooks';
+import {useUser, useScheduledClasses} from './asyncHooks';
 import {ContainerView} from '../../components/ContainerView';
 import {UserSchedule} from '../../components/UserSchedule';
 
@@ -22,7 +22,9 @@ const uploadImage = async (uri, name, firebasePath = '') => {
 };
 
 export default function UserProfileScreen() {
-  const {user, userData} = useFetchUser();
+  const {scheduledClasses} = useScheduledClasses();
+
+  const {user, userData} = useUser();
 
   const [imageIsUploading, setLoading] = useState(false);
 
@@ -82,7 +84,7 @@ export default function UserProfileScreen() {
       </ContainerView>
       <Divider />
       <ContainerView>
-        <UserSchedule />
+        <UserSchedule scheduledClasses={scheduledClasses} />
       </ContainerView>
     </SafeAreaView>
   );
