@@ -42,7 +42,7 @@ export const UserSchedule = ({scheduledClasses}) => {
     });
   };
   return (
-    <ScrollView>
+    <>
       <Headline
         style={{
           marginTop: 16,
@@ -52,26 +52,30 @@ export const UserSchedule = ({scheduledClasses}) => {
         }}>
         Your Schedule
       </Headline>
-      {scheduledClasses ? (
-        Object.values(scheduledClasses)
-          .sort(({dateTimeFormatted: a}, {dateTimeFormatted: b}) =>
-            moment(formatFirestoreDateToMoment(a)).diff(
-              formatFirestoreDateToMoment(b),
-            ),
-          )
-          .map(({title, dateTimeFormatted, scheduledClassId, fullAddress}) => (
-            <ScheduledActivityCard
-              key={scheduledClassId}
-              title={title}
-              dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
-              scheduledClassId={scheduledClassId}
-              fullAddress={fullAddress}
-              onViewCard={() => handleViewCardDetails(scheduledClassId)}
-            />
-          ))
-      ) : (
-        <Text>Loading..</Text>
-      )}
-    </ScrollView>
+      <ScrollView>
+        {scheduledClasses ? (
+          Object.values(scheduledClasses)
+            .sort(({dateTimeFormatted: a}, {dateTimeFormatted: b}) =>
+              moment(formatFirestoreDateToMoment(a)).diff(
+                formatFirestoreDateToMoment(b),
+              ),
+            )
+            .map(
+              ({title, dateTimeFormatted, scheduledClassId, fullAddress}) => (
+                <ScheduledActivityCard
+                  key={scheduledClassId}
+                  title={title}
+                  dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
+                  scheduledClassId={scheduledClassId}
+                  fullAddress={fullAddress}
+                  onViewCard={() => handleViewCardDetails(scheduledClassId)}
+                />
+              ),
+            )
+        ) : (
+          <Text>Loading..</Text>
+        )}
+      </ScrollView>
+    </>
   );
 };
