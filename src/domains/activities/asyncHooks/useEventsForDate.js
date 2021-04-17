@@ -3,7 +3,7 @@ import moment from 'moment';
 import {
   convertTimeStringToMoment,
   deriveTimeRange,
-} from '../../../components/utils/time';
+} from '../../../components/utils/datetime';
 import {retrieveFacilities} from '../services';
 
 const mapNumberToWeekDays = {

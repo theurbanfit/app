@@ -19,6 +19,7 @@ import {
   useScheduleStatus,
 } from './asyncHooks/useScheduleStatus';
 import {addClassToUserSchedule, removeClassFromUserSchedule} from './services';
+import { displayActivityDate, formatActivityDateForFirestore } from "../../components/utils/datetime";
 
 const ConfirmationDialog = ({
   onConfirm,
@@ -65,7 +66,6 @@ export default function ActivityDetailsScreen({
       title,
       fullAddress,
       dateTime,
-      date,
       timeRange,
       classId,
       classImportantInfo,
@@ -90,7 +90,7 @@ export default function ActivityDetailsScreen({
       imageSrc,
       title,
       fullAddress,
-      dateTime: dateTime.format('dddd, MMMM Do YYYY, HH:mm:ss'),
+      dateTimeFormatted: formatActivityDateForFirestore(dateTime),
       timeRange,
       classId,
       classImportantInfo,
@@ -133,14 +133,7 @@ export default function ActivityDetailsScreen({
           </Headline>
           <Text style={styles.text}>{fullAddress}</Text>
           <View style={styles.inline}>
-            <Text style={styles.text}>
-              {date.calendar(null, {
-                sameDay: '[Today]',
-                nextDay: '[Tomorrow]',
-                nextWeek: 'ddd',
-              })}
-              , {date.format('MMM Do')}
-            </Text>
+            <Text style={styles.text}>{displayActivityDate(dateTime)}</Text>
             <Text style={styles.text}>{timeRange}</Text>
           </View>
 
@@ -279,8 +272,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   divider: {
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 24,
+    marginBottom: 24,
   },
   bookMeButton: {
     alignSelf: 'stretch',

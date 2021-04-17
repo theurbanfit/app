@@ -17,6 +17,15 @@ export const deriveTimeRange = (startTime, durationInMinutes) => {
   return `${startMoment.format('H:mm')} - ${endMoment.format('H:mm')}`;
 };
 
-export const sortArrayByHour = ({startTime: a}, {startTime: b}) => {
-  return moment(a).diff(b);
-};
+export const displayActivityDate = dateTime =>
+  `${dateTime.calendar(null, {
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    nextWeek: 'ddd',
+  })}, ${dateTime.format('MMM Do')}`;
+
+export const formatActivityDateForFirestore = dateTime =>
+  dateTime.format('dddd, MMMM Do YYYY, HH:mm:ss');
+
+export const formatFirestoreDateToMoment = dateTimeFormatted =>
+  moment(dateTimeFormatted, 'dddd, MMMM Do YYYY, HH:mm:ss');

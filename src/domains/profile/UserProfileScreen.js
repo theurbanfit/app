@@ -1,6 +1,5 @@
 import React, {useState, useContext} from 'react';
 import {SafeAreaView, StyleSheet, Alert} from 'react-native';
-import {Divider} from 'react-native-paper';
 import UserAvatar from '../../components/UserAvatar';
 import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -67,7 +66,6 @@ export default function UserProfileScreen() {
         />
         <UserInfo displayName={profile?.displayName} />
       </ContainerView>
-      <Divider />
       <ContainerView>
         <UserSchedule scheduledClasses={profile?.schedule} />
       </ContainerView>
@@ -77,7 +75,6 @@ export default function UserProfileScreen() {
 
 const styles = StyleSheet.create({
   flexRow: {
-    margin: 12,
     flexDirection: 'row',
   },
 });

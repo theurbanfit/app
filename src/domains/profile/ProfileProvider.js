@@ -2,18 +2,16 @@ import React, {createContext, useState, useContext, useEffect} from 'react';
 import {AuthContext} from '../auth/AuthProvider';
 import {queryActiveUser} from '../../sharedServices';
 
-export const ProfileContext = createContext({
-  schedule: {},
-});
+export const ProfileContext = createContext({});
 
 export const useProfile = () => {
   const {auth} = useContext(AuthContext);
-  const [data, setData] = useState([]);
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     if (auth) {
       const unsubscribe = queryActiveUser(auth.uid).onSnapshot(snapshot => {
-        setData(snapshot.data());
+        setProfile(snapshot.data());
       });
       return () => {
         unsubscribe();
@@ -21,7 +19,7 @@ export const useProfile = () => {
     }
   }, [auth]);
 
-  return {profile: data};
+  return {profile};
 };
 
 export const ProfileProvider = ({children}) => {
