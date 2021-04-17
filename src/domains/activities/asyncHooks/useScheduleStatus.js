@@ -16,12 +16,13 @@ export const useScheduleStatus = scheduledClassId => {
   );
 
   useEffect(() => {
+    const classExistsInUserSchedule = scheduledClasses =>
+      Object.keys(scheduledClasses).some(key => key === scheduledClassId);
+
     const fetchData = async () => {
       const scheduledClasses = await retrieveScheduledClasses(user.uid);
 
-      setSnap(
-        Object.keys(scheduledClasses).some(key => key === scheduledClassId),
-      );
+      setSnap(classExistsInUserSchedule(scheduledClasses));
     };
     fetchData();
   }, [user.uid, scheduledClassId]);
