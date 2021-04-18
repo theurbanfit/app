@@ -21,11 +21,6 @@ or alternatively using `brew install fastlane`
 fastlane ios beta
 ```
 
-### ios distribute
-```
-fastlane ios distribute
-```
-Ios distribution to firebase
 ### ios release
 ```
 fastlane ios release
@@ -35,16 +30,16 @@ fastlane ios release
 ----
 
 ## Android
+### android distribute
+```
+fastlane android distribute
+```
+Android build and distribution to firebase
 ### android beta
 ```
 fastlane android beta
 ```
 Android build and release to beta
-### android distribute
-```
-fastlane android distribute
-```
-Android distribution to firebase
 ### android release
 ```
 fastlane android release
