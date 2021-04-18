@@ -50,6 +50,17 @@ platform :ios do
 
     desc "Ios distribution to firebase"
     lane :distribute do
+        disable_automatic_code_signing
+        update_project_provisioning(
+          xcodeproj: "Project.xcodeproj",
+          profile: "org.reactjs.native.example.urbanfitsample",
+          build_configuration: "Release",
+          code_signing_identity: "iPhone Distribution"
+        )
+        update_project_team(
+          path: "Project.xcodeproj",
+          teamid: options[:team_id]
+        )
         build_ios_app(
           scheme: "urbanfitsample",
           workspace: './ios/urbanfitsample.xcworkspace',
