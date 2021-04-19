@@ -1,5 +1,4 @@
 before_all do
-    ensure_git_status_clean
 end
 
 platform :ios do
@@ -16,11 +15,19 @@ platform :ios do
     end
 
     private_lane :staging_build do
-        gym(scheme: 'urbanfitsample-staging', workspace: './ios/urbanfitsample.xcworkspace')
+        gym(scheme: 'urbanfitsample', workspace: './ios/urbanfitsample.xcworkspace')
     end
 
     private_lane :release_build do
-        gym(scheme: 'urbanfitsample-release', workspace: './ios/urbanfitsample.xcworkspace')
+        build_app(
+            export_method: "app-store",
+            export_options: {
+              provisioningProfiles: {
+                "com.example.bundleid" => "Provisioning Profile Name",
+                "com.example.bundleid2" => "Provisioning Profile Name 2"
+              }
+            }
+          )
     end
 
     private_lane :screenshots do
@@ -29,13 +36,6 @@ platform :ios do
             sh('detox', 'build -c ios')
             sh('detox', 'test -c ios')
         end
-    end
-
-    lane :beta do
-        staging_build
-        upload_to_testflight(username: 'paschalidi.chris@gmail.com', app_identifier: 'urbanfitsample')
-        commit_version_bump(message: 'bump build')
-        push_to_git_remote
     end
 
     lane :release do

@@ -27,7 +27,7 @@
 		8DB12153ADAF41938281930A /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54DA5F85C09C4CFBAD97E3D8 /* Fontisto.ttf */; };
 		B23F580910154FAFAF8664A2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57C10C47A7D64AAF9CBE929F /* Foundation.ttf */; };
 		B33F85059C98467188019C65 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92F1859952BA435C85FA184A /* MaterialCommunityIcons.ttf */; };
-		B68C60C3262109D20022FC19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B68C60C2262109D20022FC19 /* GoogleService-Info.plist */; };
+		B63DD0CF262D6E8000C65A9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B68C60C2262109D20022FC19 /* GoogleService-Info.plist */; };
 		ED6E011E1A514271A3FA6EDF /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 035FC0F0BF9645F48C767F9B /* Feather.ttf */; };
 		F85B278C68FE4F9E9FC83F03 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B355783533841D08BA3542C /* Ionicons.ttf */; };
 		FA84F12B39384CE09574E58D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CCB56AAFD20C406BA61DC145 /* Zocial.ttf */; };
@@ -302,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63DD0CF262D6E8000C65A9C /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				0BCE3B5DA1FC4FE6B85B86E6 /* AntDesign.ttf in Resources */,
@@ -313,7 +314,6 @@
 				7F862CA1A35740E685212635 /* FontAwesome5_Regular.ttf in Resources */,
 				52781B46E9B74A30A2ECEC89 /* FontAwesome5_Solid.ttf in Resources */,
 				8DB12153ADAF41938281930A /* Fontisto.ttf in Resources */,
-				B68C60C3262109D20022FC19 /* GoogleService-Info.plist in Resources */,
 				B23F580910154FAFAF8664A2 /* Foundation.ttf in Resources */,
 				F85B278C68FE4F9E9FC83F03 /* Ionicons.ttf in Resources */,
 				B33F85059C98467188019C65 /* MaterialCommunityIcons.ttf in Resources */,
@@ -574,7 +574,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = TN5KA2M85F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = urbanfitsample/Info.plist;
@@ -587,7 +587,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.urbanfitsample;
 				PRODUCT_NAME = urbanfitsample;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitsample";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -602,7 +602,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = TN5KA2M85F;
 				INFOPLIST_FILE = urbanfitsample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -615,6 +618,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = urbanfitsample;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitsample";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
