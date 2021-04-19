@@ -2,66 +2,17 @@ before_all do
 end
 
 platform :ios do
-    private_lane :update_version do
-        app_store_version = get_app_store_version_number(bundle_id: 'urbanfitsample')
-        plist_version = get_version_number_from_plist(xcodeproj: './ios/urbanfitsample.xcodeproj')
-        if Gem::Version.new(plist_version.to_f) == Gem::Version.new(app_store_version.to_f)
-            UI.message "bumping minor"
-            increment_version_number_in_plist(xcodeproj: './ios/urbanfitsample.xcodeproj', bump_type: 'minor')
-        else
-            UI.message "bumping patch"
-            increment_version_number_in_plist(xcodeproj: './ios/urbanfitsample.xcodeproj', bump_type: 'patch')
-        end
-    end
-
-    private_lane :staging_build do
-        gym(scheme: 'urbanfitsample', workspace: './ios/urbanfitsample.xcworkspace')
-    end
-
-    private_lane :release_build do
-        build_app(
-            export_method: "app-store",
-            export_options: {
-              provisioningProfiles: {
-                "com.example.bundleid" => "Provisioning Profile Name",
-                "com.example.bundleid2" => "Provisioning Profile Name 2"
-              }
-            }
-          )
-    end
-
-    private_lane :screenshots do
-        Dir.chdir('..') do
-            # run in parent directory
-            sh('detox', 'build -c ios')
-            sh('detox', 'test -c ios')
-        end
-    end
-
-    lane :release do
-        release_build
-        screenshots
-        deliver
-        commit_version_bump(message: 'bump build')
-        push_to_git_remote
-    end
-
-    desc "Ios distribution to firebase"
-    lane :distribute do
-        build_ios_app(
-          scheme: "urbanfitsample",
-          workspace: './ios/urbanfitsample.xcworkspace',
-            output_name: 'urbanfit.ipa',
-        )
-
-        firebase_app_distribution(
-            app: "1:179379279680:ios:74cf176da6c4469a700ca5",
-            testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
-            release_notes: "A new release is being out, check it ;)",
-            ipa_path: './urbanfit.ipa',
-        )
+    platform :ios do
+      desc "Push a new beta build to TestFlight"
+      lane :beta do
+        match(type: 'appstore')
+        increment_build_number(xcodeproj: "urbanfitsample.xcodeproj")
+        build_app(workspace: "urbanfitsample.xcworkspace", scheme: "urbanfitsample")
+        upload_to_testflight
+      end
     end
 end
+
 platform :android do
     desc "Android build and distribution to firebase"
     lane :distribute do

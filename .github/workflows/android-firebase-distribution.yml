@@ -1,0 +1,29 @@
+name: Distribute to firebase
+
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  distribute-android:
+    name: Build and distribute android apk to firebase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.x'
+      - name: Install packages
+        run: |
+          yarn install
+          yarn react-native link
+      - name: Install Fastlane
+        run: gem install fastlane
+      - name: Bundle and distribute to firebase
+        env:
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+        run: fastlane android distribute
