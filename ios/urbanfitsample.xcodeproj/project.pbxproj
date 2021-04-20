@@ -14,7 +14,7 @@
 		696F5BF92D65A6F69E604094 /* libPods-urbanfitsample-urbanfitsampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB29CA8839D269F4CF9D89 /* libPods-urbanfitsample-urbanfitsampleTests.a */; };
 		6EE053DCCDDBFC0969B71EA2 /* libPods-urbanfitsample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F1B34FBEFF6FDC6159D9EDF /* libPods-urbanfitsample.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		B63DD0CF262D6E8000C65A9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B68C60C2262109D20022FC19 /* GoogleService-Info.plist */; };
+		B6C83AC8262ED23E0088DA96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6C83AC7262ED23E0088DA96 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,7 @@
 		9461A20FE2C346089E8CFABC /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		9FA397E602AF6CE57555318C /* Pods-urbanfitsample-urbanfitsampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-urbanfitsample-urbanfitsampleTests.release.xcconfig"; path = "Target Support Files/Pods-urbanfitsample-urbanfitsampleTests/Pods-urbanfitsample-urbanfitsampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		A66343159C10460D8FF7226B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		B68C60C2262109D20022FC19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B6C83AC7262ED23E0088DA96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BFCA0EA2CB294E7189B419E6 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F68E214C8968492EBF4A8C87 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		13B07FAE1A68108700A75B9A /* urbanfitsample */ = {
 			isa = PBXGroup;
 			children = (
-				B68C60C2262109D20022FC19 /* GoogleService-Info.plist */,
+				B6C83AC7262ED23E0088DA96 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -286,7 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B63DD0CF262D6E8000C65A9C /* GoogleService-Info.plist in Resources */,
+				B6C83AC8262ED23E0088DA96 /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -542,7 +542,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = TN5KA2M85F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = urbanfitsample/Info.plist;
@@ -572,7 +572,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = TN5KA2M85F;
 				INFOPLIST_FILE = urbanfitsample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

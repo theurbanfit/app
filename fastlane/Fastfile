@@ -2,20 +2,30 @@ before_all do
 end
 
 platform :ios do
-    platform :ios do
-      desc "Push a new beta build to TestFlight"
-      lane :beta do
-        match(type: 'appstore')
+    desc "Push a new beta build to TestFlight"
+    lane :beta do
+        match
         increment_build_number(xcodeproj: "./ios/urbanfitsample.xcodeproj")
         build_app(workspace: "./ios/urbanfitsample.xcworkspace", scheme: "urbanfitsample")
         upload_to_testflight
-      end
+    end
+
+
+    desc "Ios distribution to firebase"
+    lane :distribution do
+        firebase_app_distribution(
+            app: ENV['FIREBASE_APP_ID_IOS'],
+            firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+            testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
+            release_notes: "A new release is being out, check it ;)",
+            ipa_path: './ios/urbanfitsample.ipa',
+        )
     end
 end
 
 platform :android do
     desc "Android build and distribution to firebase"
-    lane :distribute do
+    lane :distribution do
         gradle(task: 'clean', project_dir: './android/')
         build_android_app(
           task: 'assemble',
