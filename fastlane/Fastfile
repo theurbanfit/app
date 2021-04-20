@@ -6,8 +6,8 @@ platform :ios do
       desc "Push a new beta build to TestFlight"
       lane :beta do
         match(type: 'appstore')
-        increment_build_number(xcodeproj: "urbanfitsample.xcodeproj")
-        build_app(workspace: "urbanfitsample.xcworkspace", scheme: "urbanfitsample")
+        increment_build_number(xcodeproj: "./ios/urbanfitsample.xcodeproj")
+        build_app(workspace: "./ios/urbanfitsample.xcworkspace", scheme: "urbanfitsample")
         upload_to_testflight
       end
     end
