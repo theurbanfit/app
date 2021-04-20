@@ -21,9 +21,9 @@ or alternatively using `brew install fastlane`
 fastlane ios beta
 ```
 Push a new beta build to TestFlight
-### ios fire
+### ios distribution
 ```
-fastlane ios fire
+fastlane ios distribution
 ```
 Ios distribution to firebase
 

@@ -3,7 +3,7 @@ name: Distribute to firebase
 on:
   push:
     branches:
-      - 'main'
+      - 'develop'
 jobs:
   distribute-android:
     name: Build and distribute android apk to firebase
