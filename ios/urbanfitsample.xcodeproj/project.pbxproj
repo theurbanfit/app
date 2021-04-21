@@ -15,6 +15,22 @@
 		6EE053DCCDDBFC0969B71EA2 /* libPods-urbanfitsample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F1B34FBEFF6FDC6159D9EDF /* libPods-urbanfitsample.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B6334F9626309E1300449489 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6334F9526309E1300449489 /* GoogleService-Info.plist */; };
+		B6334FE42630DCFA00449489 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9461A20FE2C346089E8CFABC /* AntDesign.ttf */; };
+		B6334FE52630DCFA00449489 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28A90EAD6DEF4A37BC7B38EB /* Entypo.ttf */; };
+		B6334FE62630DCFA00449489 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D8B17A787804228A2501850 /* EvilIcons.ttf */; };
+		B6334FE72630DCFA00449489 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33488A12829D447DBC666F91 /* Feather.ttf */; };
+		B6334FE82630DCFA00449489 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FF3416E31CD48358908B488 /* FontAwesome.ttf */; };
+		B6334FE92630DCFA00449489 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F68E214C8968492EBF4A8C87 /* FontAwesome5_Brands.ttf */; };
+		B6334FEA2630DCFA00449489 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0814C07F273C4C528A22D4DD /* FontAwesome5_Regular.ttf */; };
+		B6334FEB2630DCFA00449489 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8205A5FA298D465E8CBDA5FE /* FontAwesome5_Solid.ttf */; };
+		B6334FEC2630DCFA00449489 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 009E2BA626C74110A1A52264 /* Fontisto.ttf */; };
+		B6334FED2630DCFA00449489 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFCA0EA2CB294E7189B419E6 /* Foundation.ttf */; };
+		B6334FEE2630DCFA00449489 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DE8F45B87C44B6B851EA3EC /* Ionicons.ttf */; };
+		B6334FEF2630DCFA00449489 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3788079991D44D0CAFB63209 /* MaterialCommunityIcons.ttf */; };
+		B6334FF02630DCFA00449489 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A66343159C10460D8FF7226B /* MaterialIcons.ttf */; };
+		B6334FF12630DCFA00449489 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21D4FA6C27B34BD198BCFA14 /* Octicons.ttf */; };
+		B6334FF22630DCFA00449489 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 906D58526DA6409A9CFA9D71 /* SimpleLineIcons.ttf */; };
+		B6334FF32630DCFA00449489 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BC8099675484A9BB87D8E29 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -286,6 +302,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6334FE42630DCFA00449489 /* AntDesign.ttf in Resources */,
+				B6334FE52630DCFA00449489 /* Entypo.ttf in Resources */,
+				B6334FE62630DCFA00449489 /* EvilIcons.ttf in Resources */,
+				B6334FE72630DCFA00449489 /* Feather.ttf in Resources */,
+				B6334FE82630DCFA00449489 /* FontAwesome.ttf in Resources */,
+				B6334FE92630DCFA00449489 /* FontAwesome5_Brands.ttf in Resources */,
+				B6334FEA2630DCFA00449489 /* FontAwesome5_Regular.ttf in Resources */,
+				B6334FEB2630DCFA00449489 /* FontAwesome5_Solid.ttf in Resources */,
+				B6334FEC2630DCFA00449489 /* Fontisto.ttf in Resources */,
+				B6334FED2630DCFA00449489 /* Foundation.ttf in Resources */,
+				B6334FEE2630DCFA00449489 /* Ionicons.ttf in Resources */,
+				B6334FEF2630DCFA00449489 /* MaterialCommunityIcons.ttf in Resources */,
+				B6334FF02630DCFA00449489 /* MaterialIcons.ttf in Resources */,
+				B6334FF12630DCFA00449489 /* Octicons.ttf in Resources */,
+				B6334FF22630DCFA00449489 /* SimpleLineIcons.ttf in Resources */,
+				B6334FF32630DCFA00449489 /* Zocial.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				B6334F9626309E1300449489 /* GoogleService-Info.plist in Resources */,
