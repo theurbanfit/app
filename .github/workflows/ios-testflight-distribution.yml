@@ -3,7 +3,7 @@ name: Distribute to testflight
 on:
   push:
     branches:
-      - 'main'
+      - 'develop'
 jobs:
   deploy:
     runs-on: macos-latest
