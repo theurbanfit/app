@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy to TestFlight
         run: |
-          cd ./ios && bundle exec fastlane beta
+          cd ./ios && bundle exec fastlane ios beta
         env:
           TEAM_ID: ${{ secrets.TEAM_ID }}
           ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
