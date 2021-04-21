@@ -18,7 +18,7 @@ platform :ios do
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
     )
 
-    xcversion(version: "11.3")
+    xcversion(version: "12.3")
     build_app(
       workspace: "urbanfitsample.xcworkspace",
       scheme: "urbanfitsample",
