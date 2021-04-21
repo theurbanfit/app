@@ -1,0 +1,36 @@
+platform :android do
+    desc "Android build and distribution to firebase"
+    lane :distribution do
+        gradle(task: 'clean', project_dir: './android/')
+        build_android_app(
+          task: 'assemble',
+          build_type: 'Release',
+          gradle_path: './gradlew',
+          project_dir: './android',
+        )
+
+        firebase_app_distribution(
+            app: ENV['FIREBASE_APP_ID_ANDROID'],
+            firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+            testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
+            release_notes: "A new release is being out, check it ;)"
+        )
+    end
+
+    desc "Android build and release to beta"
+    lane :beta do
+        increment_version_code(app_folder_name: './android/app')
+        gradle(task: 'clean', project_dir: './android/')
+        gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
+        supply(track: 'beta', aab: './android/app/build/outputs/bundle/release/app-release.aab')
+    end
+
+
+    lane :release do
+        increment_version_code(app_folder_name: './android/app')
+        increment_version_name(app_folder_name: './android/app', bump_type: 'patch')
+        gradle(task: 'clean', project_dir: './android/')
+        gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
+        supply(track: 'production', aab: './android/app/build/outputs/bundle/release/app-release.aab', release_status: 'draft')
+    end
+end

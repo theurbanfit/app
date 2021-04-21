@@ -58,4 +58,4 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-/fastlane/report.xml
+/android/fastlane/report.xml

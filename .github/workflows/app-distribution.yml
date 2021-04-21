@@ -1,13 +1,37 @@
-name: Distribute to testflight
-
+name: Distribute beta to firebase & testflight
 on:
   push:
     branches:
       - 'develop'
 jobs:
+  distribute-android:
+    name: Distribute android apk to firebase
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.x'
+      - name: Install packages
+        run: |
+          yarn install
+          yarn react-native link
+
+      - name: Bundle install
+        run: cd ./android && bundle install && cd ..
+
+      - name: Distribute to firebase
+        run: cd ./android && bundle exec fastlane android distribution
+        env:
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+
   distribute-ios:
-    name: Build and distribute ios ipa to testflight
-    
+    name: Distribute ios ipa to testflight
 
     runs-on: macos-latest
     steps:
@@ -25,7 +49,6 @@ jobs:
 
       - name: Bundle install
         run: cd ./ios && bundle install && cd ..
-
 
       - name: Install packages
         run: yarn install
