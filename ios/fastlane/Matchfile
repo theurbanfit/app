@@ -4,4 +4,4 @@ storage_mode("git")
 
 app_identifier(["org.reactjs.native.example.urbanfitapp"])
 
-username(ENV['FASTLANE_USER'])
+username(ENV['FASTLANE_USER'])  # Your Apple Developer Portal username
