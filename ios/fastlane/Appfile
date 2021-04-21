@@ -1,8 +1,11 @@
-app_identifier("org.reactjs.native.example.urbanfitapp") # The bundle identifier of your app
-apple_id("paschalidi.chris@gmail.com") # Your Apple email address
+# The bundle identifier of your app
+app_identifier("org.reactjs.native.example.urbanfitapp")
 
-itc_team_id("122927798") # App Store Connect Team ID
-team_id("TN5KA2M85F") # Developer Portal Team ID
+# Your Apple email address
+apple_id(ENV['FASTLANE_USER'])
 
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile
+# App Store Connect Team ID
+itc_team_id(ENV['ITC_TEAM_ID'])
+
+# Developer Portal Team ID
+team_id(ENV['TEAM_ID'])
