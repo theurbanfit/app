@@ -1,4 +1,4 @@
-name: Distribute to firebase
+name: Distribute to testflight
 
 on:
   push:
