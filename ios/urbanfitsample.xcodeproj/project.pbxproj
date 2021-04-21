@@ -557,7 +557,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.urbanfitapp;
 				PRODUCT_NAME = urbanfitsample;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitapp";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitapp 1619009849";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -586,7 +586,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.urbanfitapp;
 				PRODUCT_NAME = urbanfitsample;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitapp";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitapp 1619009849";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

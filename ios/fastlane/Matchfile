@@ -1,4 +1,4 @@
-git_url("git@github.com:paschalidi/provate-ios-fastlane.git")
+git_url("git@github.com:paschalidi/private-ios-fastlane.git")
 
 storage_mode("git")
 
