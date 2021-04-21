@@ -19,7 +19,7 @@ platform :ios do
     )
     build_app(
       workspace: "urbanfitsample.xcworkspace",
-      scheme: "MyApp",
+      scheme: "urbanfitsample",
       export_method: "app-store"
     )
     upload_to_testflight
