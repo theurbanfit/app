@@ -6,7 +6,7 @@ on:
       - 'develop'
 jobs:
   distribute-ios:
-    name: Build and distribute android apk to testflight
+    name: Build and distribute ios apk to testflight
 
     runs-on: macos-latest
     steps:
