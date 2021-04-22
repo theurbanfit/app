@@ -21,45 +21,46 @@ export default memo(function ActivitiesScreen({navigation}) {
         {events &&
           events.map(
             ({
-              fullAddress,
-              bannerUrl,
-              name,
-              dateTime,
-              timeRange,
-              scheduledClassId,
-              tags,
+              facilityAddress,
+              classPhotoUrl,
+              className,
+              classTags,
               classId,
               classImportantInfo,
               classDescription,
-              howToPrepare,
-              howToArrive,
+              classPreparationInfo,
+              classArrivalInfo,
+
               facilityDescription,
+              dateTime,
+              timeRange,
+              scheduledClassId,
             }) => (
               <ActivityCard
                 onPress={() =>
                   navigation.navigate('ActivityDetails', {
-                    imageSrc: bannerUrl,
-                    title: name,
-                    fullAddress,
+                    imageSrc: classPhotoUrl,
+                    title: className,
+                    facilityAddress,
                     dateTime,
                     timeRange,
-                    tags,
+                    classTags,
                     scheduledClassId,
                     classId,
                     classImportantInfo,
                     classDescription,
-                    howToPrepare,
-                    howToArrive,
+                    classPreparationInfo,
+                    classArrivalInfo,
                     facilityDescription,
                     date: selectedDay,
                   })
                 }
                 key={scheduledClassId}
-                fullAddress={fullAddress}
-                imageSrc={bannerUrl}
-                title={name}
+                fullAddress={facilityAddress}
+                imageSrc={classPhotoUrl}
+                title={className}
                 timeRange={timeRange}
-                tags={tags}
+                tags={classTags}
               />
             ),
           )}

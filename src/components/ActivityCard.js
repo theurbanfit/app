@@ -16,14 +16,19 @@ export const ActivityCard = ({
       <View>
         <Title>{title}</Title>
         <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
-        <Text style={[styles.small, styles.marginBottom, styles.color]}>
-          {fullAddress}
-        </Text>
-        {tags.map(text => (
-          <Text key={text} style={[styles.small, styles.color]}>
-            {text}
+        <View style={styles.marginTop}>
+          <Text style={[styles.small, styles.marginBottom, styles.color]}>
+            {fullAddress}
           </Text>
-        ))}
+          <View style={styles.inline}>
+            {tags.map((text, index) => (
+              <Text key={text} style={[styles.small, styles.color]}>
+                {index !== 0 && ', '}
+                {text}
+              </Text>
+            ))}
+          </View>
+        </View>
       </View>
       <Image
         style={styles.image}
@@ -37,6 +42,9 @@ export const ActivityCard = ({
 );
 
 const styles = StyleSheet.create({
+  inline: {
+    flexDirection: 'row',
+  },
   container: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -46,6 +54,9 @@ const styles = StyleSheet.create({
   color: {color: textSecondary},
   small: {
     fontSize: 11,
+  },
+  marginTop: {
+    marginTop: 8,
   },
   marginBottom: {
     marginBottom: 4,

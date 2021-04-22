@@ -13,22 +13,22 @@ export const UserSchedule = ({scheduledClasses}) => {
     const {
       imageSrc,
       title,
-      fullAddress,
+      facilityAddress,
       dateTimeFormatted,
       timeRange,
       tags,
       classId,
       classImportantInfo,
       classDescription,
-      howToPrepare,
-      howToArrive,
+      classPreparationInfo,
+      classArrivalInfo,
       facilityDescription,
     } = scheduledClasses[scheduledClassId];
 
     return navigation.navigate('ActivityDetails', {
       imageSrc,
       title,
-      fullAddress,
+      facilityAddress,
       dateTime: formatFirestoreDateToMoment(dateTimeFormatted),
       timeRange,
       tags,
@@ -36,8 +36,8 @@ export const UserSchedule = ({scheduledClasses}) => {
       classId,
       classImportantInfo,
       classDescription,
-      howToPrepare,
-      howToArrive,
+      classPreparationInfo,
+      classArrivalInfo,
       facilityDescription,
     });
   };
@@ -61,13 +61,13 @@ export const UserSchedule = ({scheduledClasses}) => {
               ),
             )
             .map(
-              ({title, dateTimeFormatted, scheduledClassId, fullAddress}) => (
+              ({title, dateTimeFormatted, scheduledClassId, facilityAddress}) => (
                 <ScheduledActivityCard
                   key={scheduledClassId}
                   title={title}
                   dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
                   scheduledClassId={scheduledClassId}
-                  fullAddress={fullAddress}
+                  facilityAddress={facilityAddress}
                   onViewCard={() => handleViewCardDetails(scheduledClassId)}
                 />
               ),

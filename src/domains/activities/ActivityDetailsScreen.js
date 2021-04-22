@@ -19,7 +19,10 @@ import {
   useScheduleStatus,
 } from './asyncHooks/useScheduleStatus';
 import {addClassToUserSchedule, removeClassFromUserSchedule} from './services';
-import { displayActivityDate, formatActivityDateForFirestore } from "../../components/utils/datetime";
+import {
+  displayActivityDate,
+  formatActivityDateForFirestore,
+} from '../../components/utils/datetime';
 
 const ConfirmationDialog = ({
   onConfirm,
@@ -64,14 +67,14 @@ export default function ActivityDetailsScreen({
     params: {
       imageSrc,
       title,
-      fullAddress,
+      facilityAddress,
       dateTime,
       timeRange,
       classId,
       classImportantInfo,
       classDescription,
-      howToPrepare,
-      howToArrive,
+      classPreparationInfo,
+      classArrivalInfo,
       facilityDescription,
       scheduledClassId,
     },
@@ -89,14 +92,14 @@ export default function ActivityDetailsScreen({
     await addClassToUserSchedule(auth.uid, {
       imageSrc,
       title,
-      fullAddress,
+      facilityAddress,
       dateTimeFormatted: formatActivityDateForFirestore(dateTime),
       timeRange,
       classId,
       classImportantInfo,
       classDescription,
-      howToPrepare,
-      howToArrive,
+      classPreparationInfo,
+      classArrivalInfo,
       facilityDescription,
       scheduledClassId,
     });
@@ -131,7 +134,7 @@ export default function ActivityDetailsScreen({
           <Headline style={[styles.headlineSize, styles.headlineMargin]}>
             {title}
           </Headline>
-          <Text style={styles.text}>{fullAddress}</Text>
+          <Text style={styles.text}>{facilityAddress}</Text>
           <View style={styles.inline}>
             <Text style={styles.text}>{displayActivityDate(dateTime)}</Text>
             <Text style={styles.text}>{timeRange}</Text>
@@ -154,12 +157,12 @@ export default function ActivityDetailsScreen({
           <View>
             <Divider style={styles.divider} />
             <Headline style={styles.headlineMarginSm}>How to prepare</Headline>
-            <ReadMoreText>{howToPrepare}</ReadMoreText>
+            <ReadMoreText>{classPreparationInfo}</ReadMoreText>
           </View>
           <View>
             <Divider style={styles.divider} />
             <Headline style={styles.headlineMarginSm}>How to arrive</Headline>
-            <ReadMoreText>{howToArrive}</ReadMoreText>
+            <ReadMoreText>{classArrivalInfo}</ReadMoreText>
           </View>
           <View>
             <Divider style={styles.divider} />

@@ -7,7 +7,7 @@ import {displayActivityDateAndTime} from '../../../components/utils/datetime';
 export const ScheduledActivityCard = ({
   scheduledClassId,
   title,
-  fullAddress,
+  facilityAddress,
   dateTime,
   onViewCard,
 }) => {
@@ -22,7 +22,7 @@ export const ScheduledActivityCard = ({
         <View>
           <Title>{title}</Title>
           <Text>{displayActivityDateAndTime(dateTime)}</Text>
-          <Text>{fullAddress}</Text>
+          <Text>{facilityAddress}</Text>
         </View>
         <View>
           <Menu
