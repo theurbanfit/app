@@ -141,7 +141,7 @@ export default function ActivityDetailsScreen({
           </View>
 
           <View>
-            <Divider style={styles.divider} />
+            <Divider style={styles.firstDivider} />
             <Headline style={styles.headlineMarginSm}>
               About this course
             </Headline>
@@ -273,6 +273,10 @@ const styles = StyleSheet.create({
   inline: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  firstDivider: {
+    marginTop: 8,
+    marginBottom: 24,
   },
   divider: {
     marginTop: 24,
