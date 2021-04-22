@@ -80,6 +80,7 @@ export const useEventsForDate = date => {
 
   const [events, setEvents] = useState(undefined);
   useEffect(() => {
+    setEvents([]);
     const fetchData = async () => {
       const unsortedEvents = await retrieveScheduleForDayOfTheWeek(
         dayOfTheWeek,

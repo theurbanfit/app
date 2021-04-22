@@ -5,6 +5,7 @@ import moment from 'moment';
 import {ActivityCard} from '../../components/ActivityCard';
 import {ContainerView} from '../../components/ContainerView';
 import {useEventsForDate} from './asyncHooks/useEventsForDate';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export default memo(function ActivitiesScreen({navigation}) {
   const today = moment();
@@ -17,54 +18,56 @@ export default memo(function ActivitiesScreen({navigation}) {
         selectedDay={selectedDay}
         setSelectedDay={setSelectedDay}
       />
-      <ContainerView>
-        {events &&
-          events.map(
-            ({
-              facilityAddress,
-              classPhotoUrl,
-              className,
-              classTags,
-              classId,
-              classImportantInfo,
-              classDescription,
-              classPreparationInfo,
-              classArrivalInfo,
+      <ScrollView>
+        <ContainerView>
+          {events &&
+            events.map(
+              ({
+                facilityAddress,
+                classPhotoUrl,
+                className,
+                classTags,
+                classId,
+                classImportantInfo,
+                classDescription,
+                classPreparationInfo,
+                classArrivalInfo,
 
-              facilityDescription,
-              dateTime,
-              timeRange,
-              scheduledClassId,
-            }) => (
-              <ActivityCard
-                onPress={() =>
-                  navigation.navigate('ActivityDetails', {
-                    imageSrc: classPhotoUrl,
-                    title: className,
-                    facilityAddress,
-                    dateTime,
-                    timeRange,
-                    classTags,
-                    scheduledClassId,
-                    classId,
-                    classImportantInfo,
-                    classDescription,
-                    classPreparationInfo,
-                    classArrivalInfo,
-                    facilityDescription,
-                    date: selectedDay,
-                  })
-                }
-                key={scheduledClassId}
-                fullAddress={facilityAddress}
-                imageSrc={classPhotoUrl}
-                title={className}
-                timeRange={timeRange}
-                tags={classTags}
-              />
-            ),
-          )}
-      </ContainerView>
+                facilityDescription,
+                dateTime,
+                timeRange,
+                scheduledClassId,
+              }) => (
+                <ActivityCard
+                  onPress={() =>
+                    navigation.navigate('ActivityDetails', {
+                      imageSrc: classPhotoUrl,
+                      title: className,
+                      facilityAddress,
+                      dateTime,
+                      timeRange,
+                      classTags,
+                      scheduledClassId,
+                      classId,
+                      classImportantInfo,
+                      classDescription,
+                      classPreparationInfo,
+                      classArrivalInfo,
+                      facilityDescription,
+                      date: selectedDay,
+                    })
+                  }
+                  key={scheduledClassId}
+                  fullAddress={facilityAddress}
+                  imageSrc={classPhotoUrl}
+                  title={className}
+                  timeRange={timeRange}
+                  tags={classTags}
+                />
+              ),
+            )}
+        </ContainerView>
+      </ScrollView>
     </SafeAreaView>
   );
 });

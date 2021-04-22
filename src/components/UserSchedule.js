@@ -61,7 +61,12 @@ export const UserSchedule = ({scheduledClasses}) => {
               ),
             )
             .map(
-              ({title, dateTimeFormatted, scheduledClassId, facilityAddress}) => (
+              ({
+                title,
+                dateTimeFormatted,
+                scheduledClassId,
+                facilityAddress,
+              }) => (
                 <ScheduledActivityCard
                   key={scheduledClassId}
                   title={title}
