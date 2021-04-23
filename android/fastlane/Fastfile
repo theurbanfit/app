@@ -1,12 +1,12 @@
 platform :android do
     desc "Android build and distribution to firebase"
     lane :distribution do
-        gradle(task: 'clean', project_dir: './android/')
+        gradle(task: 'clean', project_dir: './')
         build_android_app(
           task: 'assemble',
           build_type: 'Release',
           gradle_path: './gradlew',
-          project_dir: './android',
+          project_dir: './',
         )
 
         firebase_app_distribution(
@@ -19,18 +19,18 @@ platform :android do
 
     desc "Android build and release to beta"
     lane :beta do
-        increment_version_code(app_folder_name: './android/app')
-        gradle(task: 'clean', project_dir: './android/')
-        gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
-        supply(track: 'beta', aab: './android/app/build/outputs/bundle/release/app-release.aab')
+        increment_version_code(app_folder_name: './app')
+        gradle(task: 'clean', project_dir: './')
+        gradle(task: 'bundle', build_type: 'Release', project_dir: './')
+        supply(track: 'beta', aab: './app/build/outputs/bundle/release/app-release.aab')
     end
 
 
     lane :release do
-        increment_version_code(app_folder_name: './android/app')
-        increment_version_name(app_folder_name: './android/app', bump_type: 'patch')
-        gradle(task: 'clean', project_dir: './android/')
-        gradle(task: 'bundle', build_type: 'Release', project_dir: './android')
-        supply(track: 'production', aab: './android/app/build/outputs/bundle/release/app-release.aab', release_status: 'draft')
+        increment_version_code(app_folder_name: './app')
+        increment_version_name(app_folder_name: './app', bump_type: 'patch')
+        gradle(task: 'clean', project_dir: './')
+        gradle(task: 'bundle', build_type: 'Release', project_dir: './')
+        supply(track: 'production', aab: './app/build/outputs/bundle/release/app-release.aab', release_status: 'draft')
     end
 end
