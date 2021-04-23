@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {SafeAreaView, StyleSheet, Alert} from 'react-native';
+import {SafeAreaView, StyleSheet, Alert, View} from 'react-native';
 import UserAvatar from '../../components/UserAvatar';
 import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -57,7 +57,7 @@ export default function UserProfileScreen() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.flex}>
       <ContainerView style={styles.flexRow}>
         <UserAvatar
           onUploadAvatar={handleAvatarUpload}
@@ -66,14 +66,17 @@ export default function UserProfileScreen() {
         />
         <UserInfo displayName={profile?.displayName} />
       </ContainerView>
-      <ContainerView>
+      <>
         <UserSchedule scheduledClasses={profile?.schedule} />
-      </ContainerView>
+      </>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
   flexRow: {
     flexDirection: 'row',
   },

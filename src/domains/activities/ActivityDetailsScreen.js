@@ -75,6 +75,7 @@ export default function ActivityDetailsScreen({
       classDescription,
       classPreparationInfo,
       classArrivalInfo,
+      facilityDistrictName,
       facilityDescription,
       scheduledClassId,
     },
@@ -134,7 +135,10 @@ export default function ActivityDetailsScreen({
           <Headline style={[styles.headlineSize, styles.headlineMargin]}>
             {title}
           </Headline>
-          <Text style={styles.text}>{facilityAddress}</Text>
+          <View style={styles.inline}>
+            <Text style={styles.text}>{facilityAddress}</Text>
+            <Text style={styles.text}>{facilityDistrictName}</Text>
+          </View>
           <View style={styles.inline}>
             <Text style={styles.text}>{displayActivityDate(dateTime)}</Text>
             <Text style={styles.text}>{timeRange}</Text>
@@ -259,7 +263,7 @@ const styles = StyleSheet.create({
   },
   headlineSize: {
     fontWeight: '600',
-    fontSize: 36,
+    fontSize: 32,
   },
   headlineMargin: {
     marginBottom: 16,

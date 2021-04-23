@@ -6,6 +6,8 @@ import {
 } from '../../../components/utils/datetime';
 import {
   retrieveClass,
+  retrieveDistrict,
+  retrieveFacilities,
   retrieveFacility,
   retrieveScheduleForDayOfTheWeek,
 } from '../services';
@@ -35,9 +37,11 @@ const fetchEventInformation = async (events = [], date) => {
           prearrangedSeats,
           remainingSeats,
         }) => {
-          const {facilityAddress, facilityDescription} = await retrieveFacility(
-            facilityId,
-          );
+          const {
+            facilityAddress,
+            facilityDescription,
+            districtId,
+          } = await retrieveFacility(facilityId);
           const {
             classDurationInMinutes,
             classPhotoUrl,
@@ -48,11 +52,13 @@ const fetchEventInformation = async (events = [], date) => {
             classArrivalInfo,
             className,
           } = await retrieveClass(classId);
+          const {name} = await retrieveDistrict(districtId);
 
           return {
             facilityId,
             facilityAddress,
             facilityDescription,
+            facilityDistrictName: name,
 
             classId,
             className,
@@ -68,6 +74,7 @@ const fetchEventInformation = async (events = [], date) => {
             scheduledClassId,
             remainingSeats,
             prearrangedSeats,
+            districtId,
           };
         },
       ),
@@ -93,4 +100,26 @@ export const useEventsForDate = date => {
   }, [dayOfTheWeek, date]);
 
   return {events};
+};
+
+export const useDistricts = () => {
+  const [activeDistricts, setActiveDistricts] = useState(undefined);
+  const [allowedDistricts, setAllowedDistrict] = useState(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const facilities = await retrieveFacilities();
+      const districts = await Promise.all(
+        facilities.map(async ({districtId}) => {
+          return await retrieveDistrict(districtId);
+        }),
+      );
+      setActiveDistricts(districts);
+      setAllowedDistrict(districts.map(({districtId}) => districtId));
+    };
+
+    fetchData();
+  }, []);
+
+  return {activeDistricts, allowedDistricts, setAllowedDistrict};
 };

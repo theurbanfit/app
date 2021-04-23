@@ -34,7 +34,7 @@ export const removeClassFromUserSchedule = async (
 export const retrieveFacilities = async () => {
   try {
     const res = await firestore().collection('facilities').get();
-    return res.data();
+    return res.docs.map(item => item.data());
   } catch (e) {
     console.error(e);
     debugger;
@@ -62,6 +62,20 @@ export const retrieveFacility = async facilityId => {
       .doc(facilityId)
       .get();
     return res.data();
+  } catch (e) {
+    console.error(e);
+    debugger;
+  }
+};
+
+export const retrieveDistrict = async districtId => {
+  try {
+    const res = await firestore()
+      .collectionGroup('districts')
+      .where('districtId', '==', districtId)
+      .get();
+
+    return res.docs[0].data();
   } catch (e) {
     console.error(e);
     debugger;
