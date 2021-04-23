@@ -13,6 +13,7 @@ import {divider, white} from './colors';
 import {Switch} from './Switch';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ContainerView} from './ContainerView';
+import {MoveToBottom} from './MoveToBottom';
 
 export const SearchTopBar = ({
   activeDistricts = [],
@@ -124,7 +125,7 @@ const SearchModal = ({
               ))}
             </ContainerView>
           </View>
-          <View styles={[modalStyles.surface]}>
+          <MoveToBottom>
             <Dialog.Actions>
               <Button uppercase={false} onPress={onHideModal}>
                 Cancel
@@ -137,7 +138,7 @@ const SearchModal = ({
                 Apply filters
               </Button>
             </Dialog.Actions>
-          </View>
+          </MoveToBottom>
         </SafeAreaView>
       </Modal>
     </Portal>
