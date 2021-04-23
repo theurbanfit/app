@@ -38,11 +38,16 @@ export default memo(function ActivitiesScreen({navigation}) {
         <ContainerView>
           {events &&
             events
-              .filter(({className}) => {
+              .filter(({className, classTags}) => {
                 if (searchQuery.length === 0) {
                   return true;
                 }
-                return fuzzy(searchQuery, className);
+                return (
+                  fuzzy(searchQuery, className) ||
+                  classTags.some(item =>
+                    fuzzy(searchQuery.toLowerCase(), item.toLowerCase()),
+                  )
+                );
               })
               .filter(({districtId}) => {
                 return allowedDistricts.some(

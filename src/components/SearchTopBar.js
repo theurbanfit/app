@@ -40,7 +40,7 @@ export const SearchTopBar = ({
           <IconButton
             size={25}
             color={primary}
-            icon="lightning-bolt-outline"
+            icon="tune"
             onPress={showModal}
           />
         </View>
