@@ -39,8 +39,17 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need to access your photo library to select a photo add and update profile picture</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Urbanfit requests access to your camera.</string>
+
+    <!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Urbanfit requests access to your media library.</string>
+
+    <!-- Include this only if you are planning to use the camera roll -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Urbanfit requests access to your photo library.</string>
+
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

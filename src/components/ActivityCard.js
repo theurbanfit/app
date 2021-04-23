@@ -17,7 +17,15 @@ export const ActivityCard = ({
         <Title>{title}</Title>
         <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
         <View style={styles.marginTop}>
-          <Text style={[styles.small, styles.marginBottom, styles.color]}>
+          <Text
+            ellipsizeMode="middle"
+            numberOfLines={1}
+            style={[
+              styles.small,
+              styles.marginBottom,
+              styles.color,
+              {width: '92%'},
+            ]}>
             {fullAddress}
           </Text>
           <View style={styles.inline}>

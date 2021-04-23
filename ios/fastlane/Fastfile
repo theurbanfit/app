@@ -19,6 +19,8 @@ platform :ios do
     )
 
     xcversion(version: "12.3")
+    increment_build_number
+    increment_version_number(bump_type: "patch")
     build_app(
       workspace: "urbanfitsample.xcworkspace",
       scheme: "urbanfitsample",
