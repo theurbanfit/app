@@ -43,7 +43,7 @@ export default memo(function ActivitiesScreen({navigation}) {
                   return true;
                 }
                 return (
-                  fuzzy(searchQuery, className) ||
+                  fuzzy(searchQuery.toLowerCase(), className.toLowerCase()) ||
                   classTags.some(item =>
                     fuzzy(searchQuery.toLowerCase(), item.toLowerCase()),
                   )
