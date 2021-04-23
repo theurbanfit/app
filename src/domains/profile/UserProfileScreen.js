@@ -66,9 +66,8 @@ export default function UserProfileScreen() {
         />
         <UserInfo displayName={profile?.displayName} />
       </ContainerView>
-      <>
-        <UserSchedule scheduledClasses={profile?.schedule} />
-      </>
+
+      <UserSchedule scheduledClasses={profile?.schedule} />
     </SafeAreaView>
   );
 }

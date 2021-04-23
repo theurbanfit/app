@@ -49,6 +49,11 @@ export const UserSchedule = ({scheduledClasses}) => {
         <>
           {scheduledClasses ? (
             Object.values(scheduledClasses)
+              .filter(({dateTimeFormatted}) =>
+                formatFirestoreDateToMoment(dateTimeFormatted).isAfter(
+                  moment().startOf('day'),
+                ),
+              )
               .sort(({dateTimeFormatted: a}, {dateTimeFormatted: b}) =>
                 moment(formatFirestoreDateToMoment(a)).diff(
                   formatFirestoreDateToMoment(b),
