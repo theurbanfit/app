@@ -44,7 +44,7 @@ export default function UserProfileScreen() {
             setLoading(false);
             Alert.alert('Success', 'Upload successful');
           } catch (e) {
-            console.log(e);
+            console.error(e);
             Alert.alert(
               'Error',
               'An error occurred while uploading your profile photo',

@@ -10,7 +10,7 @@ export const AuthProvider = ({children}) => {
   const [error, setError] = useState(null);
 
   const handleAuthErrors = ({code, message}) => {
-    console.log(message);
+    console.error(message);
     switch (code) {
       case 'auth/email-already-exists':
       case 'auth/account-exists-with-different-credential':

@@ -1,5 +1,5 @@
-import React, {useState, useEffect, createRef, useRef, forwardRef} from 'react';
-import {TouchableOpacity, StyleSheet, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {
   Searchbar,
   Modal,
@@ -8,8 +8,9 @@ import {
   Text,
   Dialog,
   Button,
+  IconButton,
 } from 'react-native-paper';
-import {divider, white} from './colors';
+import {divider, primary, white} from './colors';
 import {Switch} from './Switch';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ContainerView} from './ContainerView';
@@ -18,27 +19,35 @@ import {MoveToBottom} from './MoveToBottom';
 export const SearchTopBar = ({
   activeDistricts = [],
   allowedDistricts,
+  searchQuery,
   onAllowedDistrictsSet,
+  onSearchQuerySet,
 }) => {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const onChangeSearch = query => setSearchQuery(query);
 
   return (
     <>
-      <TouchableOpacity onPress={() => showModal()}>
+      <View style={styles.inline}>
         <Searchbar
           style={[styles.search, styles.noShadow]}
-          inputStyle={{}}
           placeholder="Search"
-          onChangeText={onChangeSearch}
+          onChangeText={onSearchQuerySet}
           value={searchQuery}
         />
-      </TouchableOpacity>
+        <View style={{width: '14%', backgroundColor: white}}>
+          <IconButton
+            size={25}
+            color={primary}
+            icon="lightning-bolt-outline"
+            onPress={showModal}
+          />
+        </View>
+      </View>
       <SearchModal
-        onChangeSearch={onChangeSearch}
+        searchQuery={searchQuery}
+        onChangeSearch={onSearchQuerySet}
         allowedDistricts={allowedDistricts}
         visible={visible}
         activeDistricts={activeDistricts}
@@ -50,16 +59,19 @@ export const SearchTopBar = ({
 };
 
 const styles = StyleSheet.create({
-  search: {
+  inline: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderBottomColor: divider,
+  },
+  search: {
+    width: '86%',
   },
   container: {
     flex: 1,
   },
   noShadow: {
-    borderBottomColor: divider,
-    borderBottomWidth: 1,
     shadowColor: 'transparent',
     shadowOpacity: 0,
     shadowRadius: 0, // elevation = 4
@@ -77,6 +89,7 @@ const SearchModal = ({
   onHideModal,
   onAllowedDistrictsSet,
   visible,
+  searchQuery,
 }) => {
   const [districtFilters, setDistrictFilter] = useState([]);
   useEffect(() => {
@@ -109,6 +122,7 @@ const SearchModal = ({
               icon="arrow-left"
               placeholder="Search"
               onChangeText={onChangeSearch}
+              value={searchQuery}
             />
             <ContainerView style={modalStyles.marginFilters}>
               <Subheading>Select areas close to you</Subheading>

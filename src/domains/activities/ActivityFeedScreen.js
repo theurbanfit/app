@@ -7,10 +7,12 @@ import {ContainerView} from '../../components/ContainerView';
 import {useDistricts, useEventsForDate} from './asyncHooks/useEventsForDate';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SearchTopBar} from '../../components/SearchTopBar';
+import fuzzy from 'fuzzysearch';
 
 export default memo(function ActivitiesScreen({navigation}) {
   const today = moment();
   const [selectedDay, setSelectedDay] = useState(today);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const {events} = useEventsForDate(selectedDay);
   const {
@@ -20,11 +22,13 @@ export default memo(function ActivitiesScreen({navigation}) {
   } = useDistricts();
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.flexOne}>
       <SearchTopBar
-        allowedDistricts={allowedDistricts}
-        onAllowedDistrictsSet={setAllowedDistrict}
         activeDistricts={activeDistricts}
+        allowedDistricts={allowedDistricts}
+        searchQuery={searchQuery}
+        onAllowedDistrictsSet={setAllowedDistrict}
+        onSearchQuerySet={setSearchQuery}
       />
       <CalendarStrip
         selectedDay={selectedDay}
@@ -34,6 +38,12 @@ export default memo(function ActivitiesScreen({navigation}) {
         <ContainerView>
           {events &&
             events
+              .filter(({className}) => {
+                if (searchQuery.length === 0) {
+                  return true;
+                }
+                return fuzzy(searchQuery, className);
+              })
               .filter(({districtId}) => {
                 return allowedDistricts.some(
                   filteredDistrictId => districtId === filteredDistrictId,
@@ -90,4 +100,8 @@ export default memo(function ActivitiesScreen({navigation}) {
       </ScrollView>
     </SafeAreaView>
   );
+});
+
+const styles = StyleSheet.create({
+  flexOne: {flex: 1},
 });
