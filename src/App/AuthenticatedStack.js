@@ -8,13 +8,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
 import CheckInScreen from '../domains/checkIn/CheckInScreen';
 import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 import UserSettingsScreen from '../domains/profile/UserSettings';
-import {IconButton} from 'react-native-paper';
+import {IconButton, useTheme} from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Profile = createStackNavigator();
 
 function ProfileStackScreen({navigation}) {
+  const {colors} = useTheme();
+
   return (
     <Profile.Navigator>
       <Profile.Screen
@@ -24,6 +26,7 @@ function ProfileStackScreen({navigation}) {
             <IconButton
               icon="cog-outline"
               size={28}
+              color={colors.mintGreenSecondary500}
               onPress={() => navigation.navigate('User Settings')}
             />
           ),
@@ -36,8 +39,13 @@ function ProfileStackScreen({navigation}) {
   );
 }
 function BottomTabNavigation() {
+  const {colors} = useTheme();
+
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: colors.primary,
+      }}>
       <Tab.Screen
         name="Activity feed"
         component={ActivityFeedScreen}
