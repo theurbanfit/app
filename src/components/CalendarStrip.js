@@ -45,6 +45,7 @@ const useStyles = () => {
     theme: {colors},
     styles: StyleSheet.create({
       calendar: {
+        color: colors.text,
         height: 72,
         paddingTop: 10,
         paddingBottom: 10,
@@ -53,14 +54,14 @@ const useStyles = () => {
       },
       icon: {display: 'none'},
       header: {
-        color: colors.textPrimary,
+        color: colors.text,
         display: 'none',
       },
       dateNumber: {
-        color: colors.textPrimary,
+        color: colors.text,
       },
       dateName: {
-        color: colors.textPrimary,
+        color: colors.text,
       },
       highlight: {
         color: colors.white,

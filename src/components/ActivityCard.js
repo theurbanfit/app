@@ -16,7 +16,7 @@ export const ActivityCard = ({
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View>
-          <Title>{title}</Title>
+          <Title style={styles.header}>{title}</Title>
           <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
           <View style={styles.marginTop}>
             <Text
@@ -58,6 +58,9 @@ const useStyles = () => {
   return StyleSheet.create({
     inline: {
       flexDirection: 'row',
+    },
+    header: {
+      color: colors.text,
     },
     container: {
       justifyContent: 'space-between',
