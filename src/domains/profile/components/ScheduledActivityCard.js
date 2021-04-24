@@ -1,7 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {Title, Text, Divider, Menu, IconButton} from 'react-native-paper';
+import {
+  Title,
+  Text,
+  Divider,
+  Menu,
+  IconButton,
+  Colors,
+  useTheme,
+} from 'react-native-paper';
 import {View, StyleSheet} from 'react-native';
-import {white} from '../../../components/colors';
 import {displayActivityDateAndTime} from '../../../components/utils/datetime';
 
 export const ScheduledActivityCard = ({
@@ -11,6 +18,8 @@ export const ScheduledActivityCard = ({
   dateTime,
   onViewCard,
 }) => {
+  const {colors} = useTheme();
+
   const [menuVisible, setMenuVisibility] = useState(false);
 
   useEffect(() => {
@@ -57,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    backgroundColor: white,
+    backgroundColor: Colors.white,
     padding: 16,
     paddingBottom: 20,
   },

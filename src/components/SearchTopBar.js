@@ -9,8 +9,8 @@ import {
   Dialog,
   Button,
   IconButton,
+  Colors,
 } from 'react-native-paper';
-import {divider, primary, white} from './colors';
 import {Switch} from './Switch';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ContainerView} from './ContainerView';
@@ -36,10 +36,10 @@ export const SearchTopBar = ({
           onChangeText={onSearchQuerySet}
           value={searchQuery}
         />
-        <View style={{width: '14%', backgroundColor: white}}>
+        <View style={{width: '14%', backgroundColor: Colors.background}}>
           <IconButton
             size={25}
-            color={primary}
+            color={Colors.primary}
             icon="tune"
             onPress={showModal}
           />
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderBottomColor: divider,
+    borderBottomColor: Colors.divider,
   },
   search: {
     width: '86%',
@@ -165,7 +165,7 @@ const modalStyles = StyleSheet.create({
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: white,
+    backgroundColor: Colors.white,
   },
   scrollView: {
     flex: 1.9,
@@ -176,7 +176,7 @@ const modalStyles = StyleSheet.create({
   },
   modalBackground: {},
   noShadow: {
-    borderBottomColor: divider,
+    borderBottomColor: Colors.divider,
     borderBottomWidth: 1,
     shadowColor: 'transparent',
     shadowOpacity: 0,

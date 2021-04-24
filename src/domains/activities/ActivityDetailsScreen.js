@@ -10,8 +10,8 @@ import {
   Portal,
   Dialog,
   Paragraph,
+  Colors,
 } from 'react-native-paper';
-import {background, divider, white} from '../../components/colors';
 import {ReadMoreText} from '../../components/ReadMoreText';
 import {AuthContext} from '../auth/AuthProvider';
 import {
@@ -119,7 +119,7 @@ export default function ActivityDetailsScreen({
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <IconButton
-          color={white}
+          color={Colors.white}
           icon="keyboard-backspace"
           size={30}
           style={styles.navButton}
@@ -236,7 +236,7 @@ export default function ActivityDetailsScreen({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: background,
+    backgroundColor: Colors.background,
     flex: 1,
   },
   scrollView: {
@@ -244,13 +244,13 @@ const styles = StyleSheet.create({
   },
   surface: {
     flex: 0.1,
-    borderTopColor: divider,
+    borderTopColor: Colors.divider,
     borderTopWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   navButton: {
-    color: white,
+    color: Colors.white,
     position: 'absolute',
     zIndex: 2,
   },

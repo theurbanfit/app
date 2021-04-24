@@ -24,7 +24,7 @@ const mapNumberToWeekDays = {
 const sortBasedOnStartTime = ({startTime: a}, {startTime: b}) =>
   moment(convertTimeStringToMoment(a)).diff(convertTimeStringToMoment(b));
 
-const fetchEventInformation = async (events = [], date) => {
+const fetchEventInformation = async (events = []) => {
   return Promise.all(
     events
       .sort(sortBasedOnStartTime)
@@ -69,7 +69,7 @@ const fetchEventInformation = async (events = [], date) => {
             classPreparationInfo,
             classArrivalInfo,
 
-            dateTime: moment(date.format('YYYY MM DD') + ' ' + startTime),
+            dateTime: convertTimeStringToMoment(startTime),
             timeRange: deriveTimeRange(startTime, classDurationInMinutes),
             scheduledClassId,
             remainingSeats,
@@ -92,7 +92,7 @@ export const useEventsForDate = date => {
       const unsortedEvents = await retrieveScheduleForDayOfTheWeek(
         dayOfTheWeek,
       );
-      const sortedEvents = await fetchEventInformation(unsortedEvents, date);
+      const sortedEvents = await fetchEventInformation(unsortedEvents);
       setEvents(sortedEvents);
     };
 

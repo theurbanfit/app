@@ -38,11 +38,12 @@ export const AuthProvider = ({children}) => {
         setAuth,
         error,
         setError,
-        login: async (email, password) => {
+        login: async (email, password, onErrorStopLoading) => {
           try {
             await firebaseAuth().signInWithEmailAndPassword(email, password);
             setError(null);
           } catch (e) {
+            onErrorStopLoading();
             handleAuthErrors(e);
           }
         },

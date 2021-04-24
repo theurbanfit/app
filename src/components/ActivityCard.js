@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Title, Text, Divider} from 'react-native-paper';
+import {Title, Text, Divider, Colors} from 'react-native-paper';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import {textSecondary} from './colors';
 
 export const ActivityCard = ({
   imageSrc,
@@ -59,7 +58,9 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 12,
   },
-  color: {color: textSecondary},
+  color: {
+    color: Colors.textSecondary,
+  },
   small: {
     fontSize: 11,
   },

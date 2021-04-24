@@ -1,8 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {Avatar} from 'react-native-paper';
+import {Avatar, Colors} from 'react-native-paper';
 import {ActivityIndicator, Portal, Modal, Text} from 'react-native-paper';
-import {mintGreen} from './colors';
 
 export default function UserAvatar({onUploadAvatar, source, loading}) {
   return (
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
   },
   loadingIndicator: {marginTop: 20},
   margins: {
-    backgroundColor: mintGreen,
+    backgroundColor: Colors.mintGreen,
     margin: 12,
   },
 });

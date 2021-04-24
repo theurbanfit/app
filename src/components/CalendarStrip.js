@@ -2,7 +2,7 @@ import React from 'react';
 import Calendar from 'react-native-calendar-strip';
 import moment from 'moment';
 import {StyleSheet} from 'react-native';
-import {divider, primary, textPrimary, white} from './colors';
+import {Colors} from 'react-native-paper';
 
 export const CalendarStrip = ({
   selectedDay,
@@ -18,7 +18,7 @@ export const CalendarStrip = ({
       calendarAnimation={{type: 'sequence', duration: 30}}
       daySelectionAnimation={{type: 'background', duration: 300}}
       calendarHeaderStyle={styles.header}
-      calendarColor={white}
+      calendarColor={Colors.white}
       dateNumberStyle={styles.dateNumber}
       dateNameStyle={styles.dateName}
       highlightDateNameStyle={styles.highlight}
@@ -39,12 +39,23 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: divider,
+    borderBottomColor: Colors.divider,
   },
   icon: {display: 'none'},
-  header: {color: textPrimary, display: 'none'},
-  dateNumber: {color: textPrimary},
-  dateName: {color: textPrimary},
-  highlight: {color: white},
-  highlightBackground: {backgroundColor: primary},
+  header: {
+    color: Colors.textPrimary,
+    display: 'none',
+  },
+  dateNumber: {
+    color: Colors.textPrimary,
+  },
+  dateName: {
+    color: Colors.textPrimary,
+  },
+  highlight: {
+    color: Colors.white,
+  },
+  highlightBackground: {
+    backgroundColor: Colors.primary,
+  },
 });

@@ -1,10 +1,9 @@
 import React, {useState, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Title, HelperText} from 'react-native-paper';
+import {Title, HelperText, Colors} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
-import {background, textLightDark} from '../../components/colors';
 
 export default function LoginScreen({navigation}) {
   const [loading, setLoading] = useState(false);
@@ -16,8 +15,9 @@ export default function LoginScreen({navigation}) {
   const handleLogin = async () => {
     if (email.length && password.length) {
       setLoading(true);
-      await login(email, password);
+      await login(email, password, () => setLoading(false));
     } else {
+      setLoading(false);
       setError('All values are required');
     }
   };
@@ -74,7 +74,7 @@ export default function LoginScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: background,
+    backgroundColor: Colors.background,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   forgotPasswordButtonText: {
-    color: textLightDark,
+    color: Colors.textLight,
     fontSize: 14,
   },
 });

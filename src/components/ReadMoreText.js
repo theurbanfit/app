@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native-paper';
+import {Colors, Text} from 'react-native-paper';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {primary} from './colors';
 
 export const ReadMoreText = ({numberOfLines = 4, styles = {}, children}) => {
   const [expanded, toggleExpansion] = useState(false);
@@ -27,7 +26,7 @@ const ownStyles = StyleSheet.create({
     marginBottom: 12,
   },
   text: {
-    color: primary,
+    color: Colors.primary,
     fontSize: 14,
   },
 });
