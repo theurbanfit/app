@@ -1,11 +1,12 @@
 import React, {useState, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Title, HelperText, Colors} from 'react-native-paper';
+import {Title, HelperText, useTheme} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
 
 export default function LoginScreen({navigation}) {
+  const styles = useStyles();
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState('');
@@ -72,29 +73,33 @@ export default function LoginScreen({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.background,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 24,
-    marginBottom: 10,
-  },
-  buttonMargin: {
-    marginBottom: 16,
-  },
-  loginButtonLabel: {
-    margin: 12,
-    fontSize: 22,
-  },
-  registrationButtonText: {
-    fontSize: 14,
-  },
-  forgotPasswordButtonText: {
-    color: Colors.textLight,
-    fontSize: 14,
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return StyleSheet.create({
+    container: {
+      backgroundColor: colors.background,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    titleText: {
+      fontSize: 24,
+      marginBottom: 10,
+    },
+    buttonMargin: {
+      marginBottom: 16,
+    },
+    loginButtonLabel: {
+      margin: 12,
+      fontSize: 22,
+    },
+    registrationButtonText: {
+      fontSize: 14,
+    },
+    forgotPasswordButtonText: {
+      color: colors.textLight,
+      fontSize: 14,
+    },
+  });
+};

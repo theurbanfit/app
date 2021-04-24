@@ -2,13 +2,18 @@ import React from 'react';
 import Calendar from 'react-native-calendar-strip';
 import moment from 'moment';
 import {StyleSheet} from 'react-native';
-import {Colors} from 'react-native-paper';
+import {useTheme} from 'react-native-paper';
 
 export const CalendarStrip = ({
   selectedDay,
   setSelectedDay,
   today = moment(),
 }) => {
+  const {
+    styles,
+    theme: {colors},
+  } = useStyles();
+
   return (
     <Calendar
       scrollable
@@ -18,7 +23,7 @@ export const CalendarStrip = ({
       calendarAnimation={{type: 'sequence', duration: 30}}
       daySelectionAnimation={{type: 'background', duration: 300}}
       calendarHeaderStyle={styles.header}
-      calendarColor={Colors.white}
+      calendarColor={colors.white}
       dateNumberStyle={styles.dateNumber}
       dateNameStyle={styles.dateName}
       highlightDateNameStyle={styles.highlight}
@@ -33,29 +38,36 @@ export const CalendarStrip = ({
   );
 };
 
-const styles = StyleSheet.create({
-  calendar: {
-    height: 72,
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  icon: {display: 'none'},
-  header: {
-    color: Colors.textPrimary,
-    display: 'none',
-  },
-  dateNumber: {
-    color: Colors.textPrimary,
-  },
-  dateName: {
-    color: Colors.textPrimary,
-  },
-  highlight: {
-    color: Colors.white,
-  },
-  highlightBackground: {
-    backgroundColor: Colors.primary,
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return {
+    theme: {colors},
+    styles: StyleSheet.create({
+      calendar: {
+        height: 72,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.divider,
+      },
+      icon: {display: 'none'},
+      header: {
+        color: colors.textPrimary,
+        display: 'none',
+      },
+      dateNumber: {
+        color: colors.textPrimary,
+      },
+      dateName: {
+        color: colors.textPrimary,
+      },
+      highlight: {
+        color: colors.white,
+      },
+      highlightBackground: {
+        backgroundColor: colors.blue,
+      },
+    }),
+  };
+};

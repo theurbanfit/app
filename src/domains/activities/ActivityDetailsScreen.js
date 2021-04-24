@@ -10,7 +10,7 @@ import {
   Portal,
   Dialog,
   Paragraph,
-  Colors,
+  useTheme,
 } from 'react-native-paper';
 import {ReadMoreText} from '../../components/ReadMoreText';
 import {AuthContext} from '../auth/AuthProvider';
@@ -81,6 +81,11 @@ export default function ActivityDetailsScreen({
     },
   },
 }) {
+  const {
+    theme: {colors},
+    styles,
+  } = useStyles();
+
   const {auth} = useContext(AuthContext);
   const [confirmationDialogOpen, setConfirmationDialogView] = useState(false);
   const [cancellationDialogOpen, setCancellationDialogView] = useState(false);
@@ -119,7 +124,7 @@ export default function ActivityDetailsScreen({
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <IconButton
-          color={Colors.white}
+          color={colors.white}
           icon="keyboard-backspace"
           size={30}
           style={styles.navButton}
@@ -234,62 +239,69 @@ export default function ActivityDetailsScreen({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.background,
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1.9,
-  },
-  surface: {
-    flex: 0.1,
-    borderTopColor: Colors.divider,
-    borderTopWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  navButton: {
-    color: Colors.white,
-    position: 'absolute',
-    zIndex: 2,
-  },
-  image: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: 240,
-    marginBottom: 20,
-  },
-  headlineSize: {
-    fontWeight: '600',
-    fontSize: 32,
-  },
-  headlineMargin: {
-    marginBottom: 16,
-  },
-  headlineMarginSm: {
-    marginBottom: 8,
-  },
-  text: {
-    marginBottom: 6,
-  },
-  inline: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  firstDivider: {
-    marginTop: 8,
-    marginBottom: 24,
-  },
-  divider: {
-    marginTop: 24,
-    marginBottom: 24,
-  },
-  bookMeButton: {
-    alignSelf: 'stretch',
-    marginTop: 12,
-    marginLeft: 12,
-    marginRight: 12,
-  },
-});
+const useStyles = () => {
+  const theme = useTheme();
+
+  return {
+    theme,
+    styles: StyleSheet.create({
+      container: {
+        backgroundColor: theme.colors.background,
+        flex: 1,
+      },
+      scrollView: {
+        flex: 1.9,
+      },
+      surface: {
+        flex: 0.1,
+        borderTopColor: theme.colors.divider,
+        borderTopWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      navButton: {
+        color: theme.colors.white,
+        position: 'absolute',
+        zIndex: 2,
+      },
+      image: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 240,
+        marginBottom: 20,
+      },
+      headlineSize: {
+        fontWeight: '600',
+        fontSize: 32,
+      },
+      headlineMargin: {
+        marginBottom: 16,
+      },
+      headlineMarginSm: {
+        marginBottom: 8,
+      },
+      text: {
+        marginBottom: 6,
+      },
+      inline: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      },
+      firstDivider: {
+        marginTop: 8,
+        marginBottom: 24,
+      },
+      divider: {
+        marginTop: 24,
+        marginBottom: 24,
+      },
+      bookMeButton: {
+        alignSelf: 'stretch',
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
+      },
+    }),
+  };
+};

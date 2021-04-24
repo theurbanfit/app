@@ -9,7 +9,7 @@ import {
   Dialog,
   Button,
   IconButton,
-  Colors,
+  useTheme,
 } from 'react-native-paper';
 import {Switch} from './Switch';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -23,6 +23,10 @@ export const SearchTopBar = ({
   onAllowedDistrictsSet,
   onSearchQuerySet,
 }) => {
+  const {
+    styles,
+    theme: {colors},
+  } = useStyles();
   const [visible, setVisible] = useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -36,10 +40,10 @@ export const SearchTopBar = ({
           onChangeText={onSearchQuerySet}
           value={searchQuery}
         />
-        <View style={{width: '14%', backgroundColor: Colors.background}}>
+        <View style={styles.smWidth}>
           <IconButton
             size={25}
-            color={Colors.primary}
+            color={colors.primary}
             icon="tune"
             onPress={showModal}
           />
@@ -58,29 +62,40 @@ export const SearchTopBar = ({
   );
 };
 
-const styles = StyleSheet.create({
-  inline: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.divider,
-  },
-  search: {
-    width: '86%',
-  },
-  container: {
-    flex: 1,
-  },
-  noShadow: {
-    shadowColor: 'transparent',
-    shadowOpacity: 0,
-    shadowRadius: 0, // elevation = 4
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return {
+    theme: {colors},
+    styles: StyleSheet.create({
+      smWidth: {
+        width: '14%',
+        backgroundColor: colors.background,
+      },
+      inline: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomWidth: 1,
+        borderBottomColor: colors.divider,
+      },
+      search: {
+        width: '86%',
+      },
+      container: {
+        flex: 1,
+      },
+      noShadow: {
+        shadowColor: 'transparent',
+        shadowOpacity: 0,
+        shadowRadius: 0, // elevation = 4
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+      },
+    }),
+  };
+};
 
 const SearchModal = ({
   activeDistricts,
@@ -91,6 +106,7 @@ const SearchModal = ({
   visible,
   searchQuery,
 }) => {
+  const modalStyles = useModalStyles();
   const [districtFilters, setDistrictFilter] = useState([]);
   useEffect(() => {
     setDistrictFilter(allowedDistricts);
@@ -159,44 +175,48 @@ const SearchModal = ({
   );
 };
 
-const modalStyles = StyleSheet.create({
-  container: {
-    height: '100%',
-    minHeight: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: Colors.white,
-  },
-  scrollView: {
-    flex: 1.9,
-  },
-  surface: {
-    alignSelf: 'flex-end',
-    flex: 0.1,
-  },
-  modalBackground: {},
-  noShadow: {
-    borderBottomColor: Colors.divider,
-    borderBottomWidth: 1,
-    shadowColor: 'transparent',
-    shadowOpacity: 0,
-    shadowRadius: 0, // elevation = 4
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-  },
-  marginFilters: {
-    marginBottom: 16,
-    marginTop: 20,
-  },
-  inline: {
-    marginBottom: 4,
-    marginTop: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
+const useModalStyles = () => {
+  const {colors} = useTheme();
 
-  buttonMargin: {marginLeft: 12},
-});
+  return StyleSheet.create({
+    container: {
+      height: '100%',
+      minHeight: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: colors.white,
+    },
+    scrollView: {
+      flex: 1.9,
+    },
+    surface: {
+      alignSelf: 'flex-end',
+      flex: 0.1,
+    },
+    modalBackground: {},
+    noShadow: {
+      borderBottomColor: colors.divider,
+      borderBottomWidth: 1,
+      shadowColor: 'transparent',
+      shadowOpacity: 0,
+      shadowRadius: 0, // elevation = 4
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+    },
+    marginFilters: {
+      marginBottom: 16,
+      marginTop: 20,
+    },
+    inline: {
+      marginBottom: 4,
+      marginTop: 4,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+
+    buttonMargin: {marginLeft: 12},
+  });
+};

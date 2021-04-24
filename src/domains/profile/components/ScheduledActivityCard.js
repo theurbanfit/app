@@ -5,7 +5,6 @@ import {
   Divider,
   Menu,
   IconButton,
-  Colors,
   useTheme,
 } from 'react-native-paper';
 import {View, StyleSheet} from 'react-native';
@@ -18,8 +17,7 @@ export const ScheduledActivityCard = ({
   dateTime,
   onViewCard,
 }) => {
-  const {colors} = useTheme();
-
+  const styles = useStyles();
   const [menuVisible, setMenuVisibility] = useState(false);
 
   useEffect(() => {
@@ -59,15 +57,19 @@ export const ScheduledActivityCard = ({
   );
 };
 
-const styles = StyleSheet.create({
-  inline: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  card: {
-    backgroundColor: Colors.white,
-    padding: 16,
-    paddingBottom: 20,
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return StyleSheet.create({
+    inline: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    card: {
+      backgroundColor: colors.white,
+      padding: 16,
+      paddingBottom: 20,
+    },
+  });
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Headline, Text, Colors} from 'react-native-paper';
+import {Headline, Text, useTheme} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ScheduledActivityCard} from '../domains/profile/components/ScheduledActivityCard';
 import {useNavigation} from '@react-navigation/native';
@@ -8,6 +8,7 @@ import moment from 'moment';
 import {StyleSheet} from 'react-native';
 
 export const UserSchedule = ({scheduledClasses}) => {
+  const styles = useStyles();
   const navigation = useNavigation();
 
   const handleViewCardDetails = scheduledClassId => {
@@ -85,11 +86,15 @@ export const UserSchedule = ({scheduledClasses}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  headline: {
-    marginTop: 16,
-    marginBottom: 28,
-    color: Colors.deepPurpleA400,
-    alignSelf: 'center',
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return StyleSheet.create({
+    headline: {
+      marginTop: 16,
+      marginBottom: 28,
+      color: colors.primary,
+      alignSelf: 'center',
+    },
+  });
+};
