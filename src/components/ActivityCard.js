@@ -26,7 +26,7 @@ export const ActivityCard = ({
                 styles.small,
                 styles.marginBottom,
                 styles.color,
-                {width: '92%'},
+                styles.width,
               ]}>
               {fullAddress}
             </Text>
@@ -87,5 +87,6 @@ const useStyles = () => {
       width: 100,
       height: 100,
     },
+    width: {width: '92%'},
   });
 };
