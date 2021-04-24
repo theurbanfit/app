@@ -13,12 +13,13 @@ const theme = {
     text: '#031323',
     textSecondary: '#24292e',
     textLight: '#727272',
-    blue: '#0071f3',
     mintGreen: '#98FB98',
-    mintGreenSecondary: '#00DAC3',
-    mintGreenSecondary300: '#00BBA7',
-    mintGreenSecondary500: '#00B4A1',
-    mintGreenSecondary700: '#08908E',
+    secondary: '#00DAC3',
+    secondary200: '#d100d1',
+    secondary400: '#b100e8',
+    secondary600: '#8900f2',
+    secondary800: '#6a00f4',
+    blue: '#2d00f7',
     divider: '#D9DCDE',
     white: '#FFFFFF',
   },
@@ -31,7 +32,7 @@ export default function Index() {
         <ProfileProvider>
           <Routes />
         </ProfileProvider>
-      </AuthProvider>
+      </AuthProvider>y
     </PaperProvider>
   );
 }

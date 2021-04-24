@@ -66,7 +66,7 @@ const useStyles = () => {
         color: colors.white,
       },
       highlightBackground: {
-        backgroundColor: colors.mintGreenSecondary300,
+        backgroundColor: colors.secondary400,
       },
     }),
   };

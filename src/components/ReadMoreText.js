@@ -30,7 +30,7 @@ const useStyles = () => {
       marginBottom: 12,
     },
     text: {
-      color: colors.mintGreenSecondary700,
+      color: colors.blue,
       fontSize: 14,
     },
   });

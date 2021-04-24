@@ -26,7 +26,7 @@ function ProfileStackScreen({navigation}) {
             <IconButton
               icon="cog-outline"
               size={28}
-              color={colors.mintGreenSecondary500}
+              color={colors.secondary400}
               onPress={() => navigation.navigate('User Settings')}
             />
           ),
