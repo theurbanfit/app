@@ -24,7 +24,7 @@ const mapNumberToWeekDays = {
 const sortBasedOnStartTime = ({startTime: a}, {startTime: b}) =>
   moment(convertTimeStringToMoment(a)).diff(convertTimeStringToMoment(b));
 
-const fetchEventInformation = async (events = []) => {
+const fetchEventInformation = async (events = [], selectedDate) => {
   return Promise.all(
     events
       .sort(sortBasedOnStartTime)
@@ -69,8 +69,8 @@ const fetchEventInformation = async (events = []) => {
             classPreparationInfo,
             classArrivalInfo,
 
-            dateTime: convertTimeStringToMoment(startTime),
-            timeRange: deriveTimeRange(startTime, classDurationInMinutes),
+            eventDateTime: convertTimeStringToMoment(startTime, selectedDate),
+            eventTimeRange: deriveTimeRange(startTime, classDurationInMinutes),
             scheduledClassId,
             remainingSeats,
             prearrangedSeats,
@@ -81,8 +81,8 @@ const fetchEventInformation = async (events = []) => {
   );
 };
 
-export const useEventsForDate = date => {
-  const numberOfTheDay = date.day();
+export const useEventsForDate = selectedDate => {
+  const numberOfTheDay = selectedDate.day();
   const dayOfTheWeek = mapNumberToWeekDays[numberOfTheDay];
 
   const [events, setEvents] = useState(undefined);
@@ -92,12 +92,15 @@ export const useEventsForDate = date => {
       const unsortedEvents = await retrieveScheduleForDayOfTheWeek(
         dayOfTheWeek,
       );
-      const sortedEvents = await fetchEventInformation(unsortedEvents);
+      const sortedEvents = await fetchEventInformation(
+        unsortedEvents,
+        selectedDate,
+      );
       setEvents(sortedEvents);
     };
 
     fetchData();
-  }, [dayOfTheWeek, date]);
+  }, [dayOfTheWeek, selectedDate]);
 
   return {events};
 };

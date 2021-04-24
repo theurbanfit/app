@@ -16,8 +16,8 @@ export const UserSchedule = ({scheduledClasses}) => {
       imageSrc,
       title,
       facilityAddress,
-      dateTimeFormatted,
-      timeRange,
+      eventDateTimeFormatted,
+      eventTimeRange,
       tags,
       classId,
       classImportantInfo,
@@ -31,8 +31,8 @@ export const UserSchedule = ({scheduledClasses}) => {
       imageSrc,
       title,
       facilityAddress,
-      dateTime: formatFirestoreDateToMoment(dateTimeFormatted),
-      timeRange,
+      eventDateTimeFormatted,
+      eventTimeRange,
       tags,
       scheduledClassId,
       classId,
@@ -50,27 +50,30 @@ export const UserSchedule = ({scheduledClasses}) => {
         <>
           {scheduledClasses ? (
             Object.values(scheduledClasses)
-              .filter(({dateTimeFormatted}) =>
-                formatFirestoreDateToMoment(dateTimeFormatted).isAfter(
+              .filter(({eventDateTimeFormatted}) =>
+                formatFirestoreDateToMoment(eventDateTimeFormatted).isAfter(
                   moment().startOf('day'),
                 ),
               )
-              .sort(({dateTimeFormatted: a}, {dateTimeFormatted: b}) =>
-                moment(formatFirestoreDateToMoment(a)).diff(
-                  formatFirestoreDateToMoment(b),
-                ),
+              .sort(
+                ({eventDateTimeFormatted: a}, {eventDateTimeFormatted: b}) =>
+                  moment(formatFirestoreDateToMoment(a)).diff(
+                    formatFirestoreDateToMoment(b),
+                  ),
               )
               .map(
                 ({
                   title,
-                  dateTimeFormatted,
+                  eventDateTimeFormatted,
                   scheduledClassId,
                   facilityAddress,
                 }) => (
                   <ScheduledActivityCard
                     key={scheduledClassId}
                     title={title}
-                    dateTime={formatFirestoreDateToMoment(dateTimeFormatted)}
+                    dateTime={formatFirestoreDateToMoment(
+                      eventDateTimeFormatted,
+                    )}
                     scheduledClassId={scheduledClassId}
                     facilityAddress={facilityAddress}
                     onViewCard={() => handleViewCardDetails(scheduledClassId)}

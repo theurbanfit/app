@@ -8,6 +8,7 @@ import {useDistricts, useEventsForDate} from './asyncHooks/useEventsForDate';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SearchTopBar} from '../../components/SearchTopBar';
 import fuzzy from 'fuzzysearch';
+import {formatActivityDateForFirestore} from '../../components/utils/datetime';
 
 export default memo(function ActivitiesScreen({navigation}) {
   const today = moment();
@@ -68,8 +69,8 @@ export default memo(function ActivitiesScreen({navigation}) {
 
                   facilityDescription,
                   facilityDistrictName,
-                  dateTime,
-                  timeRange,
+                  eventDateTime,
+                  eventTimeRange,
                   scheduledClassId,
                 }) => (
                   <ActivityCard
@@ -78,8 +79,10 @@ export default memo(function ActivitiesScreen({navigation}) {
                         imageSrc: classPhotoUrl,
                         title: className,
                         facilityAddress,
-                        dateTime,
-                        timeRange,
+                        eventDateTimeFormatted: formatActivityDateForFirestore(
+                          eventDateTime,
+                        ),
+                        eventTimeRange,
                         classTags,
                         scheduledClassId,
                         classId,
@@ -89,14 +92,13 @@ export default memo(function ActivitiesScreen({navigation}) {
                         classArrivalInfo,
                         facilityDistrictName,
                         facilityDescription,
-                        date: selectedDay,
                       })
                     }
                     key={scheduledClassId}
                     fullAddress={`${facilityAddress} • ${facilityDistrictName}`}
                     imageSrc={classPhotoUrl}
                     title={className}
-                    timeRange={timeRange}
+                    timeRange={eventTimeRange}
                     tags={classTags}
                   />
                 ),

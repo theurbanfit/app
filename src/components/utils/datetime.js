@@ -1,7 +1,10 @@
 import moment from 'moment';
 
-export const convertTimeStringToMoment = startTime => {
-  const day = moment().utcOffset(-5);
+export const convertTimeStringToMoment = (
+  startTime,
+  selectedDate = moment(),
+) => {
+  const day = selectedDate.utcOffset(-5);
   const splitTime = startTime.split(/:/);
   return day
     .hours(parseInt(splitTime[0], 10))

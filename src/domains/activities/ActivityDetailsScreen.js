@@ -22,6 +22,7 @@ import {addClassToUserSchedule, removeClassFromUserSchedule} from './services';
 import {
   displayActivityDate,
   formatActivityDateForFirestore,
+  formatFirestoreDateToMoment,
 } from '../../components/utils/datetime';
 
 const ConfirmationDialog = ({
@@ -68,8 +69,8 @@ export default function ActivityDetailsScreen({
       imageSrc,
       title,
       facilityAddress,
-      dateTime,
-      timeRange,
+      eventDateTimeFormatted,
+      eventTimeRange,
       classId,
       classImportantInfo,
       classDescription,
@@ -81,6 +82,7 @@ export default function ActivityDetailsScreen({
     },
   },
 }) {
+  console.log(eventDateTimeFormatted)
   const {
     theme: {colors},
     styles,
@@ -93,14 +95,15 @@ export default function ActivityDetailsScreen({
   const [cancellationInProgress, setCancellationLoading] = useState(false);
   const {scheduledClassStatus} = useScheduleStatus(scheduledClassId);
 
+  const eventDate = formatFirestoreDateToMoment(eventDateTimeFormatted);
   const handleConfirmation = async () => {
     setConfirmationLoading(true);
     await addClassToUserSchedule(auth.uid, {
       imageSrc,
       title,
       facilityAddress,
-      dateTimeFormatted: formatActivityDateForFirestore(dateTime),
-      timeRange,
+      eventDateTimeFormatted,
+      eventTimeRange,
       classId,
       classImportantInfo,
       classDescription,
@@ -145,8 +148,8 @@ export default function ActivityDetailsScreen({
             <Text style={styles.text}>{facilityDistrictName}</Text>
           </View>
           <View style={styles.inline}>
-            <Text style={styles.text}>{displayActivityDate(dateTime)}</Text>
-            <Text style={styles.text}>{timeRange}</Text>
+            <Text style={styles.text}>{displayActivityDate(eventDate)}</Text>
+            <Text style={styles.text}>{eventTimeRange}</Text>
           </View>
 
           <View>
