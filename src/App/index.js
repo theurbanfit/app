@@ -32,7 +32,7 @@ export default function Index() {
         <ProfileProvider>
           <Routes />
         </ProfileProvider>
-      </AuthProvider>y
+      </AuthProvider>
     </PaperProvider>
   );
 }
