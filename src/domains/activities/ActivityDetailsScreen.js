@@ -82,7 +82,6 @@ export default function ActivityDetailsScreen({
     },
   },
 }) {
-  console.log(eventDateTimeFormatted)
   const {
     theme: {colors},
     styles,
