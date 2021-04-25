@@ -96,6 +96,7 @@ export const useEventsForDate = selectedDate => {
         unsortedEvents,
         selectedDate,
       );
+
       setEvents(sortedEvents);
     };
 
