@@ -2,10 +2,15 @@ import firestore from '@react-native-firebase/firestore';
 
 export const queryActiveUser = uid => firestore().collection('users').doc(uid);
 
-export const retrieveActiveUser = async uid => await queryActiveUser(uid).get();
-
-export const retrieveScheduledClasses = async uid => {
-  const snapshot = await retrieveActiveUser(uid);
-  const {schedule} = snapshot.data();
-  return schedule || {};
+export const retrieveFacility = async facilityId => {
+  try {
+    const res = await firestore()
+      .collection('facilities')
+      .doc(facilityId)
+      .get();
+    return res.data();
+  } catch (e) {
+    console.error(e);
+    debugger;
+  }
 };

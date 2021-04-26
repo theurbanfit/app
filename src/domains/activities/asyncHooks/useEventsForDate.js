@@ -8,9 +8,9 @@ import {
   retrieveClass,
   retrieveDistrict,
   retrieveFacilities,
-  retrieveFacility,
   retrieveScheduleForDayOfTheWeek,
-} from '../services';
+} from '../_services';
+import {retrieveFacility} from '../../../sharedServices';
 
 const mapNumberToWeekDays = {
   0: 'sun',

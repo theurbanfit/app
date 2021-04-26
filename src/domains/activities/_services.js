@@ -55,19 +55,6 @@ export const retrieveClass = async classId => {
   }
 };
 
-export const retrieveFacility = async facilityId => {
-  try {
-    const res = await firestore()
-      .collection('facilities')
-      .doc(facilityId)
-      .get();
-    return res.data();
-  } catch (e) {
-    console.error(e);
-    debugger;
-  }
-};
-
 export const retrieveDistrict = async districtId => {
   try {
     const res = await firestore()

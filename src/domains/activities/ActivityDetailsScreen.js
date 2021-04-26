@@ -18,7 +18,7 @@ import {
   scheduleStatuses,
   useScheduleStatus,
 } from './asyncHooks/useScheduleStatus';
-import {addClassToUserSchedule, removeClassFromUserSchedule} from './services';
+import {addClassToUserSchedule, removeClassFromUserSchedule} from './_services';
 import {
   displayActivityDate,
   formatActivityDateForFirestore,
