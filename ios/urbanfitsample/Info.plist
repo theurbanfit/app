@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>13</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -37,19 +37,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
 	<key>NSCameraUsageDescription</key>
-    <string>Urbanfit requests access to your camera.</string>
-
-    <!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Urbanfit requests access to your media library.</string>
-
-    <!-- Include this only if you are planning to use the camera roll -->
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Urbanfit requests access to your photo library.</string>
-
+	<string>Urbanfit requests access to your camera.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Urbanfit requests access to your media library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Urbanfit requests access to your photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
