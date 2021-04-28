@@ -31,6 +31,7 @@ platform :ios do
     commit_version_bump(
       message:"chore: Version Bump",
       xcodeproj:"./urbanfitsample.xcodeproj"
+      force: true
     )
 
     push_to_git_remote(
@@ -43,7 +44,7 @@ platform :ios do
       no_verify: true,
       set_upstream: true
     )
-    
+
     build_app(
       workspace: "urbanfitsample.xcworkspace",
       scheme: "urbanfitsample",
