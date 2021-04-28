@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Title, Text, Divider, useTheme} from 'react-native-paper';
+import {Title, Text, Divider, useTheme, Colors} from 'react-native-paper';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 export const ActivityCard = ({
@@ -13,25 +13,27 @@ export const ActivityCard = ({
   prearrangedSeats,
 }) => {
   const styles = useStyles();
-
+  console.log(Boolean(remainingSeats > 0 && prearrangedSeats > 0));
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View>
           <Title style={styles.header}>{title}</Title>
           <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
-          {Boolean(remainingSeats && prearrangedSeats) &&
+          {Boolean(
+            remainingSeats !== undefined && prearrangedSeats !== undefined,
+          ) &&
             (() => {
               if (remainingSeats > 0) {
                 return (
-                  <Text style={[styles.marginBottom, styles.colorPink]}>
+                  <Text style={[styles.marginBottom, styles.colorSuccess]}>
                     Remaining seats {remainingSeats} out of {prearrangedSeats}
                   </Text>
                 );
               }
               return (
-                <Text style={[styles.marginBottom, styles.colorBlue]}>
-                  There are no remaining seats in this class
+                <Text style={[styles.marginBottom, styles.colorWarning]}>
+                  There are no remaining seats
                 </Text>
               );
             })()}
@@ -92,11 +94,11 @@ const useStyles = () => {
     color: {
       color: colors.textSecondary,
     },
-    colorBlue: {
-      color: colors.blue,
+    colorSuccess: {
+      color: Colors.deepPurpleA400,
     },
-    colorPink: {
-      color: colors.secondary600,
+    colorWarning: {
+      color: Colors.redA200,
     },
     small: {
       fontSize: 11,

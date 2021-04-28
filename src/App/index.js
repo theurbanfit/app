@@ -20,6 +20,7 @@ const theme = {
     secondary600: '#8900f2',
     secondary800: '#6a00f4',
     blue: '#2d00f7',
+    warning: '#D97508',
     divider: '#D9DCDE',
     white: '#FFFFFF',
   },

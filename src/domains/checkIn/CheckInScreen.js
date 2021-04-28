@@ -27,7 +27,30 @@ export default function CheckInScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      
+      <QRCodeScanner
+        reactivate
+        reactivateTimeout={5000}
+        showMarker
+        onRead={onSuccess}
+        cameraStyle={styles.cameraStyle}
+        customMarker={
+          <View style={styles.rectangleContainer}>
+            <View style={styles.topOverlay}>
+              <Headline style={styles.colorWhite}>Scan the QR code</Headline>
+            </View>
+
+            <View style={styles.flexRow}>
+              <View style={styles.leftAndRightOverlay} />
+
+              <View style={styles.rectangle} />
+
+              <View style={styles.leftAndRightOverlay} />
+            </View>
+
+            <View style={styles.bottomOverlay} />
+          </View>
+        }
+      />
     </View>
   );
 }
