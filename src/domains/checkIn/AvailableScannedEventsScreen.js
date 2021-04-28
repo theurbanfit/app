@@ -5,10 +5,36 @@ import {ContainerView} from '../../components/ContainerView';
 import {ScrollView} from 'react-native-gesture-handler';
 
 export default memo(function AvailableScannedEventsScreen({
+  navigation,
   route: {
     params: {availableScannedEventsForTheRestOfTheDay},
   },
 }) {
+  const handleSuccessfulCheckIn = remainingSeats => {
+    if (remainingSeats > 0) {
+      return Alert.alert(
+        'Success',
+        'You are ready to go!',
+        [
+          {
+            text: 'Okay',
+            onPress: () => navigation.navigate('Profile'),
+          },
+        ],
+        {
+          cancelable: false,
+        },
+      );
+    }
+    return Alert.alert(
+      'Sorry :(',
+      'All the seats are taken',
+      [{text: 'Okay'}],
+      {
+        cancelable: false,
+      },
+    );
+  };
   return (
     <SafeAreaView style={styles.flexOne}>
       <ScrollView>
@@ -25,9 +51,7 @@ export default memo(function AvailableScannedEventsScreen({
                 prearrangedSeats,
               }) => (
                 <ActivityCard
-                  onPress={() => {
-                    Alert.alert('Success', 'You have checked in');
-                  }}
+                  onPress={() => handleSuccessfulCheckIn(remainingSeats)}
                   remainingSeats={remainingSeats}
                   prearrangedSeats={prearrangedSeats}
                   key={scheduledClassId}

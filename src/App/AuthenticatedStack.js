@@ -10,20 +10,10 @@ import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 import UserSettingsScreen from '../domains/profile/UserSettings';
 import {IconButton, useTheme} from 'react-native-paper';
 import AvailableScannedEventsScreen from '../domains/checkIn/AvailableScannedEventsScreen';
-import {useNavigation} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Profile = createStackNavigator();
-const CheckIn = createStackNavigator();
-
-function CheckInStackScreen() {
-  return (
-    <CheckIn.Navigator>
-      <CheckIn.Screen name="Check in" component={CheckInScreen} />
-    </CheckIn.Navigator>
-  );
-}
 
 function ProfileStackScreen({navigation}) {
   const {colors} = useTheme();
@@ -59,7 +49,7 @@ function BottomTabNavigation() {
         activeTintColor: colors.primary,
       }}>
       <Tab.Screen
-        name="Activity feed"
+        name="Activity Feed"
         component={ActivityFeedScreen}
         options={{
           tabBarLabel: 'Activities',
@@ -73,8 +63,8 @@ function BottomTabNavigation() {
         }}
       />
       <Tab.Screen
-        name="Check=in"
-        component={CheckInStackScreen}
+        name="Check in"
+        component={CheckInScreen}
         options={{
           tabBarLabel: 'Check-in',
           tabBarIcon: ({color, size}) => (
