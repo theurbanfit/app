@@ -9,10 +9,24 @@ import CheckInScreen from '../domains/checkIn/CheckInScreen';
 import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 import UserSettingsScreen from '../domains/profile/UserSettings';
 import {IconButton, useTheme} from 'react-native-paper';
+import AvailableScannedEventsScreen from '../domains/checkIn/AvailableScannedEventsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Profile = createStackNavigator();
+const CheckIn = createStackNavigator();
+
+function CheckInStackScreen() {
+  return (
+    <CheckIn.Navigator>
+      <CheckIn.Screen name="Check in" component={CheckInScreen} />
+      <CheckIn.Screen
+        name="Available Scanned Events"
+        component={AvailableScannedEventsScreen}
+      />
+    </CheckIn.Navigator>
+  );
+}
 
 function ProfileStackScreen({navigation}) {
   const {colors} = useTheme();
@@ -38,6 +52,7 @@ function ProfileStackScreen({navigation}) {
     </Profile.Navigator>
   );
 }
+
 function BottomTabNavigation() {
   const {colors} = useTheme();
 
@@ -62,7 +77,7 @@ function BottomTabNavigation() {
       />
       <Tab.Screen
         name="Check=in"
-        component={CheckInScreen}
+        component={CheckInStackScreen}
         options={{
           tabBarLabel: 'Check-in',
           tabBarIcon: ({color, size}) => (

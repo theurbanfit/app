@@ -21,7 +21,6 @@ import {
 import {addClassToUserSchedule, removeClassFromUserSchedule} from './_services';
 import {
   displayActivityDate,
-  formatActivityDateForFirestore,
   formatFirestoreDateToMoment,
 } from '../../components/utils/datetime';
 

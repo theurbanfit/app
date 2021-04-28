@@ -6,7 +6,7 @@ export const ActivityCard = ({
   imageSrc,
   title,
   timeRange,
-  fullAddress,
+  fullAddress = '',
   tags = [],
   onPress = () => {},
 }) => {

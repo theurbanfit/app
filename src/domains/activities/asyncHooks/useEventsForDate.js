@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
-import moment from 'moment';
 import {
   convertTimeStringToMoment,
   deriveTimeRange,
+  mapNumberToWeekDays,
 } from '../../../components/utils/datetime';
 import {
   retrieveClass,
@@ -11,18 +11,7 @@ import {
   retrieveScheduleForDayOfTheWeek,
 } from '../_services';
 import {retrieveFacility} from '../../../sharedServices';
-
-const mapNumberToWeekDays = {
-  0: 'sun',
-  1: 'mon',
-  2: 'tue',
-  3: 'wed',
-  4: 'thu',
-  5: 'fri',
-  6: 'sat',
-};
-const sortBasedOnStartTime = ({startTime: a}, {startTime: b}) =>
-  moment(convertTimeStringToMoment(a)).diff(convertTimeStringToMoment(b));
+import {sortBasedOnStartTime} from '../../checkIn/_services';
 
 const fetchEventInformation = async (events = [], selectedDate) => {
   return Promise.all(

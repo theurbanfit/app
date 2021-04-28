@@ -1,20 +1,88 @@
 import {useState, useEffect} from 'react';
-import {retrieveScheduleFromFacilityId} from '../_services';
+import {
+  retrieveScheduleFromFacilityId,
+  sortBasedOnStartTime,
+} from '../_services';
+import {
+  convertTimeStringToMoment,
+  deriveTimeRange,
+} from '../../../components/utils/datetime';
+import moment from 'moment';
+import {retrieveClass} from '../../activities/_services';
 
-export const useAvailableEventsFromScannedFacility = facilityId => {
-  const [availableEventsFromScannedFacility, setAvailableEvents] = useState(
-    undefined,
+const fetchEventInformation = async events => {
+  if (!events) {
+    return;
+  }
+
+  return Promise.all(
+    events
+      .sort(sortBasedOnStartTime)
+      .map(
+        async ({
+          scheduledClassId,
+          classId,
+          facilityId,
+          startTime,
+          prearrangedSeats,
+          remainingSeats,
+        }) => {
+          const {
+            classDurationInMinutes,
+            classPhotoUrl,
+            classTags,
+            classPreparationInfo,
+            classDescription,
+            classImportantInfo,
+            classArrivalInfo,
+            className,
+          } = await retrieveClass(classId);
+
+          return {
+            facilityId,
+            classId,
+            className,
+            classPhotoUrl,
+            classTags,
+            classImportantInfo,
+            classDescription,
+            classPreparationInfo,
+            classArrivalInfo,
+
+            eventDateTime: convertTimeStringToMoment(startTime),
+            eventTimeRange: deriveTimeRange(startTime, classDurationInMinutes),
+            scheduledClassId,
+            remainingSeats,
+            prearrangedSeats,
+          };
+        },
+      ),
   );
+};
+
+// returns all the available events a facility has for the choose date
+export const useAvailableEventsFromScannedFacility = facilityId => {
+  const [
+    availableScannedEventsForTheRestOfTheDay,
+    setAvailableEvents,
+  ] = useState(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
-      const facilities =
-        facilityId && (await retrieveScheduleFromFacilityId(facilityId));
-      console.log(facilities);
+      const schedule = await retrieveScheduleFromFacilityId(facilityId);
+
+      const eventsForRestOfTheDay = schedule?.filter(({startTime}) => {
+        const eventDateTime = convertTimeStringToMoment(startTime);
+        return eventDateTime.isAfter(moment());
+      });
+
+      const sortedEvents = await fetchEventInformation(eventsForRestOfTheDay);
+
+      setAvailableEvents(sortedEvents);
     };
 
     fetchData();
   }, [facilityId]);
 
-  return {};
+  return {availableScannedEventsForTheRestOfTheDay};
 };

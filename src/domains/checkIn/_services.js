@@ -1,4 +1,9 @@
 import firestore from '@react-native-firebase/firestore';
+import {
+  convertTimeStringToMoment,
+  deriveDayOfTheWeekFromDate,
+} from '../../components/utils/datetime';
+import moment from 'moment';
 
 export const retrieveScheduleFrom = async districtId => {
   try {
@@ -14,14 +19,13 @@ export const retrieveScheduleFrom = async districtId => {
   }
 };
 
-export const retrieveScheduleFromFacilityId = async (
-  facilityId,
-  dayOfTheWeek = 'mon',
-) => {
+export const retrieveScheduleFromFacilityId = async facilityId => {
   if (!facilityId) {
-    console.error('facilityId undefined');
+    console.log('facilityId is not yet defined. aka undefined');
     return;
   }
+  // today
+  const dayOfTheWeek = deriveDayOfTheWeekFromDate();
 
   try {
     const scheduleSnap = await firestore()
@@ -53,3 +57,6 @@ export const retrieveScheduleFromClassId = async classId => {
     debugger;
   }
 };
+
+export const sortBasedOnStartTime = ({startTime: a}, {startTime: b}) =>
+  moment(convertTimeStringToMoment(a)).diff(convertTimeStringToMoment(b));

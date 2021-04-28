@@ -1,33 +1,57 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
-import {Text} from 'react-native-paper';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, Dimensions} from 'react-native';
+import {useTheme} from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {useAvailableEventsFromScannedFacility} from './asyncHooks';
 
-export default function CheckInScreen() {
+export default function CheckInScreen({navigation}) {
+  const styles = useStyles();
+
   const [scannedFacilityId, setScannedFacilityId] = useState('');
-
-  const {
-    availableEventsFromScannedFacility,
-  } = useAvailableEventsFromScannedFacility(scannedFacilityId);
-
   const onSuccess = e => {
-    Alert.alert('Success', e.data);
-    console.log(e.data);
     e?.data && setScannedFacilityId(e.data);
   };
+
+  const {
+    availableScannedEventsForTheRestOfTheDay,
+  } = useAvailableEventsFromScannedFacility(scannedFacilityId);
+  useEffect(() => {
+    if (Array.isArray(availableScannedEventsForTheRestOfTheDay)) {
+      navigation.navigate('Available Scanned Events', {
+        availableScannedEventsForTheRestOfTheDay,
+      });
+    }
+  }, [navigation, availableScannedEventsForTheRestOfTheDay, scannedFacilityId]);
+
   return (
     <View style={styles.container}>
       <QRCodeScanner
+        showMarker
         onRead={onSuccess}
-        topContent={<Text style={styles.centerText}>Scan the qr code</Text>}
+        markerStyle={styles.markerStyle}
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const screenHeight = Dimensions.get('window').height;
+
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return StyleSheet.create({
+    cameraStyle: {
+      height: screenHeight,
+    },
+    markerStyle: {
+      borderColor: colors.white,
+      borderRadius: 20,
+    },
+    container: {
+      flex: 1,
+    },
+    modalBackground: {
+      backgroundColor: colors.white,
+    },
+  });
+};

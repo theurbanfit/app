@@ -1,5 +1,16 @@
 import moment from 'moment';
 
+export const mapNumberToWeekDays = {
+  0: 'sun',
+  1: 'mon',
+  2: 'tue',
+  3: 'wed',
+  4: 'thu',
+  5: 'fri',
+  6: 'sat',
+};
+
+
 export const convertTimeStringToMoment = (
   startTime,
   selectedDate = moment(),
@@ -39,3 +50,8 @@ export const formatActivityDateForFirestore = dateTime =>
 
 export const formatFirestoreDateToMoment = dateTimeFormatted =>
   moment(dateTimeFormatted, 'dddd, MMMM Do YYYY, HH:mm:ss');
+
+export const deriveDayOfTheWeekFromDate = (date = moment()) => {
+  const numberOfTheDay = date.day();
+  return mapNumberToWeekDays[numberOfTheDay];
+};
