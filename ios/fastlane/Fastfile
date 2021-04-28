@@ -34,7 +34,6 @@ platform :ios do
       xcodeproj:"./urbanfitsample.xcodeproj"
     )
 
-    push_to_git_remote( remote: "origin", local_branch: "develop", remote_branch: "develop", force: true, force_with_lease: true, tags: false, no_verify: true, set_upstream: true )
 
     build_app(
       workspace: "urbanfitsample.xcworkspace",
@@ -42,5 +41,7 @@ platform :ios do
       export_method: "app-store"
     )
     upload_to_testflight
+    
+    push_to_git_remote( remote: "origin", local_branch: "develop", remote_branch: "develop", force: true, force_with_lease: true, tags: false, no_verify: true, set_upstream: true )
   end
 end
