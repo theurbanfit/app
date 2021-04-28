@@ -19,8 +19,8 @@ export default memo(function AvailableScannedEventsScreen({
   const handleSuccessfulCheckIn = (remainingSeats, scheduledClassId) => {
     if (remainingSeats > 0) {
       return Alert.alert(
-        'Success',
-        'You are ready to go!',
+        'You have checked in!',
+        'You are ready to go, get ready for your class!',
         [
           {
             text: 'Okay',
