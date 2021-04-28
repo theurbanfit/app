@@ -10,7 +10,9 @@ export const mapNumberToWeekDays = {
   6: 'sat',
 };
 
-
+export const convertTimeToDateTimeString = startTime => {
+  return formatActivityDateForFirestore(convertTimeStringToMoment(startTime));
+};
 export const convertTimeStringToMoment = (
   startTime,
   selectedDate = moment(),

@@ -25,11 +25,7 @@ export default function CheckInScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <QRCodeScanner
-        showMarker
-        onRead={onSuccess}
-        markerStyle={styles.markerStyle}
-      />
+      <QRCodeScanner showMarker onRead={onSuccess} />
     </View>
   );
 }
@@ -50,8 +46,6 @@ const useStyles = () => {
     container: {
       flex: 1,
     },
-    modalBackground: {
-      backgroundColor: colors.white,
-    },
+    modalBackground: {backgroundColor: colors.white},
   });
 };

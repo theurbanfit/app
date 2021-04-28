@@ -5,6 +5,7 @@ import {
 } from '../_services';
 import {
   convertTimeStringToMoment,
+  convertTimeToDateTimeString,
   deriveTimeRange,
 } from '../../../components/utils/datetime';
 import moment from 'moment';
@@ -31,10 +32,6 @@ const fetchEventInformation = async events => {
             classDurationInMinutes,
             classPhotoUrl,
             classTags,
-            classPreparationInfo,
-            classDescription,
-            classImportantInfo,
-            classArrivalInfo,
             className,
           } = await retrieveClass(classId);
 
@@ -44,12 +41,7 @@ const fetchEventInformation = async events => {
             className,
             classPhotoUrl,
             classTags,
-            classImportantInfo,
-            classDescription,
-            classPreparationInfo,
-            classArrivalInfo,
-
-            eventDateTime: convertTimeStringToMoment(startTime),
+            eventDateTime: convertTimeToDateTimeString(startTime),
             eventTimeRange: deriveTimeRange(startTime, classDurationInMinutes),
             scheduledClassId,
             remainingSeats,

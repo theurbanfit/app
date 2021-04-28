@@ -1,12 +1,10 @@
-import React, {useState, memo} from 'react';
+import React, {memo} from 'react';
 import {Alert, SafeAreaView, StyleSheet} from 'react-native';
 import {ActivityCard} from '../../components/ActivityCard';
 import {ContainerView} from '../../components/ContainerView';
 import {ScrollView} from 'react-native-gesture-handler';
-import {formatActivityDateForFirestore} from '../../components/utils/datetime';
 
-export default memo(function ActivitiesScreen({
-  navigation,
+export default memo(function AvailableScannedEventsScreen({
   route: {
     params: {availableScannedEventsForTheRestOfTheDay},
   },
