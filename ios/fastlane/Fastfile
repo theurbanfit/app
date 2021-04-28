@@ -25,23 +25,31 @@ platform :ios do
     )
 
     increment_version_number(
-      bump_type:"patch",
       xcodeproj:"./urbanfitsample.xcodeproj"
     )
-
-    commit_version_bump(
-      message:"Version Bump",
-      xcodeproj:"./urbanfitsample.xcodeproj"
-    )
-
 
     build_app(
       workspace: "urbanfitsample.xcworkspace",
       scheme: "urbanfitsample",
       export_method: "app-store"
     )
+
     upload_to_testflight
-    
-    push_to_git_remote( remote: "origin", local_branch: "develop", remote_branch: "develop", force: true, force_with_lease: true, tags: false, no_verify: true, set_upstream: true )
+
+    commit_version_bump(
+      message:"chore: Version Bump",
+      xcodeproj:"./urbanfitsample.xcodeproj"
+    )
+
+    push_to_git_remote(
+      remote: "origin",
+      local_branch: "develop",
+      remote_branch: "develop",
+      force: true,
+      force_with_lease: true,
+      tags: false,
+      no_verify: true,
+      set_upstream: true
+    )
   end
 end
