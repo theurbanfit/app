@@ -28,14 +28,6 @@ platform :ios do
       xcodeproj:"./urbanfitsample.xcodeproj"
     )
 
-    build_app(
-      workspace: "urbanfitsample.xcworkspace",
-      scheme: "urbanfitsample",
-      export_method: "app-store"
-    )
-
-    upload_to_testflight
-
     commit_version_bump(
       message:"chore: Version Bump",
       xcodeproj:"./urbanfitsample.xcodeproj"
@@ -51,5 +43,14 @@ platform :ios do
       no_verify: true,
       set_upstream: true
     )
+    
+    build_app(
+      workspace: "urbanfitsample.xcworkspace",
+      scheme: "urbanfitsample",
+      export_method: "app-store"
+    )
+
+    upload_to_testflight
+
   end
 end
