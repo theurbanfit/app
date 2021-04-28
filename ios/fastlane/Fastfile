@@ -30,7 +30,7 @@ platform :ios do
 
     commit_version_bump(
       message:"chore: Version Bump",
-      xcodeproj:"./urbanfitsample.xcodeproj"
+      xcodeproj:"./urbanfitsample.xcodeproj".
       force: true
     )
 
