@@ -9,6 +9,7 @@ export default function CheckInScreen({navigation}) {
 
   const [scannedFacilityId, setScannedFacilityId] = useState('');
   const onSuccess = e => {
+    console.log('@@@SUCCESS SCAN');
     e?.data && setScannedFacilityId(e.data);
   };
 
@@ -17,6 +18,7 @@ export default function CheckInScreen({navigation}) {
   } = useAvailableEventsFromScannedFacility(scannedFacilityId);
   useEffect(() => {
     if (Array.isArray(availableScannedEventsForTheRestOfTheDay)) {
+      setScannedFacilityId('');
       navigation.navigate('Available Scanned Events', {
         availableScannedEventsForTheRestOfTheDay,
       });
@@ -25,28 +27,7 @@ export default function CheckInScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <QRCodeScanner
-        showMarker
-        onRead={onSuccess}
-        cameraStyle={styles.cameraStyle}
-        customMarker={
-          <View style={styles.rectangleContainer}>
-            <View style={styles.topOverlay}>
-              <Headline style={styles.colorWhite}>Scan the QR code</Headline>
-            </View>
-
-            <View style={styles.flexRow}>
-              <View style={styles.leftAndRightOverlay} />
-
-              <View style={styles.rectangle} />
-
-              <View style={styles.leftAndRightOverlay} />
-            </View>
-
-            <View style={styles.bottomOverlay} />
-          </View>
-        }
-      />
+      
     </View>
   );
 }

@@ -10,6 +10,7 @@ import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 import UserSettingsScreen from '../domains/profile/UserSettings';
 import {IconButton, useTheme} from 'react-native-paper';
 import AvailableScannedEventsScreen from '../domains/checkIn/AvailableScannedEventsScreen';
+import {useNavigation} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,10 +21,6 @@ function CheckInStackScreen() {
   return (
     <CheckIn.Navigator>
       <CheckIn.Screen name="Check in" component={CheckInScreen} />
-      <CheckIn.Screen
-        name="Available Scanned Events"
-        component={AvailableScannedEventsScreen}
-      />
     </CheckIn.Navigator>
   );
 }
@@ -105,9 +102,19 @@ function BottomTabNavigation() {
 
 export default function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="Authenticated" headerMode="none">
+    <Stack.Navigator
+      initialRouteName="Authenticated"
+      screenOptions={{headerShown: false}}>
       <Stack.Screen name="ActivityFeed" component={BottomTabNavigation} />
       <Stack.Screen name="ActivityDetails" component={ActivityDetailsScreen} />
+      <Stack.Screen
+        name="Available Scanned Events"
+        component={AvailableScannedEventsScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Events',
+        }}
+      />
     </Stack.Navigator>
   );
 }

@@ -9,6 +9,8 @@ export const ActivityCard = ({
   fullAddress = '',
   tags = [],
   onPress = () => {},
+  remainingSeats,
+  prearrangedSeats,
 }) => {
   const styles = useStyles();
 
@@ -18,26 +20,45 @@ export const ActivityCard = ({
         <View>
           <Title style={styles.header}>{title}</Title>
           <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
-          <View style={styles.marginTop}>
-            <Text
-              ellipsizeMode="middle"
-              numberOfLines={1}
-              style={[
-                styles.small,
-                styles.marginBottom,
-                styles.color,
-                styles.width,
-              ]}>
-              {fullAddress}
-            </Text>
-            <View style={styles.inline}>
-              {tags.map((text, index) => (
-                <Text key={text} style={[styles.small, styles.color]}>
-                  {index !== 0 && ', '}
-                  {text}
+          {Boolean(remainingSeats && prearrangedSeats) &&
+            (() => {
+              if (remainingSeats > 0) {
+                return (
+                  <Text style={[styles.marginBottom, styles.colorPink]}>
+                    Remaining seats {remainingSeats} out of {prearrangedSeats}
+                  </Text>
+                );
+              }
+              return (
+                <Text style={[styles.marginBottom, styles.colorBlue]}>
+                  There are no remaining seats in this class
                 </Text>
-              ))}
-            </View>
+              );
+            })()}
+          <View style={styles.marginTop}>
+            {fullAddress.length > 0 && (
+              <Text
+                ellipsizeMode="middle"
+                numberOfLines={1}
+                style={[
+                  styles.small,
+                  styles.marginBottom,
+                  styles.color,
+                  styles.width,
+                ]}>
+                {fullAddress}
+              </Text>
+            )}
+            {tags.length > 0 && (
+              <View style={styles.inline}>
+                {tags.map((text, index) => (
+                  <Text key={text} style={[styles.small, styles.color]}>
+                    {index !== 0 && ', '}
+                    {text}
+                  </Text>
+                ))}
+              </View>
+            )}
           </View>
         </View>
         <Image
@@ -70,6 +91,12 @@ const useStyles = () => {
     },
     color: {
       color: colors.textSecondary,
+    },
+    colorBlue: {
+      color: colors.blue,
+    },
+    colorPink: {
+      color: colors.secondary600,
     },
     small: {
       fontSize: 11,

@@ -24,14 +24,14 @@ export const retrieveScheduleFromFacilityId = async facilityId => {
     console.log('facilityId is not yet defined. aka undefined');
     return;
   }
-  // today
-  const dayOfTheWeek = deriveDayOfTheWeekFromDate();
+
+  const todaysDayOfTheWeek = deriveDayOfTheWeekFromDate();
 
   try {
     const scheduleSnap = await firestore()
       .collectionGroup('schedule')
       .where('facilityId', '==', facilityId)
-      .where('dayOfTheWeek', '==', dayOfTheWeek)
+      .where('dayOfTheWeek', '==', todaysDayOfTheWeek)
       .get();
 
     return scheduleSnap.docs.map(doc => doc.data());

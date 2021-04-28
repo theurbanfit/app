@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Urbanfit requests access to your location for the first time</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Urbanfit requests access to your media library for the first time</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Urbanfit requests access to your photo library for the first time</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Urbanfit requests access to your camera for the first time</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -37,14 +45,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Urbanfit requests access to your camera.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Urbanfit requests access to your media library.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Urbanfit requests access to your photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

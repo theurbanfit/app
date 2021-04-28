@@ -6,6 +6,7 @@ import {
 import {
   convertTimeStringToMoment,
   convertTimeToDateTimeString,
+  deriveTime,
   deriveTimeRange,
 } from '../../../components/utils/datetime';
 import moment from 'moment';
@@ -19,6 +20,11 @@ const fetchEventInformation = async events => {
   return Promise.all(
     events
       .sort(sortBasedOnStartTime)
+      .filter(({startTime}) => {
+        const eventTime = deriveTime(convertTimeStringToMoment(startTime));
+        const now = deriveTime(moment());
+        return eventTime.isAfter(now);
+      })
       .map(
         async ({
           scheduledClassId,
@@ -63,12 +69,7 @@ export const useAvailableEventsFromScannedFacility = facilityId => {
     const fetchData = async () => {
       const schedule = await retrieveScheduleFromFacilityId(facilityId);
 
-      const eventsForRestOfTheDay = schedule?.filter(({startTime}) => {
-        const eventDateTime = convertTimeStringToMoment(startTime);
-        return eventDateTime.isAfter(moment());
-      });
-
-      const sortedEvents = await fetchEventInformation(eventsForRestOfTheDay);
+      const sortedEvents = await fetchEventInformation(schedule);
 
       setAvailableEvents(sortedEvents);
     };

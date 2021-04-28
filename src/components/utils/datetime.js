@@ -57,3 +57,7 @@ export const deriveDayOfTheWeekFromDate = (date = moment()) => {
   const numberOfTheDay = date.day();
   return mapNumberToWeekDays[numberOfTheDay];
 };
+
+export const deriveTime = dateTime => {
+  return moment({h: dateTime.hours(), m: dateTime.minutes()});
+};

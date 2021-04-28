@@ -21,11 +21,15 @@ export default memo(function AvailableScannedEventsScreen({
                 classTags,
                 eventTimeRange,
                 scheduledClassId,
+                remainingSeats,
+                prearrangedSeats,
               }) => (
                 <ActivityCard
                   onPress={() => {
                     Alert.alert('Success', 'You have checked in');
                   }}
+                  remainingSeats={remainingSeats}
+                  prearrangedSeats={prearrangedSeats}
                   key={scheduledClassId}
                   imageSrc={classPhotoUrl}
                   title={className}
