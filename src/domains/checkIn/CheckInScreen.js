@@ -9,7 +9,6 @@ export default function CheckInScreen({navigation}) {
 
   const [scannedFacilityId, setScannedFacilityId] = useState('');
   const onSuccess = e => {
-    console.log('@@@SUCCESS SCAN');
     e?.data && setScannedFacilityId(e.data);
   };
 

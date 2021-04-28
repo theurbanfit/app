@@ -13,13 +13,11 @@ export const ActivityCard = ({
   prearrangedSeats,
 }) => {
   const styles = useStyles();
-  console.log(Boolean(remainingSeats > 0 && prearrangedSeats > 0));
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View>
           <Title style={styles.header}>{title}</Title>
-          <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
           {Boolean(
             remainingSeats !== undefined && prearrangedSeats !== undefined,
           ) &&
@@ -37,6 +35,7 @@ export const ActivityCard = ({
                 </Text>
               );
             })()}
+          <Text style={[styles.marginBottom, styles.color]}>{timeRange}</Text>
           <View style={styles.marginTop}>
             {fullAddress.length > 0 && (
               <Text

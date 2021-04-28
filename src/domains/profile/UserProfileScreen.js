@@ -64,7 +64,10 @@ export default function UserProfileScreen() {
           source={profile?.photoURL}
           loading={imageIsUploading}
         />
-        <UserInfo displayName={profile?.displayName} />
+        <UserInfo
+          displayName={profile?.displayName}
+          total={profile?.totalCheckIns}
+        />
       </ContainerView>
 
       <UserSchedule scheduledClasses={profile?.schedule} />

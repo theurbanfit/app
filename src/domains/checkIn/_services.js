@@ -5,14 +5,33 @@ import {
 } from '../../components/utils/datetime';
 import moment from 'moment';
 
-export const retrieveScheduleFrom = async districtId => {
+export const decreaseRemainingSeatsOfScheduledClass = async scheduledClassId => {
   try {
-    const res = await firestore()
-      .collectionGroup('districts')
-      .where('districtId', '==', districtId)
-      .get();
+    const decrease = firestore.FieldValue.increment(-1);
 
-    return res.docs[0].data();
+    const scheduleSnap = await firestore()
+      .collectionGroup('schedule')
+      .where('scheduledClassId', '==', scheduledClassId)
+      .get();
+    scheduleSnap.docs.forEach(snapshot => {
+      snapshot.ref.update({remainingSeats: decrease});
+    });
+  } catch (e) {
+    console.error(e);
+    debugger;
+  }
+};
+
+export const increaseCheckInNumberOfUser = async uid => {
+  try {
+    const increase = firestore.FieldValue.increment(1);
+
+    await firestore().collection('users').doc(uid).set(
+      {
+        totalCheckIns: increase,
+      },
+      {merge: true},
+    );
   } catch (e) {
     console.error(e);
     debugger;

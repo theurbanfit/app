@@ -1,8 +1,13 @@
-import React, {memo} from 'react';
+import React, {memo, useContext} from 'react';
 import {Alert, SafeAreaView, StyleSheet} from 'react-native';
 import {ActivityCard} from '../../components/ActivityCard';
 import {ContainerView} from '../../components/ContainerView';
 import {ScrollView} from 'react-native-gesture-handler';
+import {
+  decreaseRemainingSeatsOfScheduledClass,
+  increaseCheckInNumberOfUser,
+} from './_services';
+import {AuthContext} from '../auth/AuthProvider';
 
 export default memo(function AvailableScannedEventsScreen({
   navigation,
@@ -10,7 +15,8 @@ export default memo(function AvailableScannedEventsScreen({
     params: {availableScannedEventsForTheRestOfTheDay},
   },
 }) {
-  const handleSuccessfulCheckIn = remainingSeats => {
+  const {auth} = useContext(AuthContext);
+  const handleSuccessfulCheckIn = (remainingSeats, scheduledClassId) => {
     if (remainingSeats > 0) {
       return Alert.alert(
         'Success',
@@ -18,7 +24,11 @@ export default memo(function AvailableScannedEventsScreen({
         [
           {
             text: 'Okay',
-            onPress: () => navigation.navigate('Profile'),
+            onPress: async () => {
+              await decreaseRemainingSeatsOfScheduledClass(scheduledClassId);
+              await increaseCheckInNumberOfUser(auth.uid);
+              navigation.navigate('Profile');
+            },
           },
         ],
         {
@@ -28,7 +38,7 @@ export default memo(function AvailableScannedEventsScreen({
     }
     return Alert.alert(
       'Sorry :(',
-      'All the seats are taken',
+      'Sorry, all the seats are taken. You can try another class',
       [{text: 'Okay'}],
       {
         cancelable: false,
@@ -51,7 +61,9 @@ export default memo(function AvailableScannedEventsScreen({
                 prearrangedSeats,
               }) => (
                 <ActivityCard
-                  onPress={() => handleSuccessfulCheckIn(remainingSeats)}
+                  onPress={() =>
+                    handleSuccessfulCheckIn(remainingSeats, scheduledClassId)
+                  }
                   remainingSeats={remainingSeats}
                   prearrangedSeats={prearrangedSeats}
                   key={scheduledClassId}
