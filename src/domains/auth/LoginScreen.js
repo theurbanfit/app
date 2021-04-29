@@ -16,7 +16,7 @@ export default function LoginScreen({navigation}) {
   const handleLogin = async () => {
     if (email.length && password.length) {
       setLoading(true);
-      await login(email, password, () => setLoading(false));
+      await login({email, password}, () => setLoading(false));
     } else {
       setLoading(false);
       setError('All values are required');

@@ -61,7 +61,9 @@ export default function SignupScreen({navigation}) {
             lastName.length
           ) {
             setLoading(true);
-            await register({email, password, firstName, lastName});
+            await register({email, password, firstName, lastName}, () =>
+              setLoading(false),
+            );
           } else {
             setError('All values are required');
           }

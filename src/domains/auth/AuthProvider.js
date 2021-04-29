@@ -38,7 +38,7 @@ export const AuthProvider = ({children}) => {
         setAuth,
         error,
         setError,
-        login: async (email, password, onErrorStopLoading) => {
+        login: async ({email, password}, onErrorStopLoading) => {
           try {
             await firebaseAuth().signInWithEmailAndPassword(email, password);
             setError(null);
@@ -47,7 +47,10 @@ export const AuthProvider = ({children}) => {
             handleAuthErrors(e);
           }
         },
-        register: async ({email, password, firstName, lastName}) => {
+        register: async (
+          {email, password, firstName, lastName},
+          onErrorStopLoading,
+        ) => {
           try {
             const firebase = await firebaseAuth().createUserWithEmailAndPassword(
               email,
@@ -68,6 +71,7 @@ export const AuthProvider = ({children}) => {
             await firebase.user.sendEmailVerification();
             setError(null);
           } catch (e) {
+            onErrorStopLoading();
             handleAuthErrors(e);
           }
         },
