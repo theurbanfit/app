@@ -39,15 +39,11 @@ export default function CheckInScreen({navigation}) {
             <View style={styles.topOverlay}>
               <Headline style={styles.colorWhite}>Scan the QR code</Headline>
             </View>
-
             <View style={styles.flexRow}>
               <View style={styles.leftAndRightOverlay} />
-
               <View style={styles.rectangle} />
-
               <View style={styles.leftAndRightOverlay} />
             </View>
-
             <View style={styles.bottomOverlay} />
           </View>
         }
