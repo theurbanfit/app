@@ -28,6 +28,8 @@ export default function CheckInScreen({navigation}) {
     <View style={styles.container}>
       <QRCodeScanner
         reactivate
+        checkAndroid6Permissions
+        cameraProps={{captureAudio: false}}
         reactivateTimeout={5000}
         showMarker
         onRead={onSuccess}
