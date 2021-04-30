@@ -1,15 +1,34 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions, Alert} from 'react-native';
 import {useTheme, Headline} from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {useAvailableEventsFromScannedFacility} from './asyncHooks';
+
+const jsonParse = string => JSON.parse(JSON.parse(string));
 
 export default function CheckInScreen({navigation}) {
   const styles = useStyles();
 
   const [scannedFacilityId, setScannedFacilityId] = useState('');
   const onSuccess = e => {
-    e?.data && setScannedFacilityId(e.data);
+    const {facilityId} = e?.data ? jsonParse(e.data) : {};
+
+    if (facilityId) {
+      setScannedFacilityId(facilityId);
+    } else {
+      Alert.alert(
+        'Apologies',
+        'It seems this QR code does not belong to one of our partners',
+        [
+          {
+            text: 'Try again',
+          },
+        ],
+        {
+          cancelable: false,
+        },
+      );
+    }
   };
 
   const {
