@@ -35,6 +35,7 @@ export const SearchTopBar = ({
     <>
       <View style={styles.inline}>
         <Searchbar
+          selectionColor={colors.secondary}
           style={[styles.search, styles.noShadow]}
           placeholder="Search"
           onChangeText={onSearchQuerySet}
@@ -107,6 +108,7 @@ const SearchModal = ({
   visible,
   searchQuery,
 }) => {
+  const {colors} = useTheme();
   const modalStyles = useModalStyles();
   const [districtFilters, setDistrictFilter] = useState([]);
   useEffect(() => {
@@ -140,6 +142,7 @@ const SearchModal = ({
               placeholder="Search"
               onChangeText={onChangeSearch}
               value={searchQuery}
+              selectionColor={colors.secondary}
             />
             <ContainerView style={modalStyles.marginFilters}>
               <Subheading>Select areas close to you</Subheading>
@@ -158,7 +161,10 @@ const SearchModal = ({
           </View>
           <MoveToBottom>
             <Dialog.Actions>
-              <Button uppercase={false} onPress={onHideModal}>
+              <Button
+                uppercase={false}
+                onPress={onHideModal}
+                labelStyle={modalStyles.darkButton}>
                 Cancel
               </Button>
               <Button
@@ -185,7 +191,7 @@ const useModalStyles = () => {
       minHeight: '100%',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: colors.white,
+      backgroundColor: colors.background,
     },
     scrollView: {
       flex: 1.9,
@@ -196,6 +202,7 @@ const useModalStyles = () => {
     },
     modalBackground: {},
     noShadow: {
+      backgroundColor: colors.background,
       borderBottomColor: colors.divider,
       borderBottomWidth: 1,
       shadowColor: 'transparent',
@@ -217,7 +224,11 @@ const useModalStyles = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
     },
-
-    buttonMargin: {marginLeft: 12},
+    buttonMargin: {
+      marginLeft: 12,
+    },
+    darkButton: {
+      color: colors.secondary,
+    },
   });
 };
