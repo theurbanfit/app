@@ -33,6 +33,8 @@ const ConfirmationDialog = ({
   visible,
   actionInProgress,
 }) => {
+  const {colors} = useTheme();
+
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={onDismiss}>
@@ -43,7 +45,10 @@ const ConfirmationDialog = ({
           </Dialog.Content>
         )}
         <Dialog.Actions>
-          <Button uppercase={false} onPress={onDismiss}>
+          <Button
+            uppercase={false}
+            onPress={onDismiss}
+            labelStyle={{color: colors.secondary}}>
             Close
           </Button>
           <Button
@@ -197,6 +202,7 @@ export default function ActivityDetailsScreen({
               return (
                 <Button
                   style={styles.bookMeButton}
+                  labelStyle={styles.cancelButton}
                   uppercase={false}
                   onPress={() => setCancellationDialogView(true)}>
                   Cancel reservation
@@ -254,7 +260,7 @@ const useStyles = () => {
         flex: 1.9,
       },
       surface: {
-        flex: 0.1,
+        flex: 0.07,
         borderTopColor: theme.colors.divider,
         borderTopWidth: 1,
         alignItems: 'center',
@@ -299,9 +305,11 @@ const useStyles = () => {
       },
       bookMeButton: {
         alignSelf: 'stretch',
-        marginTop: 12,
         marginLeft: 12,
         marginRight: 12,
+      },
+      cancelButton: {
+        color: theme.colors.secondary,
       },
     }),
   };

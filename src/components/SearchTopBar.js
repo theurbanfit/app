@@ -43,7 +43,7 @@ export const SearchTopBar = ({
         <View style={styles.smWidth}>
           <IconButton
             size={28}
-            color={colors.secondary400}
+            color={colors.secondary}
             icon="tune"
             onPress={showModal}
           />
@@ -79,6 +79,7 @@ const useStyles = () => {
         borderBottomColor: colors.divider,
       },
       search: {
+        backgroundColor: colors.background,
         width: '86%',
       },
       container: {

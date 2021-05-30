@@ -96,7 +96,7 @@ const useStyles = () => {
     headline: {
       marginTop: 16,
       marginBottom: 28,
-      color: colors.primary,
+      color: colors.secondary,
       alignSelf: 'center',
     },
   });

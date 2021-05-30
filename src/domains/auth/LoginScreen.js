@@ -86,6 +86,7 @@ const useStyles = () => {
     titleText: {
       fontSize: 24,
       marginBottom: 10,
+      color: colors.secondary,
     },
     buttonMargin: {
       marginBottom: 16,
@@ -95,6 +96,7 @@ const useStyles = () => {
       fontSize: 22,
     },
     registrationButtonText: {
+      color: colors.secondary,
       fontSize: 14,
     },
     forgotPasswordButtonText: {

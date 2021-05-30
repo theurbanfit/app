@@ -64,10 +64,10 @@ const useStyles = () => {
         color: colors.text,
       },
       highlight: {
-        color: colors.white,
+        color: colors.textSecondary,
       },
       highlightBackground: {
-        backgroundColor: colors.secondary400,
+        backgroundColor: colors.primary,
       },
     }),
   };

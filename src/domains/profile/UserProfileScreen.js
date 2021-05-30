@@ -8,8 +8,10 @@ import {UserSchedule} from '../../components/UserSchedule';
 import {uploadImageOnFirestorage, updateUserProfilePhoto} from './services';
 import {AuthContext} from '../auth/AuthProvider';
 import {ProfileContext} from './ProfileProvider';
+import {useTheme} from 'react-native-paper';
 
 export default function UserProfileScreen() {
+  const {styles} = useStyles();
   const {auth} = useContext(AuthContext);
   const {profile} = useContext(ProfileContext);
 
@@ -74,12 +76,19 @@ export default function UserProfileScreen() {
     </SafeAreaView>
   );
 }
+const useStyles = () => {
+  const {colors} = useTheme();
 
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-  flexRow: {
-    flexDirection: 'row',
-  },
-});
+  return {
+    theme: {colors},
+    styles: StyleSheet.create({
+      flex: {
+        flex: 1,
+        backgroundColor: colors.background,
+      },
+      flexRow: {
+        flexDirection: 'row',
+      },
+    }),
+  };
+};

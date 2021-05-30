@@ -1,11 +1,15 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Title, IconButton, HelperText} from 'react-native-paper';
+import {Title, IconButton, HelperText, useTheme} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
 
 export default function SignupScreen({navigation}) {
+  const {
+    styles,
+    theme: {colors},
+  } = useStyles();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,30 +81,39 @@ export default function SignupScreen({navigation}) {
         icon="keyboard-backspace"
         size={30}
         style={styles.navButton}
-        color="#6646ee"
+        color={colors.secondary}
         onPress={() => navigation.navigate('Login')}
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 24,
-    marginBottom: 10,
-  },
-  loginButtonLabel: {
-    fontSize: 22,
-  },
-  navButtonText: {
-    fontSize: 18,
-  },
-  navButton: {
-    marginTop: 10,
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return {
+    theme: {colors},
+    styles: StyleSheet.create({
+      container: {
+        backgroundColor: colors.background,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      titleText: {
+        color: colors.secondary,
+        fontSize: 24,
+        marginBottom: 10,
+      },
+      loginButtonLabel: {
+        fontSize: 22,
+      },
+      navButtonText: {
+        fontSize: 18,
+      },
+      navButton: {
+        marginTop: 10,
+      },
+    }),
+  };
+};

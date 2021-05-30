@@ -1,6 +1,12 @@
 import React, {useContext, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Title, IconButton, HelperText, Snackbar} from 'react-native-paper';
+import {
+  Title,
+  IconButton,
+  HelperText,
+  Snackbar,
+  useTheme,
+} from 'react-native-paper';
 import {FormInput} from '../../components/FormInput';
 import {FormButton} from '../../components/FormButton';
 import {AuthContext} from './AuthProvider';
@@ -8,6 +14,11 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 export default function ForgotPasswordScreen({navigation}) {
+  const {
+    styles,
+    theme: {colors},
+  } = useStyles();
+
   const [snackbarVisible, setSnackbarVisibility] = useState(false);
   const {passwordReset} = useContext(AuthContext);
 
@@ -67,7 +78,7 @@ export default function ForgotPasswordScreen({navigation}) {
         icon="keyboard-backspace"
         size={30}
         style={styles.navButton}
-        color="#6646ee"
+        color={colors.secondary}
         onPress={() => navigation.navigate('Login')}
       />
       <Snackbar
@@ -86,23 +97,31 @@ export default function ForgotPasswordScreen({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 24,
-    marginBottom: 10,
-  },
-  loginButtonLabel: {
-    fontSize: 22,
-  },
-  navButtonText: {
-    fontSize: 18,
-  },
-  navButton: {
-    marginTop: 10,
-  },
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return {
+    theme: {colors},
+    styles: StyleSheet.create({
+      container: {
+        backgroundColor: colors.background,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      titleText: {
+        fontSize: 24,
+        marginBottom: 10,
+      },
+      loginButtonLabel: {
+        fontSize: 22,
+      },
+      navButtonText: {
+        fontSize: 18,
+      },
+      navButton: {
+        marginTop: 10,
+      },
+    }),
+  };
+};

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Colors, Text, useTheme} from 'react-native-paper';
+import {Text, useTheme} from 'react-native-paper';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 export const ReadMoreText = ({numberOfLines = 4, styles = {}, children}) => {
@@ -22,13 +22,15 @@ export const ReadMoreText = ({numberOfLines = 4, styles = {}, children}) => {
 };
 
 const useStyles = () => {
+  const {colors} = useTheme();
+
   return StyleSheet.create({
     button: {
       marginTop: 12,
       marginBottom: 12,
     },
     text: {
-      color: Colors.deepPurpleA400,
+      color: colors.textDark,
       fontSize: 14,
     },
   });

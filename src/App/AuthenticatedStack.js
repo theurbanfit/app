@@ -4,7 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ActivityFeedScreen from '../domains/activities/ActivityFeedScreen';
 import UserProfileScreen from '../domains/profile/UserProfileScreen';
 import FontCommunityIcons from 'react-native-vector-icons/FontAwesome5';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CheckInScreen from '../domains/checkIn/CheckInScreen';
 import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 import UserSettingsScreen from '../domains/profile/UserSettings';
@@ -25,9 +26,9 @@ function ProfileStackScreen({navigation}) {
           headerTitle: null,
           headerRight: () => (
             <IconButton
-              icon="cog-outline"
+              icon="cog"
               size={28}
-              color={colors.secondary400}
+              color={colors.secondary}
               onPress={() => navigation.navigate('User Settings')}
             />
           ),
@@ -46,7 +47,10 @@ function BottomTabNavigation() {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: colors.primary,
+        activeTintColor: colors.secondary,
+        inactiveTintColor: colors.inactive,
+        inactiveBackgroundColor: colors.white,
+        activeBackgroundColor: colors.white,
       }}>
       <Tab.Screen
         name="Activity Feed"
@@ -54,10 +58,10 @@ function BottomTabNavigation() {
         options={{
           tabBarLabel: 'Activities',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
+            <MaterialIcons
               name="sports-handball"
               color={color}
-              size={size}
+              size={size + 4}
             />
           ),
         }}
@@ -69,7 +73,7 @@ function BottomTabNavigation() {
           tabBarLabel: 'Check-in',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
-              name="qr-code-scanner"
+              name="qrcode-scan"
               color={color}
               size={size}
             />
@@ -82,7 +86,7 @@ function BottomTabNavigation() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
-            <FontCommunityIcons name="user-circle" color={color} size={size} />
+            <FontCommunityIcons name="user-alt" color={color} size={size} />
           ),
         }}
       />

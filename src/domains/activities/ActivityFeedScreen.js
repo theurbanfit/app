@@ -9,8 +9,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {SearchTopBar} from '../../components/SearchTopBar';
 import fuzzy from 'fuzzysearch';
 import {formatActivityDateForFirestore} from '../../components/utils/datetime';
+import {useTheme} from 'react-native-paper';
 
 export default memo(function ActivitiesScreen({navigation}) {
+  const {styles} = useStyles();
   const today = moment();
   const [selectedDay, setSelectedDay] = useState(today);
   const [searchQuery, setSearchQuery] = useState('');
@@ -109,6 +111,16 @@ export default memo(function ActivitiesScreen({navigation}) {
   );
 });
 
-const styles = StyleSheet.create({
-  flexOne: {flex: 1},
-});
+const useStyles = () => {
+  const {colors} = useTheme();
+
+  return {
+    theme: {colors},
+    styles: StyleSheet.create({
+      flexOne: {
+        flex: 1,
+        backgroundColor: colors.background,
+      },
+    }),
+  };
+};

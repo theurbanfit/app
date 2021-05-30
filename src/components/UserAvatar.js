@@ -37,7 +37,7 @@ const useStyles = () => {
     },
     loadingIndicator: {marginTop: 20},
     margins: {
-      backgroundColor: colors.mintGreen,
+      backgroundColor: colors.primaryLight,
       margin: 12,
     },
   });
