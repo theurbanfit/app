@@ -24,7 +24,7 @@
     "fuzzysearch": "1.0.3",
     "moment": "2.29.1",
     "react": "17.0.1",
-    "react-native": "0.64.0",
+    "react-native": "0.64.2",
     "react-native-calendar-strip": "2.2.1",
     "react-native-camera": "3.43.6",
     "react-native-gesture-handler": "1.10.3",
@@ -36,7 +36,6 @@
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "3.1.0",
     "react-native-splash-screen": "3.2.0",
-    "react-native-vector-icons": "8.1.0",
     "yup": "0.32.9"
   },
   "devDependencies": {
