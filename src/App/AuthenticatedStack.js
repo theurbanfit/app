@@ -11,7 +11,6 @@ import ActivityDetailsScreen from '../domains/activities/ActivityDetailsScreen';
 import UserSettingsScreen from '../domains/profile/UserSettingsScreen';
 import {IconButton, useTheme} from 'react-native-paper';
 import AvailableScannedEventsScreen from '../domains/checkIn/AvailableScannedEventsScreen';
-import UserSubscriptionsScreen from '../domains/profile/UserSubscriptionsScreen';
 import SubscriptionOptionsScreen from '../domains/subscription/SubscriptionOptionsScreen';
 
 const Tab = createBottomTabNavigator();
@@ -39,10 +38,10 @@ function ProfileStackScreen({navigation}) {
         component={UserProfileScreen}
       />
       <Profile.Screen name="User Settings" component={UserSettingsScreen} />
-      <Profile.Screen
-        name="User Subscriptions"
-        component={UserSubscriptionsScreen}
-      />
+      {/*<Profile.Screen*/}
+      {/*  name="User Subscriptions"*/}
+      {/*  component={UserSubscriptionsScreen}*/}
+      {/*/>*/}
       <Profile.Screen
         name="Subscription Options"
         component={SubscriptionOptionsScreen}

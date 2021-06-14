@@ -11,7 +11,7 @@ import {ProfileContext} from './ProfileProvider';
 import {useTheme} from 'react-native-paper';
 import {FormButton} from '../../components/FormButton';
 import {useNavigation} from '@react-navigation/native';
-import UserSubscriptions from './UserSubscriptionsScreen';
+// import UserSubscriptions from './UserSubscriptionsScreen';
 
 export default function UserProfileScreen() {
   const navigation = useNavigation();
@@ -76,7 +76,7 @@ export default function UserProfileScreen() {
           total={profile?.totalCheckIns}
         />
       </ContainerView>
-      <UserSubscriptions />
+      {/*<UserSubscriptions />*/}
       <UserSchedule scheduledClasses={profile?.schedule} />
     </SafeAreaView>
   );
