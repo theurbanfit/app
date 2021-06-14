@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {SafeAreaView, StyleSheet, Alert, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Alert} from 'react-native';
 import UserAvatar from '../../components/UserAvatar';
 import UserInfo from '../../components/UserInfo';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -9,8 +9,13 @@ import {uploadImageOnFirestorage, updateUserProfilePhoto} from './services';
 import {AuthContext} from '../auth/AuthProvider';
 import {ProfileContext} from './ProfileProvider';
 import {useTheme} from 'react-native-paper';
+import {FormButton} from '../../components/FormButton';
+import {useNavigation} from '@react-navigation/native';
+import UserSubscriptions from './UserSubscriptionsScreen';
 
 export default function UserProfileScreen() {
+  const navigation = useNavigation();
+
   const {styles} = useStyles();
   const {auth} = useContext(AuthContext);
   const {profile} = useContext(ProfileContext);
@@ -71,7 +76,7 @@ export default function UserProfileScreen() {
           total={profile?.totalCheckIns}
         />
       </ContainerView>
-
+      <UserSubscriptions />
       <UserSchedule scheduledClasses={profile?.schedule} />
     </SafeAreaView>
   );

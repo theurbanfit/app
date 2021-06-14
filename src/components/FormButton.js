@@ -17,7 +17,7 @@ export function FormButton({title, modeValue, sm, ...rest}) {
         styles.button,
         sm ? styles.buttonContainerSmall : styles.buttonContainerMedium,
       ]}
-      labelStyle={{color: 'white', fontSize: 18}}
+      labelStyle={{color: colors.secondary, fontSize: 18}}
       theme={{
         colors: {
           label: colors.white,
@@ -37,8 +37,7 @@ const useStyles = () => {
     theme: {colors},
     styles: StyleSheet.create({
       button: {
-        color: 'red',
-        marginTop: 10,
+        color: colors.secondary,
       },
       buttonContainerSmall: {
         width: width / 2,
