@@ -1,17 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Alert} from 'react-native';
-import {ContainerView} from '../../components/ContainerView';
+import {StyleSheet, Alert, Button, SafeAreaView} from 'react-native';
 import {useStripe} from '@stripe/stripe-react-native';
-import {useProfile} from './ProfileProvider';
-import {FormButton} from '../../components/FormButton';
 
 export default function UserSubscriptions() {
   const {initPaymentSheet, presentPaymentSheet} = useStripe();
   const [loading, setLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState();
-  const {
-    profile: {stripeId},
-  } = useProfile();
 
   const openPaymentSheet = async () => {
     if (!clientSecret) {
@@ -19,8 +13,9 @@ export default function UserSubscriptions() {
     }
     setLoading(true);
     try {
-      debugger;
       const {error} = await presentPaymentSheet({clientSecret});
+      console.log(clientSecret);
+      debugger;
 
       if (error) {
         Alert.alert(`Error code: ${error.code}`, error.message);
@@ -50,38 +45,39 @@ export default function UserSubscriptions() {
         return {
           paymentIntent,
           ephemeralKey,
-          customer: stripeId,
+          customer: 'cus_JfTwkBBclanmy0',
         };
       };
-      const {
-        paymentIntent,
-        ephemeralKey,
-        customer,
-      } = await fetchPaymentSheetParams();
-
-      const {error} = await initPaymentSheet({
-        customerId: customer,
-        customerEphemeralKeySecret: ephemeralKey,
-        paymentIntentClientSecret: paymentIntent,
-      });
-
-      if (!error) {
-        setLoading(true);
+      try {
+        const {
+          paymentIntent,
+          ephemeralKey,
+          customer,
+        } = await fetchPaymentSheetParams();
+        const {error} = await initPaymentSheet({
+          customerId: customer,
+          customerEphemeralKeySecret: ephemeralKey,
+          paymentIntentClientSecret: paymentIntent,
+        });
+        if (!error) {
+          setLoading(true);
+        }
+      } catch (e) {
+        debugger;
       }
     };
-    stripeId && initializePaymentSheet();
-  }, [stripeId, initPaymentSheet]);
+    initializePaymentSheet();
+  }, [initPaymentSheet]);
 
+  console.log('@@@@@@@@');
   return (
-    <ContainerView style={styles.flexRow}>
-      <FormButton
+    <SafeAreaView style={styles.flexRow}>
+      <Button
         title="Show Sheet"
-        modeValue="contained"
         onPress={openPaymentSheet}
-        labelStyle={styles.loginButtonLabel}
         disabled={!loading}
       />
-    </ContainerView>
+    </SafeAreaView>
   );
 }
 

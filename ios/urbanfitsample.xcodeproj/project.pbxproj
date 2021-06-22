@@ -28,6 +28,7 @@
 		AF1E3B77AF8D4E1095F4CF1C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C23F5C5A4EBA47CDA2D7F094 /* MaterialIcons.ttf */; };
 		B3FA4E525D284A79B0823491 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0282AD16B67340FAB8B20E80 /* Fontisto.ttf */; };
 		B6334F9626309E1300449489 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6334F9526309E1300449489 /* GoogleService-Info.plist */; };
+		B675C6532678005900B5BD50 /* StripeFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = B675C6522678005900B5BD50 /* StripeFix.swift */; };
 		B84471D32B5342D28F3FA0AD /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB36FA99CA41269627E92B /* AntDesign.ttf */; };
 		D8838536248B4D90AE0F6C2F /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DB93F1BACE74FFD93B52B2F /* Ionicons.ttf */; };
 		F6CC14CF0F3048768D89BE62 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D280F40554894F76AB6537BB /* Zocial.ttf */; };
@@ -71,6 +72,8 @@
 		99506C1500334C31BFE5D98E /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		9FA397E602AF6CE57555318C /* Pods-urbanfitsample-urbanfitsampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-urbanfitsample-urbanfitsampleTests.release.xcconfig"; path = "Target Support Files/Pods-urbanfitsample-urbanfitsampleTests/Pods-urbanfitsample-urbanfitsampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		B6334F9526309E1300449489 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "urbanfitsample/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B675C6512678005900B5BD50 /* urbanfitsample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "urbanfitsample-Bridging-Header.h"; sourceTree = "<group>"; };
+		B675C6522678005900B5BD50 /* StripeFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeFix.swift; sourceTree = "<group>"; };
 		BF7CEDFD507740C59946F018 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		C23F5C5A4EBA47CDA2D7F094 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C62ED1472755410B8C1C66CC /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B675C6522678005900B5BD50 /* StripeFix.swift */,
 				B6334F9526309E1300449489 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* urbanfitsample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -181,6 +185,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A9CE4A386D67DA64A4D76DF6 /* Pods */,
 				4A9349C8BFC249AAAC5171FE /* Resources */,
+				B675C6512678005900B5BD50 /* urbanfitsample-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -267,7 +272,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -498,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				B675C6532678005900B5BD50 /* StripeFix.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,6 +600,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.urbanfitapp;
 				PRODUCT_NAME = urbanfitsample;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitapp 1619009849";
+				SWIFT_OBJC_BRIDGING_HEADER = "urbanfitsample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -625,6 +632,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.urbanfitapp;
 				PRODUCT_NAME = urbanfitsample;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.reactjs.native.example.urbanfitapp 1619009849";
+				SWIFT_OBJC_BRIDGING_HEADER = "urbanfitsample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -684,11 +692,7 @@
 					/usr/lib/swift,
 					"$(inherited)",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
-					"\"$(inherited)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -742,11 +746,7 @@
 					/usr/lib/swift,
 					"$(inherited)",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
-					"\"$(inherited)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
