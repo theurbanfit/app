@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>179379279680-vpug46ptq4ooij1hh2dk51n8cvtrcu0i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.179379279680-vpug46ptq4ooij1hh2dk51n8cvtrcu0i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>179379279680-d948n3n647shdtsst9gbn06mon5fnl81.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBHuxhdcVzGzuWe3cW_OYHD3TujHkz_dYc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>179379279680</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.urbanfitapp</string>
+	<key>PROJECT_ID</key>
+	<string>urbanfit-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>urbanfit-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:179379279680:ios:c8c4c9282efebdb5700ca5</string>
+</dict>
+</plist>
