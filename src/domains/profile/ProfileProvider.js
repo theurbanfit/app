@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "../auth/AuthProvider";
-import { queryActiveUser } from "../../sharedServices";
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import {AuthContext} from '../auth/AuthProvider';
+import {queryActiveUser} from '../../sharedServices';
 
 export const ProfileContext = createContext({});
 
