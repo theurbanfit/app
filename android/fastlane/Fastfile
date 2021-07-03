@@ -1,0 +1,19 @@
+platform :android do
+    desc "Android build and distribution to firebase"
+    lane :distribution do
+        gradle(task: 'clean', project_dir: './')
+        build_android_app(
+          task: 'assemble',
+          build_type: 'Release',
+          gradle_path: './gradlew',
+          project_dir: './',
+        )
+
+        firebase_app_distribution(
+            app: ENV['FIREBASE_APP_ID_ANDROID'],
+            firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+            testers: "paschalidi.chris@gmail.com, avramis.sp@gmail.com",
+            release_notes: "A new release is being out, check it ;)"
+        )
+    end
+end
