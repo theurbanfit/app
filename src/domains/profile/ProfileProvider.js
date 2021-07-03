@@ -1,6 +1,6 @@
-import React, {createContext, useState, useContext, useEffect} from 'react';
-import {AuthContext} from '../auth/AuthProvider';
-import {queryActiveUser} from '../../sharedServices';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { AuthContext } from "../auth/AuthProvider";
+import { queryActiveUser } from "../../sharedServices";
 
 export const ProfileContext = createContext({});
 
@@ -21,7 +21,12 @@ export const useProfile = () => {
     }
   }, [auth]);
 
-  return {profile, isProfileLoading};
+  return {
+    profile,
+    // we want the profile to return the loading state only when the user is
+    // logged in
+    isProfileLoading: profile.uid ? isProfileLoading : false,
+  };
 };
 
 export const ProfileProvider = ({children}) => {
