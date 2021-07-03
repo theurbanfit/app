@@ -1,4 +1,4 @@
-import React, {useState, memo} from 'react';
+import React, {memo, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {CalendarStrip} from '../../components/CalendarStrip';
 import moment from 'moment';

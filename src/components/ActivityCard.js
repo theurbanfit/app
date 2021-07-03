@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Title, Text, Divider, useTheme, Colors} from 'react-native-paper';
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {Colors, Divider, Text, Title, useTheme} from 'react-native-paper';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 export const ActivityCard = ({
   imageSrc,
@@ -91,7 +91,7 @@ const useStyles = () => {
       marginBottom: 12,
     },
     color: {
-      color: colors.textSecondary,
+      color: colors.secondary,
     },
     colorSuccess: {
       color: Colors.deepPurpleA400,

@@ -64,7 +64,7 @@ const useStyles = () => {
         color: colors.text,
       },
       highlight: {
-        color: colors.textSecondary,
+        color: colors.secondary,
       },
       highlightBackground: {
         backgroundColor: colors.primary,
