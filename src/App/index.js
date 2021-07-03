@@ -1,11 +1,9 @@
 import React from 'react';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
-// import {AuthProvider} from '../domains/auth/AuthProvider';
-// import Routes from './Routes';
-// import {ProfileProvider} from '../domains/profile/ProfileProvider';
-import {StripeProvider} from '@stripe/stripe-react-native/src/components/StripeProvider';
-import UserSubscriptions from '../domains/profile/UserSubscriptionsScreen';
-import {SafeAreaView} from 'react-native';
+import {AuthProvider} from '../domains/auth/AuthProvider';
+import Routes from './Routes';
+import {ProfileProvider} from '../domains/profile/ProfileProvider';
+import {StripeProvider} from '@stripe/stripe-react-native';
 
 const theme = {
   ...DefaultTheme,
@@ -32,12 +30,16 @@ const theme = {
 
 export default function Index() {
   return (
-    <SafeAreaView>
-      <StripeProvider
-        publishableKey={'pk_test_4pH5SY6DArgCu0SQDfnKc3Dt00OdZtA6aQ'}
-        merchantIdentifier="merchant.identifier">
-        <UserSubscriptions />
-      </StripeProvider>
-    </SafeAreaView>
+    <PaperProvider theme={theme}>
+      <AuthProvider>
+        <ProfileProvider>
+          <StripeProvider
+            publishableKey={'pk_test_4pH5SY6DArgCu0SQDfnKc3Dt00OdZtA6aQ'}
+            merchantIdentifier="merchant.identifier">
+            <Routes />
+          </StripeProvider>
+        </ProfileProvider>
+      </AuthProvider>
+    </PaperProvider>
   );
 }
