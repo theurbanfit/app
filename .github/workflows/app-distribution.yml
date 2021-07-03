@@ -2,7 +2,7 @@ name: Distribute beta to firebase & testflight
 on:
   push:
     branches:
-      - 'cp/fix-fastlane'
+      - 'cp/fastlane'
 
 jobs:
   distribute-android:
